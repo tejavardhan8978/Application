@@ -2,7 +2,7 @@
 
 ## Description
 
-Replace with your description.
+A 'grocery store' that effectively organizes food, create/views menus, and macronutrients.
 
 ## Group Members
 
