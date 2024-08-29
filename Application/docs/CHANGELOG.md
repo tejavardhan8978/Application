@@ -1,5 +1,4 @@
 # Milestone 1
 
-- [Student 1] Change 1
-- [Student 2] Change 2
-- [Student 3] Change 3
+- [Teja] Created and orchestrated the repository for the group.
+- [Quintin, Teja] Constructed the description of the project and stated the participants. 
