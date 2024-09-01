@@ -74,3 +74,10 @@ This is the screen that will display what is currently in your grocery list. Sim
 This screen displays the meal plans that you currently have.
 
 ![Application_MealPlan.jpg](Application_MealPlan.jpg)
+
+## Meal Plan Calender
+
+This is where you will go to plan out your next 2 weeks of meals.
+You will also be able to select shopping list to see ingredients you will need for the next week.
+
+![Application_MealPlanCalender.png](Application_MealPlanCalender.png)
