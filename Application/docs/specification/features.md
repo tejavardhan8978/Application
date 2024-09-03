@@ -22,10 +22,12 @@ Grocery Lists
 3. We want to track how much money we are spending and on what kinds of foods we are spending it on. 
 
 Alerts
-1. We want to be alerted when an item is going out of stock or expiring soon. 
+1. We want to be alerted when an item is going out of stock or expiring soon (within the user inventory).
+2. We may include an alert for grocery list based on tracked reports for spending/popular user foods and/or ingredients.
+3. We may include an overstock alert for items that the user has too much of (in their personal inventory).
 
 Meal Plans 
 1. We want the user to be able to meal plan and hit certain macronutrient goals.
 2. We also want the user to be able look far ahead into the future for special occasions. 
 3. We want to be able to include a calendar.
-4. We want to be able to separate or meals by breakfast, lunch, dinner, snack, dessert. 
+4. We want to be able to separate meals by breakfast, lunch, dinner, snack, dessert. 
