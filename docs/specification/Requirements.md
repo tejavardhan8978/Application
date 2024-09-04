@@ -1,17 +1,25 @@
-# Requirements
+# Non-functional Requirements
 
-Functional Requirements
+## Non-functional requirement 1
 
-1. Add and Subtract from Inventory 
-2. Search from Inventory
-3. Sort Inventory
-4. Add Remove Recipe 
-5. Search Recipe 
-6. Check and add Recipe ingredients with Inventory
+Explain specifically how you will account for this requirement in your application.
 
+# Use case name
 
-Non Functional Requirements
+## Actors
+1. Actor 1
+2. Actor 2
 
-1. Data Retention 
-2. Reusability
-3. Extensibility
+## Use case goal
+
+## Primary Actor
+
+## Preconditions
+
+## Basic flow
+
+## Alternative flows
+
+### Alternative flow 1
+
+### Alternative flow 2
