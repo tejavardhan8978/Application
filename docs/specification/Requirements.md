@@ -80,36 +80,6 @@ but a record of the deletion, the backupId and DateTime of the deletion will be 
 #### Resources
 A directory will be made for each backup in the backups directory. The backup folder's name will be an id and timestamp.
 
-
-1. Success
-   1. A message is at the top of the Messages stack reporting backup was successfully made.
-   2. The new backup is at the top of the Backup History Dropdown.
-2. Failure
-   1. A message describing the failure's nature appears at the top of the Messages stack.
-   2. If the backup fails a message describing the failure appears in the messages pane.
-   
-
-### How Our System Complies with Backup Requirement
-Our system will have a Backup/Restore feature accessible from the Main Menu and the Navigation Bar.
-1. Clicking the Backup/Restore button on either the Main Menu or Navigation Bar will bring the Backup/Restore menu to the foreground.
-2. The Backup/Restore Pane will have controls, records, and a messages pane.
-3. Controls
-   1. Button to launch the backup process.
-      1. 
-      2. 
-   2. Dropdown list of backups in descending order of date. Clicking on a drop down item opens a BackupRecord Pane.
-      1. The BackupRecord Pane will show
-         2. Date of the backup.
-         3. Location of the backup
-         4. A button for restoring the backup.
-         5. A button for deleting the backup.
-         6. A Back-To-Backup/Restore arrow in the system's Navigation Bar.
-   3. If a restore is going to wipe the current system a popup must appear warning the current data will be lost. If the popup's Continue button is selected launch the Restore process. Otherwise return to the BackupItem page.
-2. Records
-Records are show in the Dropdown where they can be selected.
-3. Messages
-These are listed above the Records Dropdown. Only the last two messages will be displayed. 
-
 ## Non-functional requirement 2: Durability
 Most of our use cases change the system by either creating, updating, or deleting records. It is essential any
 and writes are committed. There are two aspects of durability.
@@ -118,6 +88,16 @@ and writes are committed. There are two aspects of durability.
 Durability on a running system is easy to support with either critical sections and locking or using a relational database
 because they provide Atomicity, Immutability, Consistency, and Durability organically. A relational database would also
 provide persistence across restarts and shutdowns.
+
+### Mechanisms for Complying with the Durability Requirement
+Writing a custom feature in Java to implement durability is a bad idea. A SQLLite database will carry most of the weight for durability.
+SQLLite will also make thread safety easier to manage. The database can also have fine grained control when transactions get
+recorded. Durability should be implemented seamlessly without the user being aware and having to intervene to maintain 
+transaction consistency and durability.
+
+#### Single versus Multi Threaded
+A multithreaded system can be more responsive with the drawback of having to control access to shared resources with critical sections and locks.
+To improve durability our goal is to make the application single threaded.
 
 ## Non-functional requirement 3: Usability
 
