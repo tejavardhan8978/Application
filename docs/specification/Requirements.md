@@ -103,22 +103,254 @@ To improve durability our goal is to make the application single threaded.
 
 Explain specifically how you will account for this requirement in your application.
 
-# Use case name
+## Use Case Description 1
 
-## Actors
-1. Actor 1
-2. Actor 2
+    # Use case name
+Add and subtract from kitchen inventory
 
-## Use case goal
+    ## Actors
+    1. Actor 1
+The user/person managing the kitchen inventory.
 
-## Primary Actor
+    2. Actor 2
+The system/our application handling inventory management.
 
-## Preconditions
+    ## Use case goal
+To allow the user to add new or to existing items in the kitchen inventory. Also to subtract from items to ensure that 
+the inventory is up to date.
 
-## Basic flow
+    ## Primary Actor
+User
 
-## Alternative flows
+    ## Preconditions
+The user has the application available to them.
+The user knows the amount that they are about to add/subtract from the inventory. 
 
-### Alternative flow 1
+    ## Basic flow
+1 - The user navigates to the inventory management section of the application by pressing on it through the main screen.
+2 - The system will display the current inventory list, search bar to find items, add new items button, and filter to find
+the item that they are updating the inventory for. 
+3 - The user selects the option to edit an item quantity from the inventory either through the add new button or edit 
+quantity button through the list.
+4 - If adding to existing item .
+    4.1 - The user will enter the amount added to inventory and new expiration date and then press the + sign.
+    4.2 - The user submits the information by pressing the save button.
+    4.3 - The system validates the input (checking for valid quantity).
+    4.4 - The system updates the inventory with the increased quantity. 
+    4.5 - The system confirms the addition and displays the updated inventory list. 
+5 - If subtracting an item.
+    5.1 - The user enters the quantity to be subtracted.
+    5.2 - The user submits the information by pressing the save button.
+    5.3 - The system validates the information(ensuring the current quantity isn't negative).
+    5.4 - The system updates the inventory or removes the item if the quantity is zero.
+    5.5 - The system confirms the subtraction and displays the updated inventory list.
+6 - If adding a new item
+    6.1 - The user enters the item name, quantity, and expiration date.
+    6.2 - The user submits the information.
+    6.3 - The system validates the input(checks for valid quantity and item details).
+    6.4 - The system updates the inventory with the new item.
+    6.5 - The system confirms the addition and displays the updated inventory list
 
-### Alternative flow 2
+    ## Alternative flows
+
+    ### Alternative flow 1
+Invalid Item Details
+1 - Basic flow steps 1 through 6.3.
+2 - The user submits information for adding a new item to the inventory 
+3 - The system detects invalid details (entered negative quantity or expiration date prior to current date)
+4 - The system displays an error message indicating the issues with the item details.
+5 - The user corrects the details and resubmits the information.
+
+    ### Alternative flow 2
+Insufficient Quantity for subtraction
+1 - Basic flow steps 1 through 5.3.
+2 - The user enters a quantity to subtract that exceeds the available quantity.
+3 - The system detects the issue and displays and error message indicating insufficient quantity.
+4 - The user adjusts the quantity to be subtracted or cancels the operation.
+
+## Use Case Description 2
+Search From inventory
+
+    # Use case name
+Search Inventory
+
+
+    ## Actors
+    1. Actor 1
+The user/person managing the kitchen inventory.
+
+    2. Actor 2
+The system/our application handling inventory management.
+
+    ## Use case goal
+To enable the user to search for specific items within the kitchen inventory, allowing them to quickly locate items.
+
+    ## Primary Actor
+User
+
+    ## Preconditions
+The user has the application available to them.
+The user knows basic information for the item that they are looking for within the application.
+
+    ## Basic flow
+1 - The user navigates to the inventory management section of the application by pressing on it through the main screen.
+2 - The system displays the inventory search bar, optional filter criteria, and inventory list.
+3 - The enters a search term (item name, category, primary macro nutrient)
+4 - The user can optionally apply sorting options to refine the search results (alphabetical, expiration date, quantity)
+5 - The user submits the search query.
+6 - The system process the search results displaying the item list that matches the user defined fields.
+7 - The user selects a search result to view more detailed information about the item if needed.
+
+    ## Alternative flows
+
+    ### Alternative flow 1
+No matching results
+1 - Basic flow steps 1 through 5.
+2 - The system processes the search request but finds no matching items.
+3 - The system displays a message indicating that no items match the search criteria.
+4 - The user may adjust the search term or filters and retry the search.
+
+    ### Alternative flow 2
+Search Filter Application
+1 - Basic flow steps 1 through 4.
+2 - The user applies multiple sorting options to narrow down the search, without a search term.
+3 - The system processes the search with the applied filters
+4 - The system displays the sorting search results.
+5 - The user can further refine with a search term or adjust the filters as needed.
+
+## Use Case Description 3
+
+    # Use case name
+Sort Inventory
+
+    ## Actors
+    1. Actor 1
+The user/person managing the kitchen inventory.
+
+    2. Actor 2
+The system/our application handling inventory management.
+
+    ## Use case goal
+To enable the user to search through the inventory by sorting the inventory list using filters
+
+    ## Primary Actor
+User
+
+    ## Preconditions
+The user has the application available to them.
+The user knows basic information for the item/s that they are looking for within the application.
+
+    ## Basic flow
+1 - The user navigates to the inventory management section of the application by pressing on it through the main screen.
+2 - The system displays the current inventory list along with the filter/sorting options.
+3 - The user selects a sorting criteria from the available options.
+4 - The user submits the sorting request.
+5 - The system processes the sorting request and arranges the inventory items based on the selected criteria.
+6 - The system updates the display to show the sorted inventory list. 
+
+    ## Alternative flows
+
+    ### Alternative flow 1
+Invalid Sorting Criteria
+1 - Basic flow steps 1 through 3.
+2 - The user selects an invalid criteria (trying ti sort alphabetical descending and ascending).
+3 - The system displays an error message indicating that the selected criteria is not valid
+4 - the user selects a valid sorting criteria and resubmits the request.
+
+    ### Alternative flow 2
+No Inventory items
+1 - Basic flow steps 1 through 3.
+2 - The user submits the sorting request.
+3 - The systems detects that there are no inventory items to sort.
+4 - The system displays a message indicating that the inventory is empty and sorting cannot be performed.
+
+## Use Case Description 4
+
+    # Use case name
+Add and Remove Recipes
+
+    ## Actors
+    1. Actor 1
+The user/person managing the kitchen inventory.
+
+    2. Actor 2
+The system/our application handling inventory management.
+
+    ## Use case goal
+To be enable the user to add and remove their own recipes along with the default applications recipes.
+
+    ## Primary Actor
+User
+
+    ## Preconditions
+The user has the application available to them.
+The user has their own recipes details. This includes the quantity of items and the steps to make the meal.
+
+    ## Basic flow
+
+    ## Alternative flows
+
+    ### Alternative flow 1
+
+    ### Alternative flow 2
+
+## Use Case Description 5
+
+    # Use case name
+Search through Recipes
+
+    ## Actors
+    1. Actor 1
+The user/person managing the kitchen inventory.
+
+    2. Actor 2
+The system/our application handling inventory management.
+
+    ## Use case goal
+To enable the user to effectively search through their own recipes and the default applications recipes.
+
+    ## Primary Actor
+User
+
+    ## Preconditions
+The user has the application available to them.
+The knows the details about the recipe they are searching for. This can include cuisine type and or name 
+
+    ## Basic flow
+
+    ## Alternative flows
+
+    ### Alternative flow 1
+
+    ### Alternative flow 2
+
+## Use Case Description 6
+
+    # Use case name
+Check and Add Recipe Ingredients with Inventory
+
+    ## Actors
+    1. Actor 1
+The user/person managing the kitchen inventory.
+
+    2. Actor 2
+The system/our application handling inventory management.
+
+    ## Use case goal
+To enable the user to identify what items are missing from their current inventory that the recipe requires. This way 
+the user is easily prepared to create the whole recipe. 
+
+    ## Primary Actor
+User
+
+    ## Preconditions
+The user has the application available to them.
+The user has decided what type of recipe that want to make and have selected that through the recipe screen. 
+
+    ## Basic flow
+
+    ## Alternative flows
+
+    ### Alternative flow 1
+jnni
+    ### Alternative flow 2

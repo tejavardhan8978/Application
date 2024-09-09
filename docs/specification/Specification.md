@@ -13,7 +13,7 @@
 
 ## Non-functional
 
-1.  Data Retention
+1. Data Retention
 2. Reusability
 3. Extensibility
 
