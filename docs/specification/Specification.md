@@ -1,6 +1,10 @@
 # Application Specification
 
 ## Problem Statement
+It is very ineffective and disorganized when you go to make a meal and do not know all ingredients in your kitchen.
+Our application aims to simplify the process by allowing the user to create a list of the things that they have in their 
+kitchen and compare this to the ingredients required to make a dish. This will hopefully save the user time and create a 
+more organized kitchen environment.
 
 ## Functional Requirements
 
