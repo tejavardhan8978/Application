@@ -4,8 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b83c287a-c943-4b8a-8a35-35087e369c1d" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Application/docs/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/Application/docs/CHANGELOG.md" afterDir="false" />
+    <list default="true" id="b83c287a-c943-4b8a-8a35-35087e369c1d" name="Changes" comment="Commiting completed use case descriptions 1-3">
+      <change afterPath="$PROJECT_DIR$/docs/specification/UseCaseDiagram.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/specification/Requirements.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/specification/Requirements.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/specification/Specification.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/specification/Specification.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,12 +41,12 @@
     &quot;assignee&quot;: &quot;Hunterbounty11&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/tejavardhan8978/Application.git&quot;,
-    &quot;accountId&quot;: &quot;ed774a3a-d039-4783-92b6-b0cfd5925232&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/tejavardhan8978/Application.git",
+    "accountId": "09beaae3-ac75-43aa-9be8-98e82b33764c"
   }
-}</component>
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 4
 }</component>
@@ -70,5 +73,20 @@
       <updated>1725211569399</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Commiting completed use case descriptions 1-3" />
+    <option name="LAST_COMMIT_MESSAGE" value="Commiting completed use case descriptions 1-3" />
   </component>
 </project>

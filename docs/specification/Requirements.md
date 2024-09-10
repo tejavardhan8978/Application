@@ -169,7 +169,6 @@ Insufficient Quantity for subtraction
 4. The user adjusts the quantity to be subtracted or cancels the operation.
 
 # Use Case Description 2
-Search From inventory
 
 ## Use case name
 Search Inventory
