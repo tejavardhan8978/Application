@@ -12,4 +12,4 @@ culinary expertise.
 - Hieu Pham <hieu.pham@my.metrostate.edu>
 - Hunter Bammert-Mueller <hunter.bammert-mueller@my.metrostate.edu> <hunterbammert@gmail.com> Hunterbounty11
 - Lawal Oyebanji <oyebanji.lawal@my.metrostate.edu>
-- Vemulapalli Teja Vardhan <tejavardhan.vemulapalli@my.metrostate.edu>
+- Vemulapalli Teja Vardhan <tejavardhan.vemulapalli@my.metrostate.edu> <github - tejavardhan8978>
