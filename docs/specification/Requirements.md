@@ -50,7 +50,7 @@ Regardless of outcome control returns to the Backup Main Menu.
    1. A message is at the top of the Messages stack reporting backup was successfully made.
    2. The new backup is at the top of the Backup History Dropdown.
 2. Failure
-   1. A message describing the failure's nature appears at the top of the Messages stack.
+   1. A message describing the failure's nature appears at the top of the messages stack.
    2. If the backup fails a message describing the failure appears in the messages pane. 
 
 ##### Restore Process

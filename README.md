@@ -8,7 +8,7 @@ culinary expertise.
 
 ## Group Members
 
-- Quintin Plotnik <ep4302ak@go.minnstate.edu>
+- Quintin Plotnik <ep4302ak@go.minnstate.edu> GitHub user QuintinPlotnik3
 - Hieu Pham <hieu.pham@my.metrostate.edu>
 - Hunter Bammert-Mueller <hunter.bammert-mueller@my.metrostate.edu> <hunterbammert@gmail.com>
 - Lawal Oyebanji <oyebanji.lawal@my.metrostate.edu>

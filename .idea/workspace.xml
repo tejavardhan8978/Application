@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b83c287a-c943-4b8a-8a35-35087e369c1d" name="Changes" comment="Commiting completed use case descriptions 1-3">
-      <change afterPath="$PROJECT_DIR$/docs/specification/UseCaseDiagram.jpeg" afterDir="false" />
+    <list default="true" id="b83c287a-c943-4b8a-8a35-35087e369c1d" name="Changes" comment="Commiting a problem statement">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/specification/Requirements.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/specification/Requirements.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/specification/Specification.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/specification/Specification.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,12 +39,12 @@
     &quot;assignee&quot;: &quot;Hunterbounty11&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/tejavardhan8978/Application.git",
-    "accountId": "09beaae3-ac75-43aa-9be8-98e82b33764c"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/tejavardhan8978/Application.git&quot;,
+    &quot;accountId&quot;: &quot;09beaae3-ac75-43aa-9be8-98e82b33764c&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 4
 }</component>
@@ -63,6 +61,11 @@
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/docs/specification" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -72,6 +75,23 @@
       <option name="presentableId" value="Default" />
       <updated>1725211569399</updated>
     </task>
+    <task id="LOCAL-00001" summary="Commiting an integrated photo of Hieu's use case diagram">
+      <option name="closed" value="true" />
+      <created>1725992554463</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1725992554463</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Commiting a problem statement">
+      <option name="closed" value="true" />
+      <created>1725992900080</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1725992900080</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -87,6 +107,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Commiting completed use case descriptions 1-3" />
-    <option name="LAST_COMMIT_MESSAGE" value="Commiting completed use case descriptions 1-3" />
+    <MESSAGE value="Commiting an integrated photo of Hieu's use case diagram" />
+    <MESSAGE value="Commiting a problem statement" />
+    <option name="LAST_COMMIT_MESSAGE" value="Commiting a problem statement" />
   </component>
 </project>
