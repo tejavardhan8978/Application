@@ -8,5 +8,6 @@
 - [Quintin] Edited then added the wireframe from Figma to Intellij then GitHub.
 - [Hunter] Created and added Meal Plan Calendar Wireframe
 
-# Milestone 2
-- [Quintin] Created and typed in all Use Case Descriptions in Requirements.md. 
+# MileStone 2
+
+- [Teja] Created and added the UML class diagrams along with a brief description.

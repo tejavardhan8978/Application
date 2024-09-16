@@ -23,4 +23,4 @@ more organized kitchen environment.
 
 ## Use Case Diagram
 
-![Use Case Diagram](UseCaseDiagram.jpeg)
+![Use Case Diagram](UserDiagramV2.jpg)
