@@ -99,9 +99,60 @@ transaction consistency and durability.
 A multithreaded system can be more responsive with the drawback of having to control access to shared resources with critical sections and locks.
 To improve durability our goal is to make the application single threaded.
 
-## Non-functional requirement 3: Usability
+#
 
-Explain specifically how you will account for this requirement in your application.
+
+## Non-functional requirement 3: Usability
+People have different abilities and ways of interacting with systems. We are also good at somethings and prefer the
+computer assist us by dealing with things humans would prefer not to do. For our purposes usability's realms are
+1. Predictable consistent interface
+2. Legible controls, state, and outputs
+3. High responsiveness
+4. Configurable
+5. Easy to troubleshoot
+6. High mean time between failures
+7. Outputs and feedback to accurately describe the system state.
+A system which meets these criteria is easy to use. Designing it might be challenging.
+
+### Mechanisms and Methods for Achieving High Usability
+
+#### Creating a Predictable Consistent Interface
+* The navigation bar will be on the left. 
+* The top pane will have buttons corresponding to different components of the subsystem. 
+* The center pane will show state, selectors, checkboxes, and buttons for doing CRUD operations.
+* Arrows will be used to launch and processes and direct to the next part of the process.
+
+#### Creating Legible Controls State and Outputs
+In this system being readable is only one type of legibility. Visually impaired people should be find the system navigable.
+Whenever possible pictures should accompany text. We cannot incorporate braille readers and keyboards into our system; but
+if the UI is loosely coupled to the system we can add support for visually impaired folks or someone could use our APIs 
+to develop one.
+
+#### High Responsiveness
+When people give input from the keyboard or mouse they want a response in under a second. We can do this by making sure our
+transactions can run quickly. Even if we cannot process the user's input right away our system needs to give that information
+to the user instead of delaying. This might require transactions having a timeout value.
+
+#### Configurable
+Our system is solving two related problems that are clearly defined. This does not require many options, menus, and configurations.
+If people access it from a wall mounted touchscreen, their phone, or a website the interface should be fairly consistent on 
+all of them. To make sure it works on all these systems a simple layout with few options is better and less distracting.
+For our purpose configurable is more about being able to control the order they might want to put items in a menu deciding
+where data can be imported from and exported to.
+
+#### Easy to Troubleshoot
+Because our system follows the ACID principle things either work or they fail. If they fail the system rolls things back 
+so the old state is maintained. We should also prevent things like entering negative numbers or entering blank titles or names
+Any error messages should be clear and easy to understand to people with no technical ability.
+
+#### High Mean Time Between Failures
+Ideally this system would be accessible through a dashboard on the fridge or by the pantry.  The software must be designed 
+so it does not crash unless the hardware fails. It should not require resets unless an update is being pushed over the network.
+
+#### Outputs Should Accurately Describe the System State
+At the current time the only reason we can anticipate for outputs not corresponding to the state is inconsistency from race
+conditions. To prevent this our application will not be multithreaded.
+
 
 # Use Case Description 1
 
