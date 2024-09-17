@@ -12,3 +12,4 @@
 
 - [Teja] Created and added the UML class diagrams along with a brief description.
 - [Hieu] Created and added use case diagram
+- [Banji] Wrote details about nonfunctional requirements
