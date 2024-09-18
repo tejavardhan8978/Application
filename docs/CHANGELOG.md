@@ -15,3 +15,4 @@
 - [Banji] Wrote details about nonfunctional requirements.
 - [Quintin] Wrote the use case descriptions.
 - [Hunter] Wrote the entities. 
+- [Teja] Changed the UML class diagram to better align with the requirements. Added pointers to explain the relations of classes.
