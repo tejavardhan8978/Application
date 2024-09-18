@@ -24,4 +24,4 @@ Keeps track of the nutritional values of ingredients and recipes to aid in the m
 
 Will display what food groups an ingredient belongs to.
 
-![UMLClassDiagram.jpeg](UMLClassDiagram.jpeg)
+![UMLClassDiagram.jpeg](UMLClassDiagramV2.jpeg)
