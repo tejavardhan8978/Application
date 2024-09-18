@@ -10,6 +10,6 @@ culinary expertise.
 
 - Quintin Plotnik <ep4302ak@go.minnstate.edu> <github - QuintinPlotnik3>
 - Hieu Pham <hieu.pham@my.metrostate.edu> <github - hpham24>
-- Hunter Bammert-Mueller <hunter.bammert-mueller@my.metrostate.edu> <hunterbammert@gmail.com>  <github - Hunterbounty11>
-- Lawal Oyebanji <oyebanji.lawal@my.metrostate.edu>
+- Hunter Bammert-Mueller <hunter.bammert-mueller@my.metrostate.edu> <hunterbammert@gmail.com> <github - Hunterbounty11>
+- Lawal Oyebanji <banji.lawal@my.metrostate.edu> <github - banjilawal>
 - Vemulapalli Teja Vardhan <tejavardhan.vemulapalli@my.metrostate.edu> <github - tejavardhan8978>
