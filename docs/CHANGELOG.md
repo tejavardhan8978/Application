@@ -11,3 +11,4 @@
 # MileStone 2
 
 - [Teja] Created and added the UML class diagrams along with a brief description.
+- [Quintin] Created and added the use case descriptions. 
