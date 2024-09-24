@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b83c287a-c943-4b8a-8a35-35087e369c1d" name="Changes" comment="Commiting ChangeLog">
-      <change afterPath="$PROJECT_DIR$/docs/specification/MvcSequenceDiagram.jpeg" afterDir="false" />
+    <list default="true" id="b83c287a-c943-4b8a-8a35-35087e369c1d" name="Changes" comment="Commiting Mvc Sequence Diagram">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/CHANGELOG.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/specification/Architecture.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/specification/Architecture.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/specification/MvcSequenceDiagram.jpeg" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,6 +76,11 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$USER_HOME$/Desktop" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -87,6 +91,15 @@
       <updated>1725211569399</updated>
       <workItem from="1726628159469" duration="1598000" />
     </task>
+    <task id="LOCAL-00001" summary="Commiting Mvc Sequence Diagram">
+      <option name="closed" value="true" />
+      <created>1727212870154</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1727212870154</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -106,6 +119,7 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Commiting completed use case descriptions 1-3" />
-    <option name="LAST_COMMIT_MESSAGE" value="Commiting completed use case descriptions 1-3" />
+    <MESSAGE value="Commiting Mvc Sequence Diagram" />
+    <option name="LAST_COMMIT_MESSAGE" value="Commiting Mvc Sequence Diagram" />
   </component>
 </project>
