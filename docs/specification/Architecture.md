@@ -36,7 +36,9 @@ The diagram below shows all the classes, interfaces, their methods and variables
 
 ![UML Class Diagram](UMLClassDiagramV2.jpeg)
 
-
-
 The relationships between the classes are represented according to standard UML. 
 
+## MVC Sequence Diagram
+
+We selected our hardest functional requirement to represent which is determining which items are missing from a recipe. 
+![MVC Sequence Diagram](MvcSequenceDiagram.jpeg)
