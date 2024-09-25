@@ -41,4 +41,4 @@ The relationships between the classes are represented according to standard UML.
 ## MVC Sequence Diagram
 
 We selected our hardest functional requirement to represent which is determining which items are missing from a recipe. 
-![MVC Sequence Diagram](MVC%20Sequence%20Diagram.jpg)
+![MVC Sequence Diagram](MvcSequenceDiagram.jpg)
