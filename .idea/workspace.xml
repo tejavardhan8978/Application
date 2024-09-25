@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b83c287a-c943-4b8a-8a35-35087e369c1d" name="Changes" comment="Commiting Mvc Sequence Diagram attempt 2">
-      <change afterPath="$PROJECT_DIR$/docs/specification/MVC Sequence Diagram.jpg" afterDir="false" />
+    <list default="true" id="b83c287a-c943-4b8a-8a35-35087e369c1d" name="Changes" comment="Commiting Mvc Sequence final try">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/specification/Architecture.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/specification/Architecture.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/specification/MVC Sequence Diagram.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/docs/specification/MvcSequenceDiagram.jpg" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,7 +108,15 @@
       <option name="project" value="LOCAL" />
       <updated>1727213677000</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Commiting Mvc Sequence final try">
+      <option name="closed" value="true" />
+      <created>1727214115854</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1727214115854</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -130,6 +138,7 @@
     <MESSAGE value="Commiting completed use case descriptions 1-3" />
     <MESSAGE value="Commiting Mvc Sequence Diagram" />
     <MESSAGE value="Commiting Mvc Sequence Diagram attempt 2" />
-    <option name="LAST_COMMIT_MESSAGE" value="Commiting Mvc Sequence Diagram attempt 2" />
+    <MESSAGE value="Commiting Mvc Sequence final try" />
+    <option name="LAST_COMMIT_MESSAGE" value="Commiting Mvc Sequence final try" />
   </component>
 </project>
