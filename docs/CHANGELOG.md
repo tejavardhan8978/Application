@@ -20,3 +20,6 @@
 
 # Milestone 3
 - [Quintin] Created and added the MVC sequence diagram.
+- [Hieu] Created DailyMealPlanner and MealPlanner classes.
+- [Teja] Created empty classes to represent the file structure.
+- [Teja] Changed location of DailyMealPlanner and MealPlanner classes by Hieu, and Dairy by Hunter.
