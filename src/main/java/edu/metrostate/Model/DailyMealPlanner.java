@@ -11,6 +11,7 @@ public class DailyMealPlanner {
 		this.snack = snack;
 		this.drink = drink;
 	}
+
 	private String day;
 	private Date date;
 	private Recipe breakfast;
@@ -18,4 +19,46 @@ public class DailyMealPlanner {
 	private Recipe dinner;
 	private Recipe snack;
 	private Recipe drink;
+	public String getDay() {
+		return day;
+	}
+	public void setDay(String day) {
+		this.day = day;
+	}
+	public Date getDate() {
+		return date;
+	}
+	public void setDate(Date date) {
+		this.date = date;
+	}
+	public Recipe getBreakfast() {
+		return breakfast;
+	}
+	public void setBreakfast(Recipe breakfast) {
+		this.breakfast = breakfast;
+	}
+	public Recipe getLunch() {
+		return lunch;
+	}
+	public void setLunch(Recipe lunch) {
+		this.lunch = lunch;
+	}
+	public Recipe getDinner() {
+		return dinner;
+	}
+	public void setDinner(Recipe dinner) {
+		this.dinner = dinner;
+	}
+	public Recipe getSnack() {
+		return snack;
+	}
+	public void setSnack(Recipe snack) {
+		this.snack = snack;
+	}
+	public Recipe getDrink() {
+		return drink;
+	}
+	public void setDrink(Recipe drink) {
+		this.drink = drink;
+	}
 }
