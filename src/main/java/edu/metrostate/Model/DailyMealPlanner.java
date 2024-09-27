@@ -1,3 +1,5 @@
+package edu.metrostate.Model;
+
 import java.sql.Date;
 
 public class DailyMealPlanner {
