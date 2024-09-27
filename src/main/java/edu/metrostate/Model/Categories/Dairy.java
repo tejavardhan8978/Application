@@ -1,6 +1,6 @@
-package Categories;
+package edu.metrostate.Model.Categories;
 
-public class Dairy {
+public class Dairy extends Ingredient {
     private int id;
     void setID(int newID){
         id = newID;

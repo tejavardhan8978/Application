@@ -1,3 +1,5 @@
+package edu.metrostate.Model;
+
 import java.util.Queue;
 
 public class MealPlanner {
