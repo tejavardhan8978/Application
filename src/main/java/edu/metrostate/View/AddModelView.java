@@ -1,5 +1,5 @@
 package edu.metrostate.View;
 
-public class AddToModalView {
+public class AddModelView {
     
 }

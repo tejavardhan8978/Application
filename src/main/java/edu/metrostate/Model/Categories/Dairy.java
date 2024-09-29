@@ -1,22 +1,14 @@
 package edu.metrostate.Model.Categories;
 
+import edu.metrostate.Model.MacroNutrient;
+import edu.metrostate.Model.NutritionalChart;
+import edu.metrostate.Model.Storage;
+
+import java.util.Date;
+
 public class Dairy extends Ingredient {
-    private int id;
-    void setID(int newID){
-        id = newID;
-    }
-    int getID(){
-        return id;
-    }
-    String type;
-    String name;
-    int quantity;
-    int expiry_date;
-    boolean requires_refrigeration;
-    boolean isFrozen;
 
-    void NewDairy(int newID, String NewType, String NewName, int NewQuantity, String NewCategory){
-
+    public Dairy(int id, String name, Date expiryDate, NutritionalChart nutrition, MacroNutrient primaryMacroNutrient, Storage storage) {
+        super(id, name, expiryDate, nutrition, primaryMacroNutrient, storage);
     }
-
 }

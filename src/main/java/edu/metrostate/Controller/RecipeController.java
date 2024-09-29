@@ -14,9 +14,7 @@ public class RecipeController {
         return false;
     }
 
-    public boolean addNewRecipe() {
-        return false;
-    }
+    public boolean addNewRecipe() {return false;}
 
     public boolean save() {
         return false;
