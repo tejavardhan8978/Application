@@ -12,16 +12,33 @@ import java.util.ArrayList;
 public class RecipeView extends Application {
 
     @Override
-    public void start(Stage primaryStage){}
+    public void start(Stage primaryStage){
+        //code to set up the JavaFX view and buttons
+    }
 
-    public void displayMenu(BorderPane root){}
+    public void displayMenu(BorderPane root){
+        //code to display a list of recipes and other buttons
+        //code to pass a save to the controller
+    }
 
-    private void queryRecipes(){}
+    private void queryRecipes(){
+        //code to pass a query to the controller
+    }
 
-    private void addNewRecipe(){}
+    private void addNewRecipe(){
+        //code to pass a new addition to the controller
+    }
 
-    private void refreshRecipeList() {}
+    private void refreshRecipeList() {
+        //code to refresh the recipe list
+    }
 
-    public static void main(String[] args) {}
+    private void sortRecipeList(){
+        //code to sort the recipe list
+    }
+
+    public static void main(String[] args) {
+        //code to enter us into the view
+    }
     
 }

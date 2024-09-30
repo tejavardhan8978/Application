@@ -9,8 +9,12 @@ import javafx.stage.Stage;
 
 public class IngredientDetailedView {
 
-    public IngredientDetailedView(){}
+    public IngredientDetailedView(){
+        //code to retrieve the called upon ingredient
+    }
 
-    public void show(){}
+    public void show(){
+        //code to show the ingredient macro nutrients
+    }
 
 }

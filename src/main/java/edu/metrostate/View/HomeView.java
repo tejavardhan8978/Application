@@ -15,12 +15,20 @@ public class HomeView extends Application{
     @Override
     public void start(Stage primaryStage){}
 
-    private void handleInventoryClick(MouseEvent event){}
+    private void handleInventoryClick(MouseEvent event){
+        //code to take us to the inventory
+    }
 
-    private void handleMealPlanClick(MouseEvent event){}
+    private void handleMealPlanClick(MouseEvent event){
+        //code to take us to the meal planner
+    }
 
-    private void handleRecipeClick(MouseEvent event){}
+    private void handleRecipeClick(MouseEvent event){
+        //code to take use to the recipes
+    }
 
-    private void handleGroceryListClick(MouseEvent event){}
+    private void handleGroceryListClick(MouseEvent event){
+        //code to take us to the grocery lists
+    }
 
 }

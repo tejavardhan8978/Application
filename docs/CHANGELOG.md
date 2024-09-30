@@ -23,4 +23,4 @@
 - [Hieu] Created DailyMealPlanner and MealPlanner classes.
 - [Teja] Created empty classes to represent the file structure.
 - [Teja] Changed location of DailyMealPlanner and MealPlanner classes by Hieu, and Dairy by Hunter.
-- [Quintin] Added methods to the view files and edited the diary category to match the rest. 
+- [Quintin] Added methods to the view files and edited the diary class to match the rest of the package. 

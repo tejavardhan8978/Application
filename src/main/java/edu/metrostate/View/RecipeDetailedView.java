@@ -9,7 +9,11 @@ import javafx.stage.Stage;
 
 public class RecipeDetailedView {
 
-    public RecipeDetailedView(Recipe recipe){}
+    public RecipeDetailedView(Recipe recipe){
+        //code to retrieve the called upon recipe
+    }
 
-    public void show(){}
+    public void show(){
+        //code to display recipe information
+    }
 }
