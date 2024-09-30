@@ -13,6 +13,11 @@ public class RecipeDetailedView {
         //code to retrieve the called upon recipe
     }
 
+    public boolean queryIngredientsToGroceryList() {
+        //code to pass query to controller about missing ingredients
+        return false;
+    }
+
     public void show(){
         //code to display recipe information
     }
