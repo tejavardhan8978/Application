@@ -27,11 +27,19 @@ public class InventoryView extends Application {
         //code to display a list of ingredients and other buttons
     }
 
-    private void addNewIngredient() {
+    public void addNewIngredient() {
         //code to pass a new addition to the controller
     }
 
-    private void sortInventory() {
-        //code to sort the recipe list
+    public void deleteIngredient(){
+        //code to pass a delete to the controller
+    }
+
+    public void sortInventory() {
+        //code paas sort the list sort controller
+    }
+
+    public void updateView(){
+        //code to update the view
     }
 }

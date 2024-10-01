@@ -26,12 +26,21 @@ public class GroceryListView extends Application{
         //code to display a list of grocery list ingredients
     }
 
-    private void addNewIngredient() {
+    public void addNewIngredientToList() {
         //code to pass a new addition to the controller
     }
 
-    private void sortGroceryList() {
+    public void removeIngredientFromList(){
+        //code to pass a remove request on a ingredient
+    }
+
+    public void sortGroceryList() {
         //code to sort the recipe list
     }
-    
+
+    public void updateView(){
+        //code to update the view
+    }
+
+
 }

@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 
 public class IngredientDetailedView {
 
-    public IngredientDetailedView(){
+    public void IngredientDetailedMenuView(){
         //code to retrieve the called upon ingredient
     }
 
