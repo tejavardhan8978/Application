@@ -25,3 +25,4 @@
 - [Teja] Changed location of DailyMealPlanner and MealPlanner classes by Hieu, and Dairy by Hunter.
 - [Quintin] Added methods to the view files and edited the diary class to match the rest of the package.
 - [Hunter] Created the methods inside the ingredients class. Also removed the categories class to as they can be incorporated inside the ingredients.
+- [Teja] Created RecipeListModel. Added methods to GroceryListController.
