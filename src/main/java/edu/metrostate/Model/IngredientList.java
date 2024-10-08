@@ -1,7 +1,5 @@
 package edu.metrostate.Model;
 
-import edu.metrostate.Model.Categories.Ingredient;
-
 import java.util.ArrayList;
 
 /**

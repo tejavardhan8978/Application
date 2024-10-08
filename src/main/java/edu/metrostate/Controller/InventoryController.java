@@ -1,6 +1,6 @@
 package edu.metrostate.Controller;
 
-import edu.metrostate.Model.Categories.Ingredient;
+import edu.metrostate.Model.Ingredient;
 import edu.metrostate.Model.IngredientList;
 
 import java.util.ArrayList;
