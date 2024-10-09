@@ -29,6 +29,7 @@ public class Ingredient {
     public boolean UpdateQuantity(int id, int NewQuantity){
         this.id = id;
         this.quantity = NewQuantity;
+        return false;
     }
     //This Will Search through all stored ingredients to find matching ID and return quantity of it
     public int GetQuantity(int id){
