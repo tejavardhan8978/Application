@@ -34,6 +34,8 @@ The diagram below shows all the classes, interfaces, their methods and variables
 - The DailyMealPlanner class has-a Recipe to represent each meal of the day.
 - The MealPlanner class has-a DailyMealPlanner in the form of a Queue to form a week/month of meals planned.
 
+## UML Class Diagram
+
 ![UML Class Diagram](UMLClassDiagramV2.jpeg)
 
 The relationships between the classes are represented according to standard UML. 
@@ -42,3 +44,6 @@ The relationships between the classes are represented according to standard UML.
 
 We selected our hardest functional requirement to represent which is determining which items are missing from a recipe. 
 ![MVC Sequence Diagram](MvcSequenceDiagramFinalV.jpg)
+
+## UML Class Diagram with MVC Architecture
+![MvcUmlDiagram.jpg](MvcUmlDiagram.jpg)
