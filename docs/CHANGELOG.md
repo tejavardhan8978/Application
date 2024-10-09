@@ -28,6 +28,6 @@
 - [Teja] Created RecipeListModel. Added methods to GroceryListController.
 - [Quintin] Created and added the UML diagram
 - [Banji] Created and added JavaFX application views for the Addding a Recipe use case.
-- [Banji] Created and added JavaFX application View for the Recipe repositry's model.
-- Discussed and shared apporaches to refactoring the Recipe class to increase its' cohesion and loosely couple it to Cuisine and Ingredients classes. 
+- [Banji] Created and added JavaFX application View for the Recipe repositry's model. The files are in the resources folder.
+- [Banji] Discussed and shared apporaches to refactoring the Recipe class to increase its' cohesion and loosely couple it to Cuisine and Ingredients classes. 
 
