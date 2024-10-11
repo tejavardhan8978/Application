@@ -17,12 +17,16 @@ public class HomeController {
     private Scene scene;
     private Parent root;
 
-
-
-
-
     public void switchToRecipe(MouseEvent event) throws IOException {
         root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("/Recipe-Home.fxml")));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void switchToInventory(MouseEvent event) throws IOException {
+        root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("/Inventory-Home.fxml")));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

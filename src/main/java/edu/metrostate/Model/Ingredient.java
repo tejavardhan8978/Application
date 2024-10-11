@@ -14,7 +14,7 @@ public class Ingredient {
     private int quantity;
     private String category;
     //Buying an ingredient for the first time
-    public boolean CreateNewIngredient(int id, String name, Date expiryDate, NutritionalChart nutrition, MacroNutrient primaryMacroNutrient, Storage storage, int quantity, String category){
+    public Ingredient(int id, String name, Date expiryDate, NutritionalChart nutrition, MacroNutrient primaryMacroNutrient, Storage storage, int quantity, String category){
         this.id = id;
         this.name = name;
         this.expiryDate = expiryDate;
@@ -23,8 +23,8 @@ public class Ingredient {
         this.storage = storage;
         this.quantity = quantity;
         this.category = category;
-        return true;
     }
+    public Ingredient(){}
     //This will be the method to update quantity as more ingredients are bought
     public boolean UpdateQuantity(int id, int NewQuantity){
         this.id = id;
@@ -43,5 +43,26 @@ public class Ingredient {
     public static ArrayList<Recipe> queryRecipes(Ingredient ingredient) {
         ArrayList<Recipe> recipes = new ArrayList<>();
         return recipes;
+    }
+    public int getId(){
+        return id;
+    }
+    public String getName(){
+        return name;
+    }
+    public Date getExpiryDate(){
+        return expiryDate;
+    }
+    public MacroNutrient getPrimaryMacroNutrient(){
+        return primaryMacroNutrient;
+    }
+    public Storage getStorage(){
+        return storage;
+    }
+    public int getQuantity(){
+        return quantity;
+    }
+    public String getCategory(){
+        return category;
     }
 }
