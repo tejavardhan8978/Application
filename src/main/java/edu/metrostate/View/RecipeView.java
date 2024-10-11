@@ -9,12 +9,9 @@ import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
-public class RecipeView extends Application {
+public class RecipeView {
 
-    @Override
-    public void start(Stage primaryStage){
-        //code to set up the JavaFX view and buttons
-    }
+
 
     public void displayMenu(BorderPane root){
         //code to display a list of recipes and other buttons
@@ -37,8 +34,6 @@ public class RecipeView extends Application {
         //code to sort the recipe list
     }
 
-    public static void main(String[] args) {
-        //code to enter us into the view
-    }
+
     
 }

@@ -44,3 +44,5 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+*.lock
+build/libs/Application-1.0.jar
