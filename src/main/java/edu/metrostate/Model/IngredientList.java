@@ -9,6 +9,8 @@ public class IngredientList {
 
     private ArrayList<Ingredient> ingredients;
     private String name;
+    private static int lastId = 0;
+
 
     /**
      * ListType field represents whether the list is of:
@@ -21,12 +23,19 @@ public class IngredientList {
     /**
      * Default constructor
      */
-    public IngredientList() {}
+    public IngredientList() {
+        this.ingredients = new ArrayList<>();
+    }
 
     public IngredientList(ArrayList<Ingredient> ingredients, String name, int listType) {
         this.ingredients = ingredients;
         this.name = name;
         this.listType = listType;
+    }
+
+    public void addIngredient(Ingredient ingredient) {
+        ingredient.setID(++lastId);
+        ingredients.add(ingredient);
     }
 
     public ArrayList<Ingredient> getIngredients() {

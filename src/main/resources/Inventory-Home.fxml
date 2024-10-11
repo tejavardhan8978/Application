@@ -48,7 +48,7 @@
                 <Font name="System Bold" size="24.0" />
             </font>
         </Text>
-        <Text layoutX="830.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ADD NEW RECIPE" textAlignment="CENTER" wrappingWidth="100.0">
+        <Text layoutX="830.0" layoutY="68.0" onMouseClicked="#switchToAddIngredient" strokeType="OUTSIDE" strokeWidth="0.0" text="ADD NEW ITEM" textAlignment="CENTER" wrappingWidth="100.0">
             <font>
                 <Font name="System Bold" size="24.0" />
             </font>

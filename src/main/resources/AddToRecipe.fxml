@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.metrostate.Controller.IngredientQuantityController">
+    <children>
+        <Pane fx:id="setSaveButton" layoutX="-1.0" layoutY="7.0" prefHeight="396.0" prefWidth="598.0">
+            <children>
+                <Label layoutX="16.0" layoutY="55.0" prefHeight="17.0" prefWidth="156.0" text="Item Name" textAlignment="CENTER" />
+                <Label layoutX="213.0" layoutY="55.0" text="Category" textAlignment="CENTER" />
+                <Label layoutX="16.0" layoutY="118.0" prefHeight="25.0" prefWidth="175.0" text="Expiration Date YYYY-MM-DD" />
+                <TextArea fx:id="expiryDateArea" layoutX="15.0" layoutY="147.0" prefHeight="46.0" prefWidth="165.0" />
+                <Label layoutX="14.0" layoutY="204.0" prefHeight="25.0" prefWidth="94.0" text="Serving Size" />
+                <TextArea fx:id="servingSizeArea" layoutX="15.0" layoutY="229.0" prefHeight="43.0" prefWidth="14.0" />
+                <Button fx:id="cancelButton" layoutX="503.0" layoutY="350.0" mnemonicParsing="false" onMouseClicked="#setCancelButton" text="Cancel" />
+                <Button layoutX="434.0" layoutY="350.0" mnemonicParsing="false" onMouseClicked="#setSaveButton" text="Save" />
+            <Label layoutX="390.0" layoutY="55.0" text="Storage" textAlignment="CENTER" />
+            <ListView fx:id="storageListView" layoutX="390.0" layoutY="73.0" prefHeight="38.0" prefWidth="134.0" />
+            <TextArea fx:id="quantityArea" layoutX="225.0" layoutY="147.0" prefHeight="46.0" prefWidth="56.0" />
+            <Label layoutX="225.0" layoutY="118.0" prefHeight="25.0" prefWidth="165.0" text="Quantity" />
+            <Label layoutX="334.0" layoutY="131.0" prefHeight="25.0" prefWidth="165.0" text="Primary Macro" />
+            <Label layoutX="13.0" layoutY="282.0" prefHeight="25.0" prefWidth="94.0" text="Calories" />
+            <TextArea fx:id="caloriesArea" layoutX="15.0" layoutY="307.0" prefHeight="11.0" prefWidth="65.0" />
+            <Label layoutX="70.0" layoutY="238.0" prefHeight="25.0" prefWidth="10.0" text="g" />
+            <Label layoutX="107.0" layoutY="204.0" prefHeight="25.0" prefWidth="46.0" text="Carbs" />
+            <TextArea fx:id="carbsArea" layoutX="108.0" layoutY="229.0" prefHeight="43.0" prefWidth="14.0" />
+            <Label layoutX="163.0" layoutY="238.0" prefHeight="25.0" prefWidth="10.0" text="g" />
+            <Label layoutX="108.0" layoutY="282.0" prefHeight="25.0" prefWidth="46.0" text="Fat" />
+            <TextArea fx:id="fatArea" layoutX="109.0" layoutY="307.0" prefHeight="43.0" prefWidth="14.0" />
+            <Label layoutX="164.0" layoutY="316.0" prefHeight="25.0" prefWidth="10.0" text="g" />
+            <Label layoutX="192.0" layoutY="204.0" prefHeight="25.0" prefWidth="46.0" text="Protein" />
+            <TextArea fx:id="proteinArea" layoutX="193.0" layoutY="229.0" prefHeight="43.0" prefWidth="14.0" />
+            <Label layoutX="248.0" layoutY="238.0" prefHeight="25.0" prefWidth="10.0" text="g" />
+            <Label layoutX="192.0" layoutY="282.0" prefHeight="25.0" prefWidth="46.0" text="Sodium" />
+            <TextArea fx:id="sodiumArea" layoutX="193.0" layoutY="307.0" prefHeight="43.0" prefWidth="14.0" />
+            <Label layoutX="248.0" layoutY="316.0" prefHeight="25.0" prefWidth="10.0" text="g" />
+            <Label layoutX="275.0" layoutY="204.0" prefHeight="25.0" prefWidth="46.0" text="Sugar" />
+            <TextArea fx:id="sugarArea" layoutX="276.0" layoutY="229.0" prefHeight="43.0" prefWidth="14.0" />
+            <Label layoutX="331.0" layoutY="238.0" prefHeight="25.0" prefWidth="10.0" text="g" />
+            <Label layoutX="275.0" layoutY="282.0" prefHeight="25.0" prefWidth="46.0" text="Fiber" />
+            <TextArea fx:id="fiberArea" layoutX="276.0" layoutY="307.0" prefHeight="43.0" prefWidth="14.0" />
+            <Label layoutX="331.0" layoutY="316.0" prefHeight="25.0" prefWidth="10.0" text="g" />
+            <Label layoutX="350.0" layoutY="204.0" prefHeight="25.0" prefWidth="86.0" text="Cholesterol" />
+            <TextArea fx:id="cholesterolArea" layoutX="351.0" layoutY="229.0" prefHeight="43.0" prefWidth="14.0" />
+            <Label layoutX="406.0" layoutY="238.0" prefHeight="25.0" prefWidth="10.0" text="g" />
+            <Label layoutX="20.0" layoutY="14.0" prefHeight="17.0" prefWidth="156.0" text="Add a Item" textAlignment="CENTER">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <TextArea fx:id="itemNameArea" layoutX="15.0" layoutY="73.0" prefHeight="43.0" prefWidth="144.0" />
+            <ListView fx:id="macroNutrientListView" layoutX="330.0" layoutY="149.0" prefHeight="43.0" prefWidth="134.0" />
+            <ListView fx:id="categoryListView" layoutX="209.0" layoutY="76.0" prefHeight="38.0" prefWidth="134.0" />
+            </children>
+        </Pane>
+    </children>
+</Pane>

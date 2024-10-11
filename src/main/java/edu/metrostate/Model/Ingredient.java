@@ -44,6 +44,9 @@ public class Ingredient {
         ArrayList<Recipe> recipes = new ArrayList<>();
         return recipes;
     }
+    public void setID(int id){
+        this.id = id;
+    }
     public int getId(){
         return id;
     }

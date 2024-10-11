@@ -9,11 +9,11 @@ public class NutritionalChart {
     private int totalProtein;
     private int totalSodium;
     private int totalSugars;
-    private int dietaryFibre;
+    private int dietaryFiber;
     private int cholesterol;
 
     public NutritionalChart(int servingSize, int calories, int totalCarbohydrates, int totalFat,
-                            int cholesterol, int dietaryFibre, int totalProtein, int totalSodium, int totalSugars) {
+                            int cholesterol, int dietaryFiber, int totalProtein, int totalSodium, int totalSugars) {
         this.servingSize = servingSize;
         this.calories = calories;
         this.totalCarbohydrates = totalCarbohydrates;
@@ -21,7 +21,7 @@ public class NutritionalChart {
         this.totalProtein = totalProtein;
         this.totalSodium = totalSodium;
         this.totalSugars = totalSugars;
-        this.dietaryFibre = dietaryFibre;
+        this.dietaryFiber = dietaryFiber;
         this.cholesterol = cholesterol;
     }
 
@@ -81,12 +81,12 @@ public class NutritionalChart {
         this.totalSugars = totalSugars;
     }
 
-    public int getDietaryFibre() {
-        return dietaryFibre;
+    public int getDietaryFiber() {
+        return dietaryFiber;
     }
 
-    public void setDietaryFibre(int dietaryFibre) {
-        this.dietaryFibre = dietaryFibre;
+    public void setDietaryFiber(int dietaryFiber) {
+        this.dietaryFiber = dietaryFiber;
     }
 
     public int getCholesterol() {
