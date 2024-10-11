@@ -32,5 +32,76 @@ public class Recipe {
     public boolean queryIngredientsToGroceryList() {
         return false;
     }
-    
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Cuisine getCuisine() {
+        return cuisine;
+    }
+
+    public void setCuisine(Cuisine cuisine) {
+        this.cuisine = cuisine;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getCookTime() {
+        return cookTime;
+    }
+
+    public void setCookTime(int cookTime) {
+        this.cookTime = cookTime;
+    }
+
+    public int getServings() {
+        return servings;
+    }
+
+    public void setServings(int servings) {
+        this.servings = servings;
+    }
+
+    public Ingredient getPrimaryIngredient() {
+        return primaryIngredient;
+    }
+
+    public void setPrimaryIngredient(Ingredient primaryIngredient) {
+        this.primaryIngredient = primaryIngredient;
+    }
+
+    public int getCalories() {
+        return calories;
+    }
+
+    public void setCalories(int calories) {
+        this.calories = calories;
+    }
+
+    public IngredientList getIngredientList() {
+        return ingredientList;
+    }
+
+    public void setIngredientList(IngredientList ingredientList) {
+        this.ingredientList = ingredientList;
+    }
 }

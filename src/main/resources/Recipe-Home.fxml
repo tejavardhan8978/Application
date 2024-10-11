@@ -7,24 +7,24 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="650.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.metrostate.Controller.HomeController">
+<AnchorPane prefHeight="650.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.metrostate.Controller.RecipeController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d6b4fc" height="100.0" layoutX="45.0" layoutY="49.0" onMouseClicked="#switchToScene1" stroke="BLACK" strokeType="INSIDE" width="100.0" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="40.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d6b4fc" height="100.0" layoutX="166.0" layoutY="49.0" stroke="BLACK" strokeType="INSIDE" width="100.0" AnchorPane.leftAnchor="170.0" AnchorPane.topAnchor="40.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d6b4fc" height="100.0" layoutX="45.0" layoutY="49.0" onMouseClicked="#switchToHome" stroke="BLACK" strokeType="INSIDE" width="100.0" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="40.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d6b4fc" height="100.0" layoutX="166.0" layoutY="49.0" onMouseClicked="#switchToHome" stroke="BLACK" strokeType="INSIDE" width="100.0" AnchorPane.leftAnchor="170.0" AnchorPane.topAnchor="40.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d6b4fc" height="100.0" layoutX="304.0" layoutY="49.0" stroke="BLACK" strokeType="INSIDE" width="500.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="40.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d6b4fc" height="100.0" layoutX="732.0" layoutY="49.0" stroke="BLACK" strokeType="INSIDE" width="100.0" AnchorPane.rightAnchor="170.0" AnchorPane.topAnchor="40.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d6b4fc" height="100.0" layoutX="862.0" layoutY="49.0" stroke="BLACK" strokeType="INSIDE" width="100.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="40.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffc94096" height="100.0" layoutX="45.0" layoutY="173.0" stroke="BLACK" strokeType="INSIDE" width="230.0" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="170.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d6b4fc" height="310.0" layoutX="45.0" layoutY="292.0" stroke="BLACK" strokeType="INSIDE" width="230.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="300.0" />
-      <TableView layoutX="290.0" layoutY="180.0" prefHeight="440.0" prefWidth="760.0" AnchorPane.bottomAnchor="40.0" AnchorPane.rightAnchor="40.0">
+      <TableView fx:id="recipeTable" layoutX="290.0" layoutY="180.0" prefHeight="440.0" prefWidth="760.0" AnchorPane.bottomAnchor="40.0" AnchorPane.rightAnchor="40.0">
         <columns>
-          <TableColumn prefWidth="47.0" text="ID" />
-          <TableColumn prefWidth="209.0" text="NAME" />
-            <TableColumn minWidth="0.0" prefWidth="110.0" text="CUISINE" />
-            <TableColumn prefWidth="77.0" text="COOK TIME" />
-            <TableColumn prefWidth="66.0" text="SERVINGS" />
-            <TableColumn prefWidth="79.0" text="PRIMARY INGREDIENT" />
-            <TableColumn prefWidth="58.0" text="CALORIES" />
+          <TableColumn fx:id="idColumn" prefWidth="47.0" text="ID" />
+          <TableColumn fx:id="nameColumn" prefWidth="209.0" text="NAME" />
+            <TableColumn fx:id="cuisineColumn" minWidth="0.0" prefWidth="110.0" text="CUISINE" />
+            <TableColumn fx:id="cookTimeColumn" prefWidth="77.0" text="COOK TIME" />
+            <TableColumn fx:id="servingsColumn" prefWidth="66.0" text="SERVINGS" />
+            <TableColumn fx:id="primaryIngredientColumn" prefWidth="79.0" text="PRIMARY INGREDIENT" />
+            <TableColumn fx:id="caloriesColumn" prefWidth="58.0" text="CALORIES" />
             <TableColumn prefWidth="68.0" text="CHECK INGREDIENTS" />
             <TableColumn prefWidth="45.0" text="ADD TO MEALPLAN" />
         </columns>
@@ -34,12 +34,12 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Text>
-      <Text layoutX="54.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HOME" textAlignment="CENTER">
+      <Text layoutX="54.0" layoutY="99.0" onMouseClicked="#switchToHome" strokeType="OUTSIDE" strokeWidth="0.0" text="HOME" textAlignment="CENTER">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Text>
-      <Text layoutX="189.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BACK" textAlignment="CENTER">
+      <Text layoutX="189.0" layoutY="99.0" onMouseClicked="#switchToHome" strokeType="OUTSIDE" strokeWidth="0.0" text="BACK" textAlignment="CENTER">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
