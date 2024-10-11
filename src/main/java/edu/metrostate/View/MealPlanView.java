@@ -14,12 +14,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MealPlanView extends Application{
+public class MealPlanView {
 
-    @Override
-    public void start(Stage primaryStage) {
-        //code to set up the JavaFX view and buttons
-    }
+
 
     public void displayMenu(BorderPane root){
         //code to display a list of recipes/dates and other buttons
@@ -34,8 +31,6 @@ public class MealPlanView extends Application{
         //code to pass a new addition to the controller
     }
 
-    public static void main(String[] args){
-        //code to launch the view
-    }
+
 
 }

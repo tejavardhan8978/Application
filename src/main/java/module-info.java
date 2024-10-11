@@ -5,6 +5,4 @@ module Application {
 
     opens edu.metrostate to javafx.fxml;
     exports edu.metrostate;
-    exports Categories;
-    opens Categories to javafx.fxml;
 }

@@ -4,15 +4,10 @@ import javafx.application.Application;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-public class InventoryView extends Application {
+public class InventoryView {
 
-    public static void main(String[] args) {
-    }
 
-    @Override
-    public void start(Stage primaryStage) {
-        //code to set up the JavaFX view and buttons
-    }
+
 
     public void displayMenu(BorderPane root) {
         //code to pass a save to the controller
