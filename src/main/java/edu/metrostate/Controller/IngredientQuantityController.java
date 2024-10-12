@@ -1,12 +1,7 @@
 package edu.metrostate.Controller;
 
 import edu.metrostate.Main;
-import edu.metrostate.Model.Ingredient;
-import edu.metrostate.Model.Category;
-import edu.metrostate.Model.IngredientList;
-import edu.metrostate.Model.MacroNutrient;
-import edu.metrostate.Model.Storage;
-import edu.metrostate.Model.NutritionalChart;
+import edu.metrostate.Model.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -159,7 +154,8 @@ public class IngredientQuantityController {
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("/Inventory-Home.fxml"));
         Parent root = loader.load();
         InventoryController inventoryController = loader.getController();
-        inventoryController.setIngredientList(this.ingredientList, inventoryController); // Keep the reference if you need
+        inventoryController.setIngredientList(IngredientListSingleton.getInstance(), inventoryController); // Keep the reference
+        inventoryController.updateTableView();
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();

@@ -26,7 +26,6 @@ public class InventoryController implements Initializable {
     private Scene scene;
     private Parent root;
     private IngredientList ingredientList;
-    private ObservableList<Ingredient> observableIngredients;
 
     @FXML private TableView<Ingredient> InventoryTable;
     @FXML private TableColumn<Ingredient, Integer> idColumn;
@@ -46,7 +45,7 @@ public class InventoryController implements Initializable {
     }
 
     public void switchToAddIngredient(MouseEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(Main.class.getResource("/AddToRecipe.fxml"));
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("/AddToInventory.fxml"));
         Parent root = loader.load();
         // Get the controller
         IngredientQuantityController controller = loader.getController();
@@ -61,8 +60,8 @@ public class InventoryController implements Initializable {
 
     @Override
     public void initialize(URL arg0, ResourceBundle resourceBundle){
-        ingredientList = new IngredientList();
-
+        ingredientList = IngredientListSingleton.getInstance();
+        updateTableView();
         idColumn.setCellValueFactory(new PropertyValueFactory<Ingredient, Integer>("id"));
         name.setCellValueFactory(new PropertyValueFactory<Ingredient, String>("name"));
         expiryDate.setCellValueFactory(new PropertyValueFactory<Ingredient, Date>("expiryDate"));
@@ -70,8 +69,6 @@ public class InventoryController implements Initializable {
         storage.setCellValueFactory(new PropertyValueFactory<Ingredient, Storage>("storage"));
         quantity.setCellValueFactory(new PropertyValueFactory<Ingredient, Integer>("quantity"));
         category.setCellValueFactory(new PropertyValueFactory<Ingredient, String>("category"));
-
-        InventoryTable.setItems(observableIngredients);
     }
 
     public void addIngredient(Ingredient ingredient) {
