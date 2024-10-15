@@ -37,3 +37,5 @@
           with composition to minimize inheritance. Designed interfaces so differing food entities can implement
           NutrionalChart and Macronutirent. Confirmed code can be eaiser to maanage without affecting current 
           functionality.
+- [Quintin] Created the Inventory page and to inventory page. Also added code to enable the user to add items to the recipe
+            and ensured that this would stay with the user while the app was open. 
