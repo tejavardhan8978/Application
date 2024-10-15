@@ -31,3 +31,9 @@
 - [Banji] Created and added JavaFX application View for the Recipe repositry's model. The files are in the resources folder.
 - [Banji] Discussed and shared apporaches to refactoring the Recipe class to increase its' cohesion and loosely couple it to Cuisine and Ingredients classes. 
 
+# Milestone 4
+-[Banji] Created package for refactoring models to separate responsibilities keeping track of inventory
+          managing shopping list and Recipe ingredients. Minimized number of fields in refactored classes 
+          with composition to minimize inheritance. Designed interfaces so differing food entities can implement
+          NutrionalChart and Macronutirent. Confirmed code can be eaiser to maanage without affecting current 
+          functionality.
