@@ -17,6 +17,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -56,7 +58,7 @@ public class RecipeController implements Initializable {
 
     public void switchToHome(MouseEvent event) throws IOException {
         root = FXMLLoader.load(Main.class.getResource("/HomeScreen.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
@@ -75,15 +77,55 @@ public class RecipeController implements Initializable {
 
         //load data
         recipeTable.setItems(getItems());
+
+
+
     }
 
     public ObservableList<Recipe> getItems() {
         ObservableList<Recipe> recipeList = FXCollections.observableArrayList();
-        recipeList.add(new Recipe(01, "Steak", new Cuisine("American", "America"), "Big chunk of meat", 20, 1, new Ingredient(), 500, new IngredientList()));
-        recipeList.add(new Recipe(01, "Steak", new Cuisine("American", "America"), "Big chunk of meat", 25, 1, new Ingredient(), 500, new IngredientList()));
-        recipeList.add(new Recipe(01, "Steak", new Cuisine("American", "America"), "Big chunk of meat", 23, 1, new Ingredient(), 500, new IngredientList()));
-        recipeList.add(new Recipe(01, "Steak", new Cuisine("American", "America"), "Big chunk of meat", 22, 1, new Ingredient(), 500, new IngredientList()));
+        recipeList.add(new Recipe(01, "Steak", new Cuisine("American", "America"), "Big chunk of meat", 20, 1, new Ingredient(), 500, new IngredientList(), "cook till medium rare"));
+        recipeList.add(new Recipe(01, "Steak", new Cuisine("American", "America"), "Big chunk of meat", 25, 1, new Ingredient(), 500, new IngredientList(), "cook till medium rare"));
+        recipeList.add(new Recipe(01, "Steak", new Cuisine("American", "America"), "Big chunk of meat", 23, 1, new Ingredient(), 500, new IngredientList(), "cook till medium rare"));
+        recipeList.add(new Recipe(01, "Steak", new Cuisine("American", "America"), "Big chunk of meat", 22, 1, new Ingredient(), 500, new IngredientList(), "cook till medium rare"));
 
         return recipeList;
     }
+
+    @FXML
+    public void openModal(MouseEvent event) throws IOException {
+
+        if (event.getClickCount() == 2) {
+            Recipe tempRecipe = recipeTable.getSelectionModel().getSelectedItem();
+            if (tempRecipe != null) {
+                System.out.println(tempRecipe.toString());
+
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/RecipeDetailedModal.fxml"));
+                //fxmlLoader.setLocation(getClass().getResource("/RecipeDetailedModal.fxml"));
+                AnchorPane recipeModal = fxmlLoader.load();
+                RecipePopupController recipePopupController = fxmlLoader.getController();
+                recipePopupController.setRecipeController(this);
+                recipePopupController.setRecipeModalDetails(tempRecipe);
+
+
+                Stage modalStage = new Stage();
+                Scene modelScene = new Scene(recipeModal);
+                modalStage.setScene(modelScene);
+                modalStage.setTitle("Recipe Popup");
+                modalStage.initModality(Modality.APPLICATION_MODAL);
+
+                modalStage.show();
+            }
+        }
+    }
+
+    public void handleCloseToHome(MouseEvent event) throws IOException {
+        this.stage.close();
+        root = FXMLLoader.load(Main.class.getResource("/HomeScreen.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
 }
