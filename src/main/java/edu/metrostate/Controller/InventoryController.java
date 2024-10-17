@@ -48,7 +48,7 @@ public class InventoryController implements Initializable {
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("/AddToInventory.fxml"));
         Parent root = loader.load();
         // Get the controller
-        IngredientQuantityController controller = loader.getController();
+        AddIngredientToInventory controller = loader.getController();
         // Pass the ingredientList to the IngredientQuantityController
         controller.setIngredientList(this.ingredientList, this);
         // Switch to the new scene

@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.util.Date;
 import java.time.LocalDate;
 
-public class IngredientQuantityController {
+public class AddIngredientToInventory {
     @FXML private TextArea itemNameArea;
     @FXML private TextArea expiryDateArea;
     @FXML private TextArea servingSizeArea;
