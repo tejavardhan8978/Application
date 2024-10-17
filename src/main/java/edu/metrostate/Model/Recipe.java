@@ -11,13 +11,14 @@ public class Recipe {
     private Ingredient primaryIngredient;
     private int calories;
     private IngredientList ingredientList;
+    private String instruction;
 
     //default constructor
     public Recipe() {}
 
     public Recipe(int id, String name, Cuisine cuisine, String description,
                   int cookTime, int servings, Ingredient primaryIngredient,
-                  int calories, IngredientList ingredientList) {
+                  int calories, IngredientList ingredientList, String instruction) {
         this.id = id;
         this.name = name;
         this.cuisine = cuisine;
@@ -27,6 +28,7 @@ public class Recipe {
         this.primaryIngredient = primaryIngredient;
         this.calories = calories;
         this.ingredientList = ingredientList;
+        this.instruction = instruction;
     }
 
     public boolean queryIngredientsToGroceryList() {
@@ -103,5 +105,24 @@ public class Recipe {
 
     public void setIngredientList(IngredientList ingredientList) {
         this.ingredientList = ingredientList;
+    }
+
+    @Override
+    public String toString() {
+        return "Recipe{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", cuisine=" + cuisine +
+                ", description='" + description + '\'' +
+                ", cookTime=" + cookTime +
+                ", servings=" + servings +
+                ", primaryIngredient=" + primaryIngredient +
+                ", calories=" + calories +
+                ", ingredientList=" + ingredientList +
+                '}';
+    }
+
+    public String getInstructions() {
+        return instruction;
     }
 }
