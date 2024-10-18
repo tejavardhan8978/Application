@@ -9,46 +9,45 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.metrostate.Controller.IngredientPopupController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d6b4fc" height="700.0" stroke="BLACK" strokeType="INSIDE" width="900.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffc94096" height="620.0" layoutX="35.0" layoutY="39.0" stroke="BLACK" strokeType="INSIDE" width="210.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="40.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffc94096" height="180.0" layoutX="269.0" layoutY="40.0" stroke="BLACK" strokeType="INSIDE" width="580.0" AnchorPane.bottomAnchor="480.0" AnchorPane.leftAnchor="280.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="40.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffc94096" height="410.0" layoutX="280.0" layoutY="250.0" stroke="BLACK" strokeType="INSIDE" width="580.0" AnchorPane.leftAnchor="280.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="250.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b4ffa3" height="35.0" layoutX="50.0" layoutY="61.0" stroke="BLACK" strokeType="INSIDE" width="90.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="50.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b4ffa3" height="35.0" layoutX="151.0" layoutY="50.0" stroke="BLACK" strokeType="INSIDE" width="90.0" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="50.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b4ffa3" height="35.0" layoutX="50.0" layoutY="61.0" onMouseClicked="#handleHomeButtonClick" stroke="BLACK" strokeType="INSIDE" width="90.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="50.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b4ffa3" height="35.0" layoutX="151.0" layoutY="50.0" onMouseClicked="#handleBackButtonClick" stroke="BLACK" strokeType="INSIDE" width="90.0" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="50.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b4ffa3" height="35.0" layoutX="50.0" layoutY="95.0" stroke="BLACK" strokeType="INSIDE" width="190.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="95.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b4ffa3" height="35.0" layoutX="50.0" layoutY="136.0" stroke="BLACK" strokeType="INSIDE" width="190.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="140.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b4ffa3" height="90.0" layoutX="50.0" layoutY="185.0" stroke="BLACK" strokeType="INSIDE" width="190.0" AnchorPane.bottomAnchor="425.0" AnchorPane.topAnchor="185.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b4ffa3" height="35.0" layoutX="50.0" layoutY="396.0" stroke="BLACK" strokeType="INSIDE" width="190.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="405.0" />
-      <TableView layoutX="50.0" layoutY="446.0" prefHeight="200.0" prefWidth="190.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="450.0">
+      <TableView fx:id="ingredientRecipeTable" layoutX="50.0" layoutY="446.0" prefHeight="200.0" prefWidth="190.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="450.0">
         <columns>
           <TableColumn prefWidth="59.0" text="QUANTITY" />
           <TableColumn prefWidth="130.0" text="INGREDIENTS" />
         </columns>
       </TableView>
-      <Text layoutX="68.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HOME" textAlignment="CENTER" wrappingWidth="54.404296875">
+      <Text layoutX="68.0" layoutY="74.0" onMouseClicked="#handleHomeButtonClick" strokeType="OUTSIDE" strokeWidth="0.0" text="HOME" textAlignment="CENTER" wrappingWidth="54.404296875">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Text layoutX="171.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BACK" textAlignment="CENTER" wrappingWidth="47.404296875">
+      <Text layoutX="171.0" layoutY="73.0" onMouseClicked="#handleBackButtonClick" strokeType="OUTSIDE" strokeWidth="0.0" text="BACK" textAlignment="CENTER" wrappingWidth="47.404296875">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Text layoutX="54.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CHICKEN" textAlignment="CENTER" wrappingWidth="181.404296875">
+      <Text fx:id="ingredientTitle" layoutX="54.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CHICKEN" textAlignment="CENTER" wrappingWidth="181.404296875">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Text layoutX="108.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MEATS" textAlignment="CENTER" wrappingWidth="72.404296875">
+      <Text fx:id="ingredientCategory" layoutX="61.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MEATS" textAlignment="CENTER" wrappingWidth="169.8222656249999">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Text layoutX="58.0" layoutY="213.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Delicious white meat chicken pairs with any sauce or seasoning" textAlignment="CENTER" wrappingWidth="174.404296875" AnchorPane.bottomAnchor="434.599609375">
+      <Text fx:id="ingredientDescription" layoutX="58.0" layoutY="213.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Delicious white meat chicken pairs with any sauce or seasoning" textAlignment="CENTER" wrappingWidth="174.404296875" AnchorPane.bottomAnchor="434.599609375">
          <font>
             <Font size="18.0" />
          </font>
@@ -58,13 +57,13 @@
             <Font size="18.0" />
          </font>
       </Text>
-      <TableView layoutX="287.0" layoutY="83.0" prefHeight="115.0" prefWidth="275.0" AnchorPane.bottomAnchor="490.0" AnchorPane.leftAnchor="290.0" AnchorPane.rightAnchor="335.0" AnchorPane.topAnchor="95.0">
+      <TableView fx:id="ingredientNutritionChartTable1" layoutX="287.0" layoutY="83.0" prefHeight="115.0" prefWidth="275.0" AnchorPane.bottomAnchor="490.0" AnchorPane.leftAnchor="290.0" AnchorPane.rightAnchor="335.0" AnchorPane.topAnchor="95.0">
         <columns>
           <TableColumn prefWidth="75.0" text="C1" />
           <TableColumn prefWidth="75.0" text="C2" />
         </columns>
       </TableView>
-      <TableView layoutX="606.0" layoutY="50.0" prefHeight="160.0" prefWidth="275.0" style="-fx-background-color: #ffc940;" AnchorPane.bottomAnchor="490.0" AnchorPane.leftAnchor="575.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0">
+      <TableView fx:id="ingredientNutritionChartTable2" layoutX="606.0" layoutY="50.0" prefHeight="160.0" prefWidth="275.0" style="-fx-background-color: #ffc940;" AnchorPane.bottomAnchor="490.0" AnchorPane.leftAnchor="575.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0">
          <columns>
             <TableColumn prefWidth="75.0" text="C1" />
             <TableColumn prefWidth="75.0" text="C2" />
@@ -83,15 +82,15 @@
          </font>
       </Text>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fc9ea6" height="35.0" layoutX="60.0" layoutY="308.0" stroke="BLACK" strokeType="INSIDE" width="170.0" AnchorPane.bottomAnchor="355.0" AnchorPane.topAnchor="310.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fc9ea6" height="35.0" layoutX="59.0" layoutY="350.0" stroke="BLACK" strokeType="INSIDE" width="170.0" AnchorPane.topAnchor="350.0" />
-      <Pane layoutX="280.0" layoutY="250.0" prefHeight="410.0" prefWidth="580.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fc9ea6" height="35.0" layoutX="59.0" layoutY="350.0" onMouseClicked="#handleAddButtonClick" stroke="BLACK" strokeType="INSIDE" width="170.0" AnchorPane.topAnchor="350.0" />
+      <Pane fx:id="ingredientImage" layoutX="280.0" layoutY="250.0" prefHeight="410.0" prefWidth="580.0" />
       <Text layoutX="68.0" layoutY="332.0" strokeType="OUTSIDE" strokeWidth="0.0" text="IN STOCK">
          <font>
             <Font size="14.0" />
          </font>
       </Text>
-      <TextField layoutX="150.0" layoutY="315.0" prefHeight="25.0" prefWidth="75.0" />
-      <Text layoutX="126.0" layoutY="374.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ADD" textAlignment="CENTER">
+      <TextField fx:id="ingredientStock" layoutX="150.0" layoutY="315.0" prefHeight="25.0" prefWidth="75.0" />
+      <Text fx:id="ingredientQuantityAdd" layoutX="126.0" layoutY="374.0" onMouseClicked="#handleAddButtonClick" strokeType="OUTSIDE" strokeWidth="0.0" text="ADD" textAlignment="CENTER">
          <font>
             <Font size="18.0" />
          </font>
