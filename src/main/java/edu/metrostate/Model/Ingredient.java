@@ -13,8 +13,10 @@ public class Ingredient {
     private Storage storage;
     private int quantity;
     private String category;
+    private String description;
     //Buying an ingredient for the first time
-    public Ingredient(int id, String name, Date expiryDate, NutritionalChart nutrition, MacroNutrient primaryMacroNutrient, Storage storage, int quantity, String category){
+    public Ingredient(int id, String name, Date expiryDate, NutritionalChart nutrition,
+                      MacroNutrient primaryMacroNutrient, Storage storage, int quantity, String category, String description){
         this.id = id;
         this.name = name;
         this.expiryDate = expiryDate;
@@ -23,6 +25,7 @@ public class Ingredient {
         this.storage = storage;
         this.quantity = quantity;
         this.category = category;
+        this.description = description;
     }
     public Ingredient(){}
     //This will be the method to update quantity as more ingredients are bought
@@ -35,6 +38,7 @@ public class Ingredient {
     public int GetQuantity(int id){
         return quantity;
     }
+
     /**
      * This method takes an ingredient as a parameter and returns a list of recipes that use this specific ingredient.
      * @param ingredient Ingredient to be searched for.
@@ -44,28 +48,40 @@ public class Ingredient {
         ArrayList<Recipe> recipes = new ArrayList<>();
         return recipes;
     }
+
     public void setID(int id){
         this.id = id;
     }
+
     public int getId(){
         return id;
     }
+
     public String getName(){
         return name;
     }
+
     public Date getExpiryDate(){
         return expiryDate;
     }
+
     public MacroNutrient getPrimaryMacroNutrient(){
         return primaryMacroNutrient;
     }
+
     public Storage getStorage(){
         return storage;
     }
+
     public int getQuantity(){
         return quantity;
     }
+
     public String getCategory(){
         return category;
+    }
+
+    public String getDescription() {
+        return this.description;
     }
 }

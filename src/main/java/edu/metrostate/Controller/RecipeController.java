@@ -31,21 +31,6 @@ public class RecipeController implements Initializable {
     private Scene scene;
     private Parent root;
 
-
-    public ArrayList<Recipe> queryRecipes() {
-        return null;
-    }
-
-    public boolean queryIngredientsToGroceryList(Recipe recipe) {
-        return false;
-    }
-
-    public boolean addNewRecipe() {return false;}
-
-    public boolean save() {
-        return false;
-    }
-
     @FXML private TableView<Recipe> recipeTable;
     @FXML private TableColumn<Recipe, Integer> idColumn;
     @FXML private TableColumn<Recipe, String> nameColumn;
@@ -76,13 +61,10 @@ public class RecipeController implements Initializable {
         caloriesColumn.setCellValueFactory(new PropertyValueFactory<Recipe, Integer>("calories"));
 
         //load data
-        recipeTable.setItems(getItems());
-
-
-
+        recipeTable.setItems(getRecipeItems());
     }
 
-    public ObservableList<Recipe> getItems() {
+    public ObservableList<Recipe> getRecipeItems() {
         ObservableList<Recipe> recipeList = FXCollections.observableArrayList();
         recipeList.add(new Recipe(01, "Steak", new Cuisine("American", "America"), "Big chunk of meat", 20, 1, new Ingredient(), 500, new IngredientList(), "cook till medium rare"));
         recipeList.add(new Recipe(01, "Steak", new Cuisine("American", "America"), "Big chunk of meat", 25, 1, new Ingredient(), 500, new IngredientList(), "cook till medium rare"));
@@ -109,8 +91,8 @@ public class RecipeController implements Initializable {
 
 
                 Stage modalStage = new Stage();
-                Scene modelScene = new Scene(recipeModal);
-                modalStage.setScene(modelScene);
+                Scene modalScene = new Scene(recipeModal);
+                modalStage.setScene(modalScene);
                 modalStage.setTitle("Recipe Popup");
                 modalStage.initModality(Modality.APPLICATION_MODAL);
 

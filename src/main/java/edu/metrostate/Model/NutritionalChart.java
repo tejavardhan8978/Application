@@ -25,6 +25,10 @@ public class NutritionalChart {
         this.cholesterol = cholesterol;
     }
 
+    public NutritionalChart() {
+
+    }
+
     public int getServingSize() {
         return servingSize;
     }

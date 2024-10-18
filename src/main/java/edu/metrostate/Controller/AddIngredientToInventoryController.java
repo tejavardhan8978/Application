@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.util.Date;
 import java.time.LocalDate;
 
-public class AddIngredientToInventory {
+public class AddIngredientToInventoryController {
     @FXML private TextArea itemNameArea;
     @FXML private TextArea expiryDateArea;
     @FXML private TextArea servingSizeArea;
@@ -75,6 +75,7 @@ public class AddIngredientToInventory {
         String category = categoryListView.getSelectionModel().getSelectedItem();
         String expiryDateString = expiryDateArea.getText();
         String quantityString = quantityArea.getText();
+        String description = "CREATE FIELD FOR DESCRIPTION!!";
 
         try {
             // Parse expiry date
@@ -104,6 +105,7 @@ public class AddIngredientToInventory {
             Storage selectedStorage = Storage.valueOf(storageListView.getSelectionModel().getSelectedItem());
 
             // Create a new Ingredient object
+            
             Ingredient newIngredient = new Ingredient(
                     id,
                     name,
@@ -112,7 +114,9 @@ public class AddIngredientToInventory {
                     selectedMacroNutrient, // Use selected macro nutrient from the ListView
                     selectedStorage, // Use selected storage from the ListView
                     quantity,
-                    category
+                    category,
+                    description
+
             );
 
             //Add the new ingredient to the list
