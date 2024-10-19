@@ -1,5 +1,5 @@
 # Phase1
-We are implementing:
+We have decided to implement the two functional requirements.
 
 ## Add and subtract from recipe
 
