@@ -32,10 +32,11 @@
 - [Banji] Discussed and shared approaches to refactoring the Recipe class to increase its cohesion and loosely couple it to Cuisine and Ingredients classes. 
 
 # Milestone 4
--[Banji] Created package for refactoring models to separate responsibilities keeping track of inventory
+- [Banji] Created package for refactoring models to separate responsibilities keeping track of inventory
           managing shopping list and Recipe ingredients. Minimized number of fields in refactored classes 
           with composition to minimize inheritance. Designed interfaces so differing food entities can implement
           NutritionalChart and Macronutrient. Confirmed code can be easier to manage without affecting current 
           functionality.
 - [Quintin] Created the Inventory page and to inventory page. Also added code to enable the user to add items to the recipe
             and ensured that this would stay with the user while the app was open. 
+- [Hieu] Created Implementation.md. outline.
