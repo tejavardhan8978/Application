@@ -60,6 +60,21 @@ public class InventoryController implements Initializable {
         stage.show();
     }
 
+    public void switchToEditIngredient(MouseEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("/ChangeQuantityInventoryModal.fxml"));
+        Parent root = loader.load();
+        // Get the controller
+        AddIngredientToInventoryController controller = loader.getController();
+        // Pass the ingredientList to the IngredientQuantityController
+        controller.setIngredientList(this.ingredientList, this);
+        // Switch to the new scene
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
 //        ingredientList = IngredientListSingleton.getInstance();
