@@ -64,9 +64,7 @@ public class InventoryController implements Initializable {
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("/ChangeQuantityInventoryModal.fxml"));
         Parent root = loader.load();
         // Get the controller
-        AddIngredientToInventoryController controller = loader.getController();
-        // Pass the ingredientList to the IngredientQuantityController
-        controller.setIngredientList(this.ingredientList, this);
+        EditIngredient controller = loader.getController();
         // Switch to the new scene
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
