@@ -14,6 +14,7 @@ public class Ingredient {
     private int quantity;
     private String category;
     private String description;
+
     //Buying an ingredient for the first time
     public Ingredient(int id, String name, Date expiryDate, NutritionalChart nutrition,
                       MacroNutrient primaryMacroNutrient, Storage storage, int quantity, String category, String description){

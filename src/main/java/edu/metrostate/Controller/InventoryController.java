@@ -62,8 +62,8 @@ public class InventoryController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
-//        ingredientList = IngredientListSingleton.getInstance();
-//        updateTableView();
+        ingredientList = IngredientListSingleton.getInstance();
+        updateTableView();
         idColumn.setCellValueFactory(new PropertyValueFactory<Ingredient, Integer>("id"));
         name.setCellValueFactory(new PropertyValueFactory<Ingredient, String>("name"));
         expiryDate.setCellValueFactory(new PropertyValueFactory<Ingredient, Date>("expiryDate"));
@@ -130,7 +130,4 @@ public class InventoryController implements Initializable {
             }
         }
     }
-
-
-
 }

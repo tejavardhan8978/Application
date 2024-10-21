@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -19,23 +20,24 @@ import java.util.Date;
 import java.time.LocalDate;
 
 public class AddIngredientToInventoryController {
-    @FXML private TextArea itemNameArea;
-    @FXML private TextArea expiryDateArea;
-    @FXML private TextArea servingSizeArea;
-    @FXML private TextArea quantityArea;
-    @FXML private TextArea caloriesArea;
-    @FXML private TextArea carbsArea;
-    @FXML private TextArea fatArea;
-    @FXML private TextArea proteinArea;
-    @FXML private TextArea sodiumArea;
-    @FXML private TextArea sugarArea;
-    @FXML private TextArea fiberArea;
-    @FXML private TextArea cholesterolArea;
+    @FXML private TextField itemNameField;
+    @FXML private TextField expiryDateField;
+    @FXML private TextField servingSizeField;
+    @FXML private TextField quantityField;
+    @FXML private TextField caloriesField;
+    @FXML private TextField carbsField;
+    @FXML private TextField fatField;
+    @FXML private TextField proteinField;
+    @FXML private TextField sodiumField;
+    @FXML private TextField sugarField;
+    @FXML private TextField fiberField;
+    @FXML private TextField cholesterolField;
+    @FXML private TextArea itemDescriptionArea;
     @FXML private ListView<String> macroNutrientListView;
     @FXML private ListView<String> storageListView;
     @FXML private ListView<String> categoryListView;
 
-    private IngredientList ingredientList;
+    IngredientList ingredientList;
     private InventoryController inventoryController;
 
     @FXML
@@ -71,11 +73,11 @@ public class AddIngredientToInventoryController {
     @FXML
     public void setSaveButton(MouseEvent event) throws IOException {
         int id =0;
-        String name = itemNameArea.getText();
+        String name = itemNameField.getText();
         String category = categoryListView.getSelectionModel().getSelectedItem();
-        String expiryDateString = expiryDateArea.getText();
-        String quantityString = quantityArea.getText();
-        String description = "CREATE FIELD FOR DESCRIPTION!!";
+        String expiryDateString = expiryDateField.getText();
+        String quantityString = quantityField.getText();
+        String description = itemDescriptionArea.getText();
 
         try {
             // Parse expiry date
@@ -86,15 +88,15 @@ public class AddIngredientToInventoryController {
             int quantity = Integer.parseInt(quantityString);
 
             // Gather nutritional information
-            int servingSize = Integer.parseInt(servingSizeArea.getText());
-            int calories = Integer.parseInt(caloriesArea.getText());
-            int totalCarbohydrates = Integer.parseInt(carbsArea.getText());
-            int totalFat = Integer.parseInt(fatArea.getText());
-            int totalProtein = Integer.parseInt(proteinArea.getText());
-            int totalSodium = Integer.parseInt(sodiumArea.getText());
-            int totalSugars = Integer.parseInt(sugarArea.getText());
-            int dietaryFiber = Integer.parseInt(fiberArea.getText());
-            int cholesterol = Integer.parseInt(cholesterolArea.getText());
+            int servingSize = Integer.parseInt(servingSizeField.getText());
+            int calories = Integer.parseInt(caloriesField.getText());
+            int totalCarbohydrates = Integer.parseInt(carbsField.getText());
+            int totalFat = Integer.parseInt(fatField.getText());
+            int totalProtein = Integer.parseInt(proteinField.getText());
+            int totalSodium = Integer.parseInt(sodiumField.getText());
+            int totalSugars = Integer.parseInt(sugarField.getText());
+            int dietaryFiber = Integer.parseInt(fiberField.getText());
+            int cholesterol = Integer.parseInt(cholesterolField.getText());
 
             // Create a NutritionalChart object
             NutritionalChart nutrition = new NutritionalChart(servingSize, calories, totalCarbohydrates, totalFat,
@@ -116,7 +118,6 @@ public class AddIngredientToInventoryController {
                     quantity,
                     category,
                     description
-
             );
 
             //Add the new ingredient to the list
@@ -138,17 +139,18 @@ public class AddIngredientToInventoryController {
     }
 
     private void clearFields() {
-        itemNameArea.clear();
-        expiryDateArea.clear();
-        quantityArea.clear();
-        caloriesArea.clear();
-        carbsArea.clear();
-        fatArea.clear();
-        proteinArea.clear();
-        sodiumArea.clear();
-        sugarArea.clear();
-        fiberArea.clear();
-        cholesterolArea.clear();
+        itemNameField.clear();
+        expiryDateField.clear();
+        quantityField.clear();
+        caloriesField.clear();
+        carbsField.clear();
+        fatField.clear();
+        proteinField.clear();
+        sodiumField.clear();
+        sugarField.clear();
+        fiberField.clear();
+        cholesterolField.clear();
+        itemDescriptionArea.clear();
     }
 
     //Go back to the referenced Inventory Controller to display changes
