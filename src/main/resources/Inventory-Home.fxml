@@ -10,10 +10,10 @@
 <AnchorPane prefHeight="650.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.metrostate.Controller.InventoryController">
     <children>
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d6b4fc" height="100.0" layoutX="45.0" layoutY="49.0" onMouseClicked="#switchToHome" stroke="BLACK" strokeType="INSIDE" width="100.0" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="40.0" />
-        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d6b4fc" height="100.0" layoutX="166.0" layoutY="49.0" onMouseClicked="#switchToHome" stroke="BLACK" strokeType="INSIDE" width="100.0" AnchorPane.leftAnchor="170.0" AnchorPane.topAnchor="40.0" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d6b4fc" height="100.0" layoutX="960.0" layoutY="39.0" onMouseClicked="#switchToEditIngredient" stroke="BLACK" strokeType="INSIDE" width="100.0" AnchorPane.leftAnchor="960.0" AnchorPane.topAnchor="39.0" />
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d6b4fc" height="100.0" layoutX="304.0" layoutY="49.0" stroke="BLACK" strokeType="INSIDE" width="500.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="40.0" />
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d6b4fc" height="100.0" layoutX="732.0" layoutY="49.0" stroke="BLACK" strokeType="INSIDE" width="100.0" AnchorPane.rightAnchor="170.0" AnchorPane.topAnchor="40.0" />
-        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d6b4fc" height="100.0" layoutX="862.0" layoutY="49.0" stroke="BLACK" strokeType="INSIDE" width="100.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="40.0" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d6b4fc" height="100.0" layoutX="170.0" layoutY="38.0" stroke="BLACK" strokeType="INSIDE" width="100.0" AnchorPane.rightAnchor="830.0" AnchorPane.topAnchor="38.0" />
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffc94096" height="100.0" layoutX="45.0" layoutY="173.0" stroke="BLACK" strokeType="INSIDE" width="230.0" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="170.0" />
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d6b4fc" height="310.0" layoutX="45.0" layoutY="292.0" stroke="BLACK" strokeType="INSIDE" width="230.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="300.0" />
         <TableView fx:id="inventoryTable" layoutX="290.0" layoutY="180.0" onMouseClicked="#openIngredientModal" prefHeight="440.0" prefWidth="760.0" AnchorPane.bottomAnchor="40.0" AnchorPane.rightAnchor="40.0">
@@ -37,7 +37,7 @@
                 <Font name="System Bold" size="24.0" />
             </font>
         </Text>
-        <Text layoutX="189.0" layoutY="99.0" onMouseClicked="#switchToHome" strokeType="OUTSIDE" strokeWidth="0.0" text="BACK" textAlignment="CENTER">
+        <Text layoutX="988.0" layoutY="99.0" onMouseClicked="#switchToEditIngredient" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit" textAlignment="CENTER">
             <font>
                 <Font name="System Bold" size="24.0" />
             </font>
@@ -52,7 +52,7 @@
                 <Font name="System Bold" size="24.0" />
             </font>
         </Text>
-        <Text layoutX="980.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SAVE" textAlignment="CENTER">
+        <Text layoutX="190.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SAVE" textAlignment="CENTER">
             <font>
                 <Font name="System Bold" size="24.0" />
             </font>
