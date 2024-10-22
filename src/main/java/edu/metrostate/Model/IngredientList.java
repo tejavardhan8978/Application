@@ -1,6 +1,7 @@
 package edu.metrostate.Model;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * This class instantiates an object which contains the list of ingredients and which category the list belongs to.
@@ -36,6 +37,9 @@ public class IngredientList {
     public void addIngredient(Ingredient ingredient) {
         ingredient.setID(++lastId);
         ingredients.add(ingredient);
+    }
+    public void updateIngredient(Ingredient ingredient, int newQuantity, Date newDate){
+        ingredient.UpdateIngredient(ingredient.getId(), newQuantity, newDate);
     }
 
     public ArrayList<Ingredient> getIngredients() {
