@@ -29,9 +29,10 @@ public class Ingredient {
     }
     public Ingredient(){}
     //This will be the method to update quantity as more ingredients are bought
-    public boolean UpdateQuantity(int id, int NewQuantity){
+    public boolean UpdateIngredient(int id, int NewQuantity, Date NewDate){
         this.id = id;
         this.quantity = NewQuantity;
+        this.expiryDate = NewDate;
         return false;
     }
     //This Will Search through all stored ingredients to find matching ID and return quantity of it
