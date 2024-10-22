@@ -25,4 +25,10 @@ public class Cuisine{
     public void setCountry(String country) {
         this.country = country;
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
+
 }

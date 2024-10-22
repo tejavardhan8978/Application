@@ -4,10 +4,7 @@ import edu.metrostate.Model.Recipe;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -20,7 +17,6 @@ public class RecipePopupController implements Initializable {
 
     private RecipeController recipeController;
     private Stage RecipeControllerStage;
-    private Recipe recipe;
 
     @FXML private Text recipeTitle;
     @FXML private Text recipeCuisine;
@@ -30,8 +26,6 @@ public class RecipePopupController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("Initializing RecipePopupController");
-
-
     }
 
     @FXML
@@ -58,8 +52,6 @@ public class RecipePopupController implements Initializable {
     public void setStage(Stage stage) {
         this.RecipeControllerStage = stage;
     }
-
-
 
     public void setRecipeModalDetails(Recipe recipe) {
         this.recipeTitle.setText(recipe.getName());

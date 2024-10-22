@@ -7,13 +7,21 @@ public class RecipeListModel {
     private ArrayList<Recipe> recipes;
     private String name;
     private int listType;
+    private static int lastId =0;
 
-    public RecipeListModel() {}
+    public RecipeListModel() {
+        this.recipes = new ArrayList<>();
+    }
 
     public RecipeListModel(ArrayList<Recipe> recipes, String name, int listType) {
         this.recipes = recipes;
         this.name = name;
         this.listType = listType;
+    }
+
+    public void addRecipe(Recipe recipe){
+        recipe.setId(++lastId);
+        recipes.add(recipe);
     }
 
     public ArrayList<Recipe> getRecipes() {

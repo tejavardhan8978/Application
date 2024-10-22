@@ -9,6 +9,7 @@ public class IngredientList {
 
     private ArrayList<Ingredient> ingredients;
     private String name;
+    private int listType;
     private static int lastId = 0;
 
 
@@ -18,7 +19,6 @@ public class IngredientList {
      * 2 - Ingredients in a given recipe.
      * 3 - Ingredients in the grocery list.
      */
-    private int listType;
 
     /**
      * Default constructor

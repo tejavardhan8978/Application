@@ -8,17 +8,17 @@ public class Recipe {
     private String description;
     private int cookTime;
     private int servings;
-    private Ingredient primaryIngredient;
-    private int calories;
-    private IngredientList ingredientList;
+    private String primaryIngredient;
+    private NutritionalChart nutrition;
+    private String ingredients;
     private String instruction;
 
     //default constructor
     public Recipe() {}
 
     public Recipe(int id, String name, Cuisine cuisine, String description,
-                  int cookTime, int servings, Ingredient primaryIngredient,
-                  int calories, IngredientList ingredientList, String instruction) {
+                  int cookTime, int servings, String primaryIngredient,
+                  NutritionalChart nutrition, String ingredients, String instruction) {
         this.id = id;
         this.name = name;
         this.cuisine = cuisine;
@@ -26,8 +26,8 @@ public class Recipe {
         this.cookTime = cookTime;
         this.servings = servings;
         this.primaryIngredient = primaryIngredient;
-        this.calories = calories;
-        this.ingredientList = ingredientList;
+        this.nutrition = nutrition;
+        this.ingredients = ingredients;
         this.instruction = instruction;
     }
 
@@ -83,28 +83,20 @@ public class Recipe {
         this.servings = servings;
     }
 
-    public Ingredient getPrimaryIngredient() {
+    public String getPrimaryIngredient() {
         return primaryIngredient;
     }
 
-    public void setPrimaryIngredient(Ingredient primaryIngredient) {
+    public void setPrimaryIngredient(String primaryIngredient) {
         this.primaryIngredient = primaryIngredient;
     }
 
-    public int getCalories() {
-        return calories;
+    public String getIngredientList() {
+        return ingredients;
     }
 
-    public void setCalories(int calories) {
-        this.calories = calories;
-    }
-
-    public IngredientList getIngredientList() {
-        return ingredientList;
-    }
-
-    public void setIngredientList(IngredientList ingredientList) {
-        this.ingredientList = ingredientList;
+    public void setIngredientList(String ingredients) {
+        this.ingredients = ingredients;
     }
 
     @Override
@@ -117,8 +109,7 @@ public class Recipe {
                 ", cookTime=" + cookTime +
                 ", servings=" + servings +
                 ", primaryIngredient=" + primaryIngredient +
-                ", calories=" + calories +
-                ", ingredientList=" + ingredientList +
+                ", ingredientList=" + ingredients +
                 '}';
     }
 

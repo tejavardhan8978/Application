@@ -40,3 +40,5 @@
 - [Quintin] Created the Inventory page and to inventory page. Also added code to enable the user to add items to the recipe
             and ensured that this would stay with the user while the app was open. 
 - [Hieu] Created Implementation.md. outline.
+- [Quintin] Created the AddToRecipe pop up and code to enable the user to add to the recipe list.
+- [Quintin] Completed the implementations.md file.

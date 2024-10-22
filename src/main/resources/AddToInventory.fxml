@@ -9,23 +9,23 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="604.0" prefWidth="705.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.metrostate.Controller.AddIngredientToInventoryController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="605.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.metrostate.Controller.AddIngredientToInventoryController">
     <children>
-        <Pane prefHeight="604.0" prefWidth="705.0" style="-fx-background-color: #fc9ea6;">
+        <Pane prefHeight="605.0" prefWidth="700.0" style="-fx-background-color: #fc9ea6;">
             <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#8cc4f8" height="65.0" layoutX="260.0" layoutY="150.0" stroke="BLACK" strokeType="INSIDE" width="180.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#8cc4f8" height="70.0" layoutX="260.0" layoutY="150.0" stroke="BLACK" strokeType="INSIDE" width="180.0" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#8cc4f8" height="180.0" layoutX="16.0" layoutY="242.0" stroke="BLACK" strokeType="INSIDE" width="607.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#8cc4f8" height="65.0" layoutX="16.0" layoutY="150.0" stroke="BLACK" strokeType="INSIDE" width="180.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#8cc4f8" height="65.0" layoutX="504.0" layoutY="59.0" stroke="BLACK" strokeType="INSIDE" width="180.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#8cc4f8" height="65.0" layoutX="260.0" layoutY="58.0" stroke="BLACK" strokeType="INSIDE" width="180.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#8cc4f8" height="65.0" layoutX="504.0" layoutY="150.0" stroke="BLACK" strokeType="INSIDE" width="180.0" />
-                <Label layoutX="266.0" layoutY="64.0" text="Category" textAlignment="CENTER" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#8cc4f8" height="70.0" layoutX="16.0" layoutY="150.0" stroke="BLACK" strokeType="INSIDE" width="180.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#8cc4f8" height="70.0" layoutX="504.0" layoutY="59.0" stroke="BLACK" strokeType="INSIDE" width="180.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#8cc4f8" height="70.0" layoutX="260.0" layoutY="58.0" stroke="BLACK" strokeType="INSIDE" width="180.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#8cc4f8" height="70.0" layoutX="504.0" layoutY="150.0" stroke="BLACK" strokeType="INSIDE" width="180.0" />
+                <Label layoutX="271.0" layoutY="64.0" text="Category" textAlignment="CENTER" />
                 <Label layoutX="22.0" layoutY="154.0" prefHeight="25.0" prefWidth="175.0" text="Expiration Date YYYY-MM-DD" />
                 <Label layoutX="22.0" layoutY="275.0" prefHeight="25.0" prefWidth="94.0" text="Serving Size" />
-            <Label layoutX="510.0" layoutY="64.0" text="Storage" textAlignment="CENTER" />
-            <ListView fx:id="storageListView" layoutX="508.0" layoutY="82.0" prefHeight="27.0" prefWidth="160.0" />
-            <Label layoutX="510.0" layoutY="154.0" prefHeight="25.0" prefWidth="165.0" text="Quantity" />
-            <Label layoutX="266.0" layoutY="154.0" prefHeight="25.0" prefWidth="165.0" text="Primary Macro" />
+            <Label layoutX="515.0" layoutY="64.0" text="Storage" textAlignment="CENTER" />
+            <ListView fx:id="storageListView" layoutX="513.0" layoutY="82.0" prefHeight="27.0" prefWidth="160.0" />
+            <Label layoutX="515.0" layoutY="154.0" prefHeight="25.0" prefWidth="165.0" text="Quantity" />
+            <Label layoutX="271.0" layoutY="154.0" prefHeight="25.0" prefWidth="165.0" text="Primary Macro" />
             <Label layoutX="22.0" layoutY="346.0" prefHeight="25.0" prefWidth="94.0" text="Calories" />
             <Label layoutX="462.0" layoutY="370.0" prefHeight="25.0" prefWidth="10.0" text="g" />
             <Label layoutX="258.0" layoutY="275.0" prefHeight="25.0" prefWidth="46.0" text="Carbs" />
@@ -47,13 +47,13 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <ListView fx:id="macroNutrientListView" layoutX="265.0" layoutY="179.0" prefHeight="27.0" prefWidth="160.0" />
-            <ListView fx:id="categoryListView" layoutX="264.0" layoutY="82.0" prefHeight="27.0" prefWidth="160.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#8cc4f8" height="65.0" layoutX="16.0" layoutY="58.0" stroke="BLACK" strokeType="INSIDE" width="180.0" />
-                <Label layoutX="22.0" layoutY="64.0" prefHeight="17.0" prefWidth="156.0" text="Item Name" textAlignment="CENTER" />
-            <TextField fx:id="itemNameField" layoutX="20.0" layoutY="82.0" prefHeight="27.0" prefWidth="160.0" />
-            <TextField fx:id="expiryDateField" layoutX="20.0" layoutY="178.0" prefHeight="27.0" prefWidth="160.0" />
-            <TextField fx:id="quantityField" layoutX="508.0" layoutY="179.0" prefHeight="27.0" prefWidth="160.0" />
+            <ListView fx:id="macroNutrientListView" layoutX="269.0" layoutY="179.0" prefHeight="27.0" prefWidth="160.0" />
+            <ListView fx:id="categoryListView" layoutX="269.0" layoutY="82.0" prefHeight="27.0" prefWidth="160.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#8cc4f8" height="70.0" layoutX="16.0" layoutY="58.0" stroke="BLACK" strokeType="INSIDE" width="180.0" />
+                <Label layoutX="27.0" layoutY="64.0" prefHeight="17.0" prefWidth="156.0" text="Item Name" textAlignment="CENTER" />
+            <TextField fx:id="itemNameField" layoutX="25.0" layoutY="82.0" prefHeight="27.0" prefWidth="160.0" />
+            <TextField fx:id="expiryDateField" layoutX="25.0" layoutY="178.0" prefHeight="27.0" prefWidth="160.0" />
+            <TextField fx:id="quantityField" layoutX="513.0" layoutY="179.0" prefHeight="27.0" prefWidth="160.0" />
             <TextField fx:id="servingSizeField" layoutX="22.0" layoutY="299.0" prefHeight="27.0" prefWidth="70.0" />
             <Label layoutX="22.0" layoutY="244.0" prefHeight="25.0" prefWidth="144.0" text="Nutritional Chart">
                <font>
@@ -68,19 +68,19 @@
             <TextField fx:id="cholesterolField" layoutX="376.0" layoutY="299.0" prefHeight="27.0" prefWidth="70.0" />
             <TextField fx:id="proteinField" layoutX="376.0" layoutY="370.0" prefHeight="27.0" prefWidth="70.0" />
             <TextField fx:id="sodiumField" layoutX="494.0" layoutY="299.0" prefHeight="27.0" prefWidth="70.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#8cc4f8" height="104.0" layoutX="16.0" layoutY="453.0" stroke="BLACK" strokeType="INSIDE" width="256.0" />
-            <TextArea fx:id="itemDescriptionArea" layoutX="22.0" layoutY="481.0" prefHeight="65.0" prefWidth="235.0" />
-            <Label layoutX="22.0" layoutY="457.0" prefHeight="25.0" prefWidth="187.0" text="Add a Description of Your Item" />
-            <Rectangle fx:id="setSaveButton" arcHeight="5.0" arcWidth="5.0" fill="#8cc4f8" height="54.0" layoutX="350.0" layoutY="453.0" onMouseClicked="#setSaveButton" stroke="BLACK" strokeType="INSIDE" width="200.0" />
-            <Text layoutX="420.0" layoutY="489.0" onMouseClicked="#setSaveButton" strokeType="OUTSIDE" strokeWidth="0.0" text="SAVE" textAlignment="CENTER">
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#8cc4f8" height="104.0" layoutX="16.0" layoutY="453.0" stroke="BLACK" strokeType="INSIDE" width="259.0" />
+            <TextArea fx:id="itemDescriptionArea" layoutX="27.0" layoutY="481.0" prefHeight="65.0" prefWidth="235.0" />
+            <Label layoutX="27.0" layoutY="457.0" prefHeight="25.0" prefWidth="187.0" text="Add a Description of Your Item" />
+            <Rectangle fx:id="setSaveButton" arcHeight="5.0" arcWidth="5.0" fill="#8cc4f8" height="45.0" layoutX="400.0" layoutY="460.0" onMouseClicked="#setSaveButton" stroke="BLACK" strokeType="INSIDE" width="175.0" />
+            <Text layoutX="465.0" layoutY="490.0" onMouseClicked="#setSaveButton" strokeType="OUTSIDE" strokeWidth="0.0" text="SAVE" textAlignment="CENTER">
                <font>
-                  <Font size="24.0" />
+                  <Font size="18.0" />
                </font>
             </Text>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#8cc4f8" height="54.0" layoutX="350.0" layoutY="530.0" onMouseClicked="#setCancelButton" stroke="BLACK" strokeType="INSIDE" width="200.0" />
-            <Text layoutX="403.0" layoutY="564.0" onMouseClicked="#setCancelButton" strokeType="OUTSIDE" strokeWidth="0.0" text="CANCEL" textAlignment="CENTER" wrappingWidth="98.55336695580445">
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#8cc4f8" height="45.0" layoutX="400.0" layoutY="530.0" onMouseClicked="#setCancelButton" stroke="BLACK" strokeType="INSIDE" width="175.0" />
+            <Text layoutX="435.0" layoutY="560.0" onMouseClicked="#setCancelButton" strokeType="OUTSIDE" strokeWidth="0.0" text="CANCEL" textAlignment="CENTER" wrappingWidth="98.55336695580445">
                <font>
-                  <Font size="24.0" />
+                  <Font size="18.0" />
                </font>
             </Text>
             </children>

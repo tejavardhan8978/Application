@@ -107,7 +107,6 @@ public class AddIngredientToInventoryController {
             Storage selectedStorage = Storage.valueOf(storageListView.getSelectionModel().getSelectedItem());
 
             // Create a new Ingredient object
-            
             Ingredient newIngredient = new Ingredient(
                     id,
                     name,

@@ -28,13 +28,16 @@ public class Ingredient {
         this.category = category;
         this.description = description;
     }
+
     public Ingredient(){}
+
     //This will be the method to update quantity as more ingredients are bought
     public boolean UpdateQuantity(int id, int NewQuantity){
         this.id = id;
         this.quantity = NewQuantity;
         return false;
     }
+
     //This Will Search through all stored ingredients to find matching ID and return quantity of it
     public int GetQuantity(int id){
         return quantity;
@@ -45,6 +48,7 @@ public class Ingredient {
      * @param ingredient Ingredient to be searched for.
      * @return ArrayList of Recipes that use the given ingredient.
      */
+
     public static ArrayList<Recipe> queryRecipes(Ingredient ingredient) {
         ArrayList<Recipe> recipes = new ArrayList<>();
         return recipes;

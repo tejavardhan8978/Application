@@ -24,10 +24,10 @@ import java.sql.Date;
 import java.util.ResourceBundle;
 
 public class InventoryController implements Initializable {
-    private Stage stage;
-    private Scene scene;
-    private Parent root;
-    private IngredientList ingredientList;
+    Stage stage;
+    Scene scene;
+    Parent root;
+    IngredientList ingredientList;
 
     @FXML private TableView<Ingredient> inventoryTable;
     @FXML private TableColumn<Ingredient, Integer> idColumn;
@@ -63,14 +63,13 @@ public class InventoryController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
         ingredientList = IngredientListSingleton.getInstance();
-        updateTableView();
-        idColumn.setCellValueFactory(new PropertyValueFactory<Ingredient, Integer>("id"));
-        name.setCellValueFactory(new PropertyValueFactory<Ingredient, String>("name"));
-        expiryDate.setCellValueFactory(new PropertyValueFactory<Ingredient, Date>("expiryDate"));
-        primaryMacroNutrient.setCellValueFactory(new PropertyValueFactory<Ingredient, MacroNutrient>("primaryMacroNutrient"));
-        storage.setCellValueFactory(new PropertyValueFactory<Ingredient, Storage>("storage"));
-        quantity.setCellValueFactory(new PropertyValueFactory<Ingredient, Integer>("quantity"));
-        category.setCellValueFactory(new PropertyValueFactory<Ingredient, String>("category"));
+        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        name.setCellValueFactory(new PropertyValueFactory<>("name"));
+        expiryDate.setCellValueFactory(new PropertyValueFactory<>("expiryDate"));
+        primaryMacroNutrient.setCellValueFactory(new PropertyValueFactory<>("primaryMacroNutrient"));
+        storage.setCellValueFactory(new PropertyValueFactory<>("storage"));
+        quantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+        category.setCellValueFactory(new PropertyValueFactory<>("category"));
 
         inventoryTable.setItems(getIngredientItems());
     }
@@ -89,7 +88,6 @@ public class InventoryController implements Initializable {
     public void addIngredient(Ingredient ingredient) {
         ingredientList.addIngredient(ingredient);
         System.out.println("You have added an ingredient!");
-        updateTableView();
     }
 
     public void updateTableView() {
@@ -100,15 +98,14 @@ public class InventoryController implements Initializable {
     }
 
     public void setIngredientList(IngredientList ingredientList, InventoryController inventoryController) {
-        this.ingredientList = ingredientList; // You should have this field defined
-        updateTableView(); // Refresh the table view with the new list
+        this.ingredientList = ingredientList;
     }
 
     public void openIngredientModal(MouseEvent event) throws IOException {
         if (event.getClickCount() == 2) {
             Ingredient tempIngredient = inventoryTable.getSelectionModel().getSelectedItem();
             if (tempIngredient != null) {
-                System.out.println(tempIngredient.toString());
+                System.out.println(tempIngredient);
 
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/IngredientDetailedModal.fxml"));
 
