@@ -8,11 +8,11 @@ more organized kitchen environment.
 
 ## Functional Requirements
 
-1. Add and Subtract from Inventory
-2. Search from Inventory
-3. Sort Inventory
-4. Add Remove Recipe
-5. Search Recipe
+1. Add to Inventory
+2. Search Tables
+3. Remove from inventory
+4. Add  Recipe
+5. Remove Recipe
 6. Check and add Recipe ingredients with Inventory
 
 ## Non-functional

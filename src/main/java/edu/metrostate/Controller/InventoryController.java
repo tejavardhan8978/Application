@@ -67,9 +67,9 @@ public class InventoryController implements Initializable {
     }
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        ingredientList = IngredientListSingleton.getInstance();
-        updateTableView();
+//    public void initialize(URL url, ResourceBundle resourceBundle) {
+//        ingredientList = IngredientListSingleton.getInstance();
+//        updateTableView();
     public void initialize(URL url, ResourceBundle resourceBundle){
         ingredientList = IngredientListSingleton.getInstance();
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -79,7 +79,7 @@ public class InventoryController implements Initializable {
         storage.setCellValueFactory(new PropertyValueFactory<>("storage"));
         quantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         category.setCellValueFactory(new PropertyValueFactory<>("category"));
-
+        updateTableView();
         inventoryTable.setItems(getIngredientItems());
         inventoryTable.refresh();
     }

@@ -24,12 +24,9 @@ public class EditIngredient {
     @FXML
     private TextField addedQuantity;
     @FXML private TextField newExpiration;
-
     private Stage stage;
     private Scene scene;
     private Parent root;
-
-    private IngredientList ingredientList;
 
     public void IngredientBackButton(MouseEvent event) throws IOException {
         root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("/Inventory-Home.fxml")));
@@ -50,11 +47,8 @@ public class EditIngredient {
         LocalDate TempDate = LocalDate.parse(DateString);
         Date updateDate = java.sql.Date.valueOf(TempDate);
 
-        Date date = new Date(20250101);
-
-        ingredientList = IngredientListSingleton.getInstance();
-        ingredientList.updateIngredient(tempIngredient, tempQuantity, date);
-
+        IngredientList ingredientList = IngredientListSingleton.getInstance();
+        ingredientList.updateIngredient(tempIngredient, tempQuantity, updateDate);
 
         root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("/Inventory-Home.fxml")));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
