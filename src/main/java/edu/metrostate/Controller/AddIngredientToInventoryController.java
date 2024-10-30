@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Date;
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class AddIngredientToInventoryController {
     @FXML private TextField itemNameField;
@@ -39,6 +40,8 @@ public class AddIngredientToInventoryController {
 
     IngredientList ingredientList;
     private InventoryController inventoryController;
+    private Parent root;
+    private Stage stage;
 
     @FXML
     public void initialize() {
@@ -123,6 +126,7 @@ public class AddIngredientToInventoryController {
             System.out.println("Creating new ingredient: " + newIngredient);
             inventoryController.addIngredient(newIngredient);
 
+
             // Clear fields after saving
             clearFields();
             ReturnToInventoryHome(event);
@@ -154,15 +158,13 @@ public class AddIngredientToInventoryController {
 
     //Go back to the referenced Inventory Controller to display changes
     public void ReturnToInventoryHome(MouseEvent event) throws IOException{
-        Node source = (Node) event.getSource();
-        Stage stage = (Stage) source.getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader(Main.class.getResource("/Inventory-Home.fxml"));
-        Parent root = loader.load();
-        InventoryController inventoryController = loader.getController();
-        inventoryController.setIngredientList(IngredientListSingleton.getInstance(), inventoryController); // Keep the reference
         inventoryController.updateTableView();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        stage.close();
     }
+
+    public void setRoot(Parent root) {
+        this.root = root;
+    }
+
 }

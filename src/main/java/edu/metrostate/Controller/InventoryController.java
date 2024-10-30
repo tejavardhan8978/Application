@@ -13,19 +13,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
-import java.time.LocalDate;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -34,6 +30,8 @@ public class InventoryController implements Initializable {
     Scene scene;
     Parent root;
     IngredientList ingredientList;
+    private boolean initialInventoryFlag = false;
+    public static Ingredient tempIngredient;
 
     @FXML private TableView<Ingredient> inventoryTable;
     @FXML private TableColumn<Ingredient, Integer> idColumn;
@@ -47,6 +45,17 @@ public class InventoryController implements Initializable {
     public void switchToHome(MouseEvent event) throws IOException {
         root = FXMLLoader.load(Main.class.getResource("/HomeScreen.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        System.out.println(stage);
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void switchToHomeV2(MouseEvent event) throws IOException {
+        root = FXMLLoader.load(Main.class.getResource("/HomeScreen.fxml"));
+        System.out.println(stage);
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        System.out.println(stage);
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
@@ -57,20 +66,19 @@ public class InventoryController implements Initializable {
         Parent root = loader.load();
         // Get the controller
         AddIngredientToInventoryController controller = loader.getController();
+        controller.setRoot(root);
         // Pass the ingredientList to the IngredientQuantityController
         controller.setIngredientList(this.ingredientList, this);
         // Switch to the new scene
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
+        stage = new Stage();
+        scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
 
     @Override
-//    public void initialize(URL url, ResourceBundle resourceBundle) {
-//        ingredientList = IngredientListSingleton.getInstance();
-//        updateTableView();
     public void initialize(URL url, ResourceBundle resourceBundle){
+        System.out.println("Initialize start - Inventory controller");
         ingredientList = IngredientListSingleton.getInstance();
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         name.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -79,21 +87,29 @@ public class InventoryController implements Initializable {
         storage.setCellValueFactory(new PropertyValueFactory<>("storage"));
         quantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         category.setCellValueFactory(new PropertyValueFactory<>("category"));
+
+        //setInitialIngredientItemsList();
         updateTableView();
-        inventoryTable.setItems(getIngredientItems());
         inventoryTable.refresh();
+        System.out.println("Initialize end - Inventory controller");
     }
 
-    public ObservableList<Ingredient> getIngredientItems() {
-        ObservableList<Ingredient> ingredientList = FXCollections.observableArrayList();
-//        ingredientList.add(new Ingredient(1, "Chicken", new java.util.Date(), new NutritionalChart(), MacroNutrient.PROTEIN, Storage.FRIDGE, 5, "Meat", "good meat"));
-//        ingredientList.add(new Ingredient(2, "Mutton", new java.util.Date(), new NutritionalChart(), MacroNutrient.PROTEIN, Storage.FRIDGE, 5, "Meat", "best meat"));
-//        ingredientList.add(new Ingredient(3, "Broccoli", new java.util.Date(), new NutritionalChart(), MacroNutrient.FIBER, Storage.FRIDGE, 5, "Vegetable", "Least favoured vegetable"));
-//        ingredientList.add(new Ingredient(4, "Beans", new java.util.Date(), new NutritionalChart(), MacroNutrient.FIBER, Storage.FRIDGE, 5, "Vegetable", "no comments"));
-
-        return ingredientList;
-
+    //Code to add ingredients to list
+    public void setInitialIngredientItemsList() {
+        InventoryController testingController = this;
+        System.out.println("InventoryController address:  " + testingController);
+        if (!this.initialInventoryFlag) {
+            System.out.println(initialInventoryFlag);
+            System.out.println("Adding intital ingredients");
+            ingredientList.addIngredient(new Ingredient(1, "Chicken", new java.util.Date(), new NutritionalChart(), MacroNutrient.PROTEIN, Storage.FRIDGE, 5, "Meat", "good meat"));
+            ingredientList.addIngredient(new Ingredient(2, "Mutton", new java.util.Date(), new NutritionalChart(), MacroNutrient.PROTEIN, Storage.FRIDGE, 5, "Meat", "best meat"));
+            ingredientList.addIngredient(new Ingredient(3, "Broccoli", new java.util.Date(), new NutritionalChart(), MacroNutrient.FIBER, Storage.FRIDGE, 5, "Vegetable", "Least favoured vegetable"));
+            ingredientList.addIngredient(new Ingredient(4, "Beans", new java.util.Date(), new NutritionalChart(), MacroNutrient.FIBER, Storage.FRIDGE, 5, "Vegetable", "no comments"));
+            initialInventoryFlag = true;
+        }
+        System.out.println(initialInventoryFlag);
     }
+
 
     public void addIngredient(Ingredient ingredient) {
         ingredientList.addIngredient(ingredient);
@@ -102,6 +118,7 @@ public class InventoryController implements Initializable {
 
     public void updateTableView() {
         System.out.println("you've reached the update");
+        System.out.println("updateTableView - inventoryController");
         ObservableList<Ingredient> items = FXCollections.observableArrayList(ingredientList.getIngredients());
         inventoryTable.setItems(items);
         inventoryTable.refresh();
@@ -125,14 +142,15 @@ public class InventoryController implements Initializable {
                 ingredientPopupController.setIngredientModalDetails(tempIngredient);
 
 
-                Stage modalStage = new Stage();
-                Scene modalScene = new Scene(ingredientModal);
-                modalStage.setScene(modalScene);
-                modalStage.setTitle("Ingredient Popup");
-                modalStage.initModality(Modality.APPLICATION_MODAL);
+                stage = new Stage();
+                scene = new Scene(ingredientModal);
+                stage.setScene(scene);
+                stage.setTitle("Ingredient Popup");
+                stage.initModality(Modality.APPLICATION_MODAL);
+                System.out.println(this);
 
-                modalStage.show();
-                ingredientPopupController.setIngredientPopupStage(modalStage);
+                stage.show();
+                ingredientPopupController.setIngredientPopupStage(stage);
 
             }
         }
@@ -154,6 +172,13 @@ public class InventoryController implements Initializable {
         }
     }
 
+    public InventoryController getController() {
+        return this;
+    }
 
-    public static Ingredient tempIngredient;
+    public void backToHome(MouseEvent event) throws IOException {
+        System.out.println("Going back to home");
+        switchToHome(event);
+    }
+
 }

@@ -40,7 +40,7 @@ public class RecipeController implements Initializable {
     //Switches back to the home screen
     public void switchToHome(MouseEvent event) throws IOException {
         root = FXMLLoader.load(Main.class.getResource("/HomeScreen.fxml"));
-        this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
@@ -51,11 +51,16 @@ public class RecipeController implements Initializable {
         Parent root = loader.load();
         //Retrieve the controller associated with the addToRecipe and store it in controller
         AddToRecipeController controller = loader.getController();
+        controller.setRoot(root);
         //Call on the controller and pass the recipe list and pass the Recipe controller allowing the AddToRecipe controller
         //to modify the list of recipes
         controller.setRecipeList(this.recipeList, this);
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
+//        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+//        Scene scene = new Scene(root);
+//        stage.setScene(scene);
+//        stage.show();
+        stage = new Stage();
+        scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
 
@@ -63,6 +68,7 @@ public class RecipeController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        System.out.println("Initialize start - Recipe Controller");
         //Set up singleton
         recipeList = RecipeListSingleton.getInstance();
         //Setup columns
@@ -74,6 +80,10 @@ public class RecipeController implements Initializable {
         primaryIngredientColumn.setCellValueFactory(new PropertyValueFactory<>("primaryIngredient"));
         //load default data for testing
         recipeTable.setItems(getRecipeItems());
+
+        updateTableView();
+        recipeTable.refresh();
+        System.out.println("Initialize end - Recipe Controller");
     }
 
     public ObservableList<Recipe> getRecipeItems() {
@@ -95,6 +105,7 @@ public class RecipeController implements Initializable {
     //Prints the current recipes in the list
     public void updateTableView(){
         System.out.println("You've reached the update");
+        System.out.println("updateTableView - recipeController");
         ObservableList<Recipe> items = FXCollections.observableArrayList(recipeList.getRecipes());
         recipeTable.setItems(items);
         recipeTable.refresh();
@@ -106,7 +117,7 @@ public class RecipeController implements Initializable {
     }
 
     @FXML
-    public void openModal(MouseEvent event) throws IOException {
+    public void openRecipeModal(MouseEvent event) throws IOException {
 
         if (event.getClickCount() == 2) {
             Recipe tempRecipe = recipeTable.getSelectionModel().getSelectedItem();
@@ -130,5 +141,9 @@ public class RecipeController implements Initializable {
                 modalStage.show();
             }
         }
+    }
+
+    public void switchToEditRecipe(MouseEvent event) throws IOException {
+        System.out.println("Implement switchToEditRecipe");
     }
 }

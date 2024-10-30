@@ -56,11 +56,12 @@ public class IngredientPopupController implements Initializable {
 
     @FXML
     public void handleHomeButtonClick(MouseEvent event) throws IOException {
-        System.out.println("Closing RecipePopupController and returning to HomeScreen");
+        System.out.println("Closing IngredientPopupController and returning to HomeScreen");
         Stage modalStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         modalStage.close();
         if (this.inventoryController != null) {
-            inventoryController.switchToHome(event);
+            System.out.println(inventoryController);
+            inventoryController.backToHome(event);
         }
     }
 

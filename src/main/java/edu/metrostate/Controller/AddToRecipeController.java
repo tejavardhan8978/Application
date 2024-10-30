@@ -40,6 +40,8 @@ public class AddToRecipeController {
     RecipeListModel recipeList;
     //Declare an instance of the recipe controller to add items to the list and update view
     private RecipeController recipeController;
+    private Parent root;
+    private Stage stage;
 
     //Initialize the recipeList/Controller allows the controller to access and modify the shared recipe list
     public void setRecipeList(RecipeListModel recipeList, RecipeController recipeController){
@@ -135,19 +137,26 @@ public class AddToRecipeController {
     }
 
     public void ReturnToRecipeHome(MouseEvent event) throws IOException {
-        Node source = (Node) event.getSource();
-        Stage stage = (Stage) source.getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader(Main.class.getResource("/Recipe-Home.fxml"));
-        Parent root = loader.load();
-        //Retrieve the controller associated with the addToRecipe and store it in controller
-        RecipeController recipeController = loader.getController();
-        //Sets a recipe list from the recipeController and pass the singleton list and the reference to the controller.
-        recipeController.setRecipeList(RecipeListSingleton.getInstance(), recipeController);
-        //Calls to update the table view after a successful addition.
+//        Node source = (Node) event.getSource();
+//        Stage stage = (Stage) source.getScene().getWindow();
+//        FXMLLoader loader = new FXMLLoader(Main.class.getResource("/Recipe-Home.fxml"));
+//        Parent root = loader.load();
+//        //Retrieve the controller associated with the addToRecipe and store it in controller
+//        RecipeController recipeController = loader.getController();
+//        //Sets a recipe list from the recipeController and pass the singleton list and the reference to the controller.
+//        recipeController.setRecipeList(RecipeListSingleton.getInstance(), recipeController);
+//        //Calls to update the table view after a successful addition.
+//        recipeController.updateTableView();
+//        Scene scene = new Scene(root);
+//        stage.setScene(scene);
+//        stage.show();
         recipeController.updateTableView();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        stage.close();
+    }
+
+    public void setRoot(Parent root) {
+        this.root = root;
     }
 
 }
