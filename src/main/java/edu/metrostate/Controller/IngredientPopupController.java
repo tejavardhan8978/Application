@@ -17,7 +17,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
@@ -26,6 +25,7 @@ import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.io.IOException;
 import java.net.URL;
 import java.util.PrimitiveIterator;
 import java.util.ResourceBundle;
@@ -35,14 +35,13 @@ public class IngredientPopupController implements Initializable {
     private InventoryController inventoryController;
     private Stage ingredientPopupStage;
 
-    @FXML
-    private Text ingredientTitle;
-    @FXML
-    private Text ingredientCategory;
-    @FXML
-    private Text ingredientDescription;
-    @FXML
-    private TextField ingredientStock;
+    @FXML private Text ingredientTitle;
+    @FXML private Text ingredientCategory;
+    @FXML private Text ingredientDescription;
+    @FXML private TextField ingredientStock;
+    @FXML private TableView ingredientNutritionChartTable1;
+    @FXML private TableView ingredientNutritionChartTable2;
+    @FXML private TableView ingredientRecipeTable;
     private Stage inventoryControllerStage;
     private Ingredient ingredient;
 
@@ -99,7 +98,7 @@ public class IngredientPopupController implements Initializable {
         System.out.println(ingredient + "in ingredientpopup controller");
         //setting details of all text fields
         this.ingredientTitle.setText(ingredient.getName());
-        this.ingredientCategory.setText(ingredient.getCategory());
+        this.ingredientCategory.setText(ingredient.getCategory().name());
         this.ingredientDescription.setText(ingredient.getDescription());
         this.caloriesColumn.setText(String.valueOf(ingredient.getNutrition().getCalories()));
         this.servingSizeColumn.setText(String.valueOf(ingredient.getNutrition().getServingSize()));
@@ -121,7 +120,7 @@ public class IngredientPopupController implements Initializable {
     public void handleAddButtonClick(MouseEvent event) throws IOException {
         System.out.println("Opening add quantity modal");
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/ChangeQuantityModal.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Views/ChangeQuantityModal.fxml"));
         Pane addModal = fxmlLoader.load();
 
         Stage modalStage = new Stage();

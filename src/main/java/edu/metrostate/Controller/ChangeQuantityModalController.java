@@ -35,7 +35,7 @@ public class ChangeQuantityModalController implements Initializable {
     public void handleAddToInventoryClick(MouseEvent event) throws IOException {
         System.out.println("Opening Add to inventory quantity modal");
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/ChangeQuantityInventoryModal.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Views/ChangeQuantityInventoryModal.fxml"));
         Pane addInventoryModal = fxmlLoader.load();
 
         Stage modalStage = new Stage();
@@ -59,7 +59,7 @@ public class ChangeQuantityModalController implements Initializable {
     public void handleAddToGroceryListClick(MouseEvent event) throws IOException {
         System.out.println("Opening Add to Grocery list modal");
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/ChangeQuantityGroceryListModal.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Views/ChangeQuantityGroceryListModal.fxml"));
         Pane addToGroceryModal = fxmlLoader.load();
 
         Stage modalStage = new Stage();
@@ -88,7 +88,7 @@ public class ChangeQuantityModalController implements Initializable {
 
     //This is for the ChangeQuantityInventoryModal
     public void BackButton(MouseEvent event) throws IOException {
-        root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("/Inventory-Home.fxml")));
+        root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("/Views/Inventory-Home.fxml")));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

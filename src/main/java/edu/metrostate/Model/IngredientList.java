@@ -35,11 +35,11 @@ public class IngredientList {
     }
 
     public void addIngredient(Ingredient ingredient) {
-        ingredient.setID(++lastId);
+        ingredient.setIngredientID(++lastId);
         ingredients.add(ingredient);
     }
     public void updateIngredient(Ingredient ingredient, int newQuantity, Date newDate){
-        ingredient.UpdateIngredient(ingredient.getId(), newQuantity, newDate);
+        ingredient.UpdateIngredient(ingredient.getIngredientID(), newQuantity, newDate);
     }
 
     public ArrayList<Ingredient> getIngredients() {
