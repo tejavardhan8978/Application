@@ -22,7 +22,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class InventoryController implements Initializable {
@@ -43,7 +42,7 @@ public class InventoryController implements Initializable {
     @FXML private TableColumn<Ingredient, String> category;
 
     public void switchToHome(MouseEvent event) throws IOException {
-        root = FXMLLoader.load(Main.class.getResource("/HomeScreen.fxml"));
+        root = FXMLLoader.load(Main.class.getResource("/Views/HomeScreen.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         System.out.println(stage);
         scene = new Scene(root);
@@ -52,7 +51,7 @@ public class InventoryController implements Initializable {
     }
 
     public void switchToAddIngredient(MouseEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(Main.class.getResource("/AddToInventory.fxml"));
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("/Views/AddToInventory.fxml"));
         Parent root = loader.load();
         // Get the controller
         AddIngredientToInventoryController controller = loader.getController();
@@ -69,8 +68,8 @@ public class InventoryController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
         System.out.println("Initialize start - Inventory controller");
-        ingredientList = IngredientListSingleton.getInstance();
-        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        ingredientList = IngredientListSingleton.getInstance().getIngredients();
+        idColumn.setCellValueFactory(new PropertyValueFactory<>("ingredientID"));
         name.setCellValueFactory(new PropertyValueFactory<>("name"));
         expiryDate.setCellValueFactory(new PropertyValueFactory<>("expiryDate"));
         primaryMacroNutrient.setCellValueFactory(new PropertyValueFactory<>("primaryMacroNutrient"));
@@ -107,7 +106,7 @@ public class InventoryController implements Initializable {
             if (tempIngredient != null) {
                 System.out.println(tempIngredient);
 
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/IngredientDetailedModal.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Views/IngredientDetailedModal.fxml"));
 
                 AnchorPane ingredientModal = fxmlLoader.load();
                 IngredientPopupController ingredientPopupController = fxmlLoader.getController();
@@ -132,7 +131,7 @@ public class InventoryController implements Initializable {
     public void switchToEditIngredient(MouseEvent event) throws IOException {
         if (inventoryTable.getSelectionModel().getSelectedItem() != null) {
             tempIngredient = inventoryTable.getSelectionModel().getSelectedItem();
-            FXMLLoader loader = new FXMLLoader(Main.class.getResource("/ChangeQuantityInventoryModal.fxml"));
+            FXMLLoader loader = new FXMLLoader(Main.class.getResource("/Views/ChangeQuantityInventoryModal.fxml"));
             Parent root = loader.load();
             // Get the controller
             EditIngredient controller = loader.getController();

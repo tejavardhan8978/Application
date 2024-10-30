@@ -16,6 +16,7 @@ public class Ingredient {
     private String name;
     private Date expiryDate;
     private int nutritionID;
+    private NutritionalChart nutrition;
     private MacroNutrient primaryMacroNutrient;
     private Storage storage;
     private int quantity;
@@ -28,12 +29,13 @@ public class Ingredient {
 
     //Buying an ingredient for the first time
     public Ingredient(String name, Date expiryDate,
-                      MacroNutrient primaryMacroNutrient,
+                      MacroNutrient primaryMacroNutrient, NutritionalChart nutrition,
                       Storage storage, int quantity, Category category,
                       String description){
         this.name = name;
         this.expiryDate = expiryDate;
         this.primaryMacroNutrient = primaryMacroNutrient;
+        this.nutrition = nutrition;
         this.storage = storage;
         this.quantity = quantity;
         this.category = category;
@@ -196,15 +198,12 @@ public class Ingredient {
         return image;
     }
 
-    public void setImage(File image) {
-        this.image = image;
-    }
+    public void setImage(File image) {this.image = image;}
 
     public void setExpiryDate(Date expiryDate) {
         this.expiryDate = expiryDate;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
+    public void setQuantity(int quantity) {this.quantity = quantity;}
+
 }

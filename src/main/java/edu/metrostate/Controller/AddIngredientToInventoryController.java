@@ -42,10 +42,9 @@ public class AddIngredientToInventoryController {
     @FXML private ListView<String> macroNutrientListView;
     @FXML private ListView<String> storageListView;
     @FXML private ListView<String> categoryListView;
-
     @FXML private TextArea fileNameDisplay;
-    private File file;
 
+    private File file;
     IngredientList ingredientList;
     private InventoryController inventoryController;
     private Parent root;
@@ -142,6 +141,7 @@ public class AddIngredientToInventoryController {
                         name,
                         expiryDateObj,
                         selectedMacroNutrient,
+                        nutrition,
                         selectedStorage,
                         quantity,
                         selectedCategory,
@@ -160,11 +160,7 @@ public class AddIngredientToInventoryController {
                 item.setNutritionID(nutritionID);
                 nutrition.updateIngredientID(connection, ingredientID);
                 item.updateNutritionID(connection, nutritionID);
-                newIngredient.setImage(file);
-
-            //Add the new ingredient to the list
-            System.out.println("Creating new ingredient: " + newIngredient);
-            inventoryController.addIngredient(newIngredient);
+                item.setImage(file);
 
                 System.out.println("Item added to the db: " + item);
 

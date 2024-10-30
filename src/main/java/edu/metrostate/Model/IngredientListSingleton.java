@@ -10,10 +10,10 @@ import java.util.List;
 
 public class IngredientListSingleton {
     private static IngredientListSingleton instance;
-    private final List<Ingredient> ingredientList;
+    private final IngredientList ingredientList;
 
     private IngredientListSingleton() {
-        ingredientList = new ArrayList<>();
+        ingredientList = new IngredientList();
         loadIngredientsFromDatabase();
     }
 
@@ -44,7 +44,7 @@ public class IngredientListSingleton {
 
                     //Creates new objects of items through a simpler constructor for user viewing
                     Ingredient ingredient = new Ingredient(ingredientID, name, expiryDate, quantity, primaryMacroNutrient, storage, category);
-                    ingredientList.add(ingredient);
+                    ingredientList.addIngredient(ingredient);
                 }
             }
         } catch (SQLException e) {
@@ -54,10 +54,10 @@ public class IngredientListSingleton {
 
     //Add a new item into the singleton list to be viewed in the table
     public void addIngredientToList(Ingredient ingredient) {
-        ingredientList.add(ingredient);
+        ingredientList.addIngredient(ingredient);
     }
 
-    public List<Ingredient> getIngredients() {
+    public IngredientList getIngredients() {
         return ingredientList;
     }
 }
