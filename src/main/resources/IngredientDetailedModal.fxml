@@ -3,6 +3,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Rectangle?>
@@ -23,8 +24,7 @@
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b4ffa3" height="35.0" layoutX="50.0" layoutY="396.0" stroke="BLACK" strokeType="INSIDE" width="190.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="405.0" />
       <TableView fx:id="ingredientRecipeTable" layoutX="50.0" layoutY="446.0" prefHeight="200.0" prefWidth="190.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="450.0">
         <columns>
-          <TableColumn prefWidth="59.0" text="QUANTITY" />
-          <TableColumn prefWidth="130.0" text="INGREDIENTS" />
+          <TableColumn prefWidth="189.6000106573105" />
         </columns>
       </TableView>
       <Text layoutX="68.0" layoutY="74.0" onMouseClicked="#handleHomeButtonClick" strokeType="OUTSIDE" strokeWidth="0.0" text="HOME" textAlignment="CENTER" wrappingWidth="54.404296875">
@@ -57,18 +57,6 @@
             <Font size="18.0" />
          </font>
       </Text>
-      <TableView fx:id="ingredientNutritionChartTable1" layoutX="287.0" layoutY="83.0" prefHeight="115.0" prefWidth="275.0" AnchorPane.bottomAnchor="490.0" AnchorPane.leftAnchor="290.0" AnchorPane.rightAnchor="335.0" AnchorPane.topAnchor="95.0">
-        <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
-        </columns>
-      </TableView>
-      <TableView fx:id="ingredientNutritionChartTable2" layoutX="606.0" layoutY="50.0" prefHeight="160.0" prefWidth="275.0" AnchorPane.bottomAnchor="490.0" AnchorPane.leftAnchor="575.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0">
-         <columns>
-            <TableColumn prefWidth="75.0" text="C1" />
-            <TableColumn prefWidth="75.0" text="C2" />
-         </columns>
-      </TableView>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b4ffa3" height="35.0" layoutX="290.0" layoutY="50.0" stroke="BLACK" strokeType="INSIDE" width="190.0" AnchorPane.bottomAnchor="615.0" AnchorPane.leftAnchor="290.0" AnchorPane.rightAnchor="420.0" AnchorPane.topAnchor="50.0" />
       <Text layoutX="300.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NUTRITIONAL VALUE" textAlignment="CENTER">
          <font>
@@ -83,7 +71,10 @@
       </Text>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fc9ea6" height="35.0" layoutX="60.0" layoutY="308.0" stroke="BLACK" strokeType="INSIDE" width="170.0" AnchorPane.bottomAnchor="355.0" AnchorPane.topAnchor="310.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fc9ea6" height="35.0" layoutX="59.0" layoutY="350.0" onMouseClicked="#handleAddButtonClick" stroke="BLACK" strokeType="INSIDE" width="170.0" AnchorPane.topAnchor="350.0" />
-      <Pane fx:id="ingredientImage" layoutX="280.0" layoutY="250.0" prefHeight="410.0" prefWidth="580.0" />
+      <Pane fx:id="ingredientImage" layoutX="280.0" layoutY="250.0" prefHeight="410.0" prefWidth="580.0">
+         <children>
+            <ImageView fx:id="imageView" fitHeight="410.0" fitWidth="580.0" pickOnBounds="true" preserveRatio="true" />
+         </children></Pane>
       <Text layoutX="68.0" layoutY="332.0" strokeType="OUTSIDE" strokeWidth="0.0" text="IN STOCK">
          <font>
             <Font size="14.0" />
@@ -93,6 +84,116 @@
       <Text fx:id="ingredientQuantityAdd" layoutX="126.0" layoutY="374.0" onMouseClicked="#handleAddButtonClick" strokeType="OUTSIDE" strokeWidth="0.0" text="ADD" textAlignment="CENTER">
          <font>
             <Font size="18.0" />
+         </font>
+      </Text>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="115.0" layoutX="290.0" layoutY="101.0" stroke="BLACK" strokeType="INSIDE" width="275.0" AnchorPane.bottomAnchor="490.0" AnchorPane.leftAnchor="290.0" AnchorPane.rightAnchor="335.0" AnchorPane.topAnchor="95.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="160.0" layoutX="570.0" layoutY="50.0" stroke="BLACK" strokeType="INSIDE" width="275.0" AnchorPane.bottomAnchor="490.0" AnchorPane.leftAnchor="575.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f2f2f2" height="29.0" layoutX="290.0" layoutY="97.0" stroke="BLACK" strokeType="INSIDE" width="175.0" AnchorPane.leftAnchor="290.0" AnchorPane.topAnchor="95.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f2f2f2" height="29.0" layoutX="285.0" layoutY="130.0" stroke="BLACK" strokeType="INSIDE" width="175.0" AnchorPane.leftAnchor="290.0" AnchorPane.topAnchor="123.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f2f2f2" height="29.0" layoutX="350.0" layoutY="163.0" stroke="BLACK" strokeType="INSIDE" width="175.0" AnchorPane.leftAnchor="290.0" AnchorPane.topAnchor="151.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f2f2f2" height="32.0" layoutX="294.0" layoutY="188.0" stroke="BLACK" strokeType="INSIDE" width="175.0" AnchorPane.leftAnchor="290.0" AnchorPane.topAnchor="178.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f2f2f2" height="32.0" layoutX="590.0" layoutY="53.0" stroke="BLACK" strokeType="INSIDE" width="175.0" AnchorPane.leftAnchor="575.0" AnchorPane.topAnchor="50.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f2f2f2" height="32.0" layoutX="575.0" layoutY="179.0" stroke="BLACK" strokeType="INSIDE" width="175.0" AnchorPane.bottomAnchor="490.0" AnchorPane.leftAnchor="575.0" AnchorPane.topAnchor="178.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f2f2f2" height="32.0" layoutX="585.0" layoutY="80.0" stroke="BLACK" strokeType="INSIDE" width="175.0" AnchorPane.leftAnchor="575.0" AnchorPane.topAnchor="82.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f2f2f2" height="32.0" layoutX="595.0" layoutY="110.0" stroke="BLACK" strokeType="INSIDE" width="175.0" AnchorPane.leftAnchor="575.0" AnchorPane.topAnchor="114.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f2f2f2" height="32.0" layoutX="581.0" layoutY="141.0" stroke="BLACK" strokeType="INSIDE" width="175.0" AnchorPane.leftAnchor="575.0" AnchorPane.topAnchor="146.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f2f2f2" height="29.0" layoutX="465.0" layoutY="97.0" stroke="BLACK" strokeType="INSIDE" width="100.0" AnchorPane.leftAnchor="465.0" AnchorPane.topAnchor="95.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f2f2f2" height="29.0" layoutX="483.0" layoutY="120.0" stroke="BLACK" strokeType="INSIDE" width="100.0" AnchorPane.leftAnchor="465.0" AnchorPane.topAnchor="123.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f2f2f2" height="29.0" layoutX="481.0" layoutY="184.0" stroke="BLACK" strokeType="INSIDE" width="100.0" AnchorPane.leftAnchor="465.0" AnchorPane.topAnchor="151.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f2f2f2" height="32.0" layoutX="300.0" layoutY="188.0" stroke="BLACK" strokeType="INSIDE" width="100.0" AnchorPane.leftAnchor="465.0" AnchorPane.topAnchor="178.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f2f2f2" height="32.0" layoutX="750.0" layoutY="52.0" stroke="BLACK" strokeType="INSIDE" width="100.0" AnchorPane.leftAnchor="750.0" AnchorPane.topAnchor="50.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f2f2f2" height="32.0" layoutX="750.0" layoutY="84.0" stroke="BLACK" strokeType="INSIDE" width="100.0" AnchorPane.leftAnchor="750.0" AnchorPane.topAnchor="82.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f2f2f2" height="32.0" layoutX="750.0" layoutY="114.0" stroke="BLACK" strokeType="INSIDE" width="100.0" AnchorPane.leftAnchor="750.0" AnchorPane.topAnchor="114.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f2f2f2" height="32.0" layoutX="750.0" layoutY="146.0" stroke="BLACK" strokeType="INSIDE" width="100.0" AnchorPane.leftAnchor="750.0" AnchorPane.topAnchor="146.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f2f2f2" height="32.0" layoutX="750.0" layoutY="178.0" stroke="BLACK" strokeType="INSIDE" width="100.0" AnchorPane.leftAnchor="750.0" AnchorPane.topAnchor="178.0" />
+      <Text layoutX="293.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SERVING SIZE" textAlignment="CENTER" wrappingWidth="169.8222656249999">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text layoutX="293.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CALORIES" textAlignment="CENTER" wrappingWidth="169.8222656249999">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text layoutX="293.0" layoutY="171.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CARBOHYDRATES" textAlignment="CENTER" wrappingWidth="169.8222656249999">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text layoutX="293.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="FAT" textAlignment="CENTER" wrappingWidth="169.8222656249999">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text layoutX="578.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PROTEIN" textAlignment="CENTER" wrappingWidth="169.8222656249999">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text layoutX="578.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SUGAR" textAlignment="CENTER" wrappingWidth="169.8222656249999">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text layoutX="578.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SODIUM" textAlignment="CENTER" wrappingWidth="169.8222656249999">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text layoutX="578.0" layoutY="168.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DIETARY FIBER" textAlignment="CENTER" wrappingWidth="169.8222656249999">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text layoutX="578.0" layoutY="199.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CHOLESTEROL" textAlignment="CENTER" wrappingWidth="169.8222656249999">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text fx:id="servingSizeColumn" layoutX="477.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0000" textAlignment="CENTER" wrappingWidth="75.20000000000005">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text fx:id="caloriesColumn" layoutX="477.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0000" textAlignment="CENTER" wrappingWidth="75.20000000000005">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text fx:id="carbohydratesColumn" layoutX="477.0" layoutY="171.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0000" textAlignment="CENTER" wrappingWidth="75.20000000000005">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text fx:id="fatColumn" layoutX="477.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0000" textAlignment="CENTER" wrappingWidth="75.20000000000005">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text fx:id="proteinColumn" layoutX="762.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0000" textAlignment="CENTER" wrappingWidth="75.20000000000005">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text fx:id="sugarsColumn" layoutX="762.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0000" textAlignment="CENTER" wrappingWidth="75.20000000000005">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text fx:id="sodiumColumn" layoutX="762.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0000" textAlignment="CENTER" wrappingWidth="75.20000000000005">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text fx:id="dietaryFiberColumn" layoutX="762.0" layoutY="168.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0000" textAlignment="CENTER" wrappingWidth="75.20000000000005">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text fx:id="cholesterolColumn" layoutX="762.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0000" textAlignment="CENTER" wrappingWidth="75.20000000000005">
+         <font>
+            <Font size="14.0" />
          </font>
       </Text>
    </children>

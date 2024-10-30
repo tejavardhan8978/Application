@@ -1,5 +1,8 @@
 package edu.metrostate.Model;
 
+import javafx.scene.image.Image;
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -14,6 +17,8 @@ public class Ingredient {
     private int quantity;
     private String category;
     private String description;
+
+    private File image;
 
     //Buying an ingredient for the first time
     public Ingredient(int id, String name, Date expiryDate, NutritionalChart nutrition,
@@ -89,5 +94,29 @@ public class Ingredient {
 
     public String getDescription() {
         return this.description;
+    }
+
+    public NutritionalChart getNutrition() {
+        return nutrition;
+    }
+
+    public void setNutrition(NutritionalChart nutrition) {
+        this.nutrition = nutrition;
+    }
+
+    public File getImage() {
+        return image;
+    }
+
+    public void setImage(File image) {
+        this.image = image;
+    }
+
+    public void setExpiryDate(Date expiryDate) {
+        this.expiryDate = expiryDate;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }

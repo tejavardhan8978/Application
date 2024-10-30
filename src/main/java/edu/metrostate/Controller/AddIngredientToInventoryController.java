@@ -4,6 +4,7 @@ import edu.metrostate.Main;
 import edu.metrostate.Model.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -13,8 +14,10 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 import java.time.LocalDate;
@@ -37,6 +40,9 @@ public class AddIngredientToInventoryController {
     @FXML private ListView<String> macroNutrientListView;
     @FXML private ListView<String> storageListView;
     @FXML private ListView<String> categoryListView;
+
+    @FXML private TextArea fileNameDisplay;
+    private File file;
 
     IngredientList ingredientList;
     private InventoryController inventoryController;
@@ -102,7 +108,8 @@ public class AddIngredientToInventoryController {
             int cholesterol = Integer.parseInt(cholesterolField.getText());
 
             // Create a NutritionalChart object
-            NutritionalChart nutrition = new NutritionalChart(servingSize, calories, totalCarbohydrates, totalFat,
+            //!!!!!ID of nutritional chart needs to be accounted for!!!!!!
+            NutritionalChart nutrition = new NutritionalChart(id, servingSize, calories, totalCarbohydrates, totalFat,
                     cholesterol, dietaryFiber, totalProtein, totalSodium, totalSugars);
 
             //Gets the selected enum's
@@ -121,6 +128,8 @@ public class AddIngredientToInventoryController {
                     category,
                     description
             );
+
+            newIngredient.setImage(file);
 
             //Add the new ingredient to the list
             System.out.println("Creating new ingredient: " + newIngredient);
@@ -165,6 +174,18 @@ public class AddIngredientToInventoryController {
 
     public void setRoot(Parent root) {
         this.root = root;
+    }
+
+    @FXML
+    public void imageChooser(MouseEvent event) {
+        FileChooser fc = new FileChooser();
+        fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.jpeg", "*.png"));
+        file = fc.showOpenDialog(null);
+
+        if (file != null) {
+            fileNameDisplay.setText(file.getPath());
+
+        }
     }
 
 }

@@ -1,13 +1,21 @@
 package edu.metrostate.Controller;
 
 import edu.metrostate.Model.Ingredient;
+import edu.metrostate.Model.NutritionalChart;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -15,9 +23,11 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import java.io.Console;
-import java.io.IOException;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.*;
 import java.net.URL;
+import java.util.PrimitiveIterator;
 import java.util.ResourceBundle;
 
 public class IngredientPopupController implements Initializable {
@@ -33,13 +43,22 @@ public class IngredientPopupController implements Initializable {
     private Text ingredientDescription;
     @FXML
     private TextField ingredientStock;
-    @FXML
-    private TableView ingredientNutritionChartTable1;
-    @FXML
-    private TableView ingredientNutritionChartTable2;
-    @FXML
-    private TableView ingredientRecipeTable;
     private Stage inventoryControllerStage;
+    private Ingredient ingredient;
+
+    @FXML private Text caloriesColumn;
+    @FXML private Text carbohydratesColumn;
+    @FXML private Text fatColumn;
+    @FXML private Text proteinColumn;
+    @FXML private Text sodiumColumn;
+    @FXML private Text sugarsColumn;
+    @FXML private Text dietaryFiberColumn;
+    @FXML private Text cholesterolColumn;
+    @FXML private Text servingSizeColumn;
+
+    @FXML private ImageView imageView;
+
+
 
 
     @Override
@@ -52,6 +71,7 @@ public class IngredientPopupController implements Initializable {
         System.out.println("Closing Ingredient Popup");
         Stage modalStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         modalStage.close();
+        inventoryController.updateTableView();
     }
 
     @FXML
@@ -74,9 +94,28 @@ public class IngredientPopupController implements Initializable {
     }
 
     public void setIngredientModalDetails(Ingredient ingredient) {
+        //saving ingredient as a local variable
+        setIngredient(ingredient);
+        System.out.println(ingredient + "in ingredientpopup controller");
+        //setting details of all text fields
         this.ingredientTitle.setText(ingredient.getName());
         this.ingredientCategory.setText(ingredient.getCategory());
         this.ingredientDescription.setText(ingredient.getDescription());
+        this.caloriesColumn.setText(String.valueOf(ingredient.getNutrition().getCalories()));
+        this.servingSizeColumn.setText(String.valueOf(ingredient.getNutrition().getServingSize()));
+        this.carbohydratesColumn.setText(String.valueOf(ingredient.getNutrition().getTotalCarbohydrates()));
+        this.fatColumn.setText(String.valueOf(ingredient.getNutrition().getTotalFat()));
+        this.proteinColumn.setText(String.valueOf(ingredient.getNutrition().getTotalProtein()));
+        this.sugarsColumn.setText(String.valueOf(ingredient.getNutrition().getTotalSugars()));;
+        this.sodiumColumn.setText(String.valueOf(ingredient.getNutrition().getTotalSodium()));
+        this.dietaryFiberColumn.setText(String.valueOf(ingredient.getNutrition().getDietaryFiber()));
+        this.cholesterolColumn.setText(String.valueOf(ingredient.getNutrition().getCholesterol()));
+        refreshIngredientStock();
+        try {
+            displayImage(ingredient.getImage());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void handleAddButtonClick(MouseEvent event) throws IOException {
@@ -96,10 +135,39 @@ public class IngredientPopupController implements Initializable {
 
         ChangeQuantityModalController changeQuantityModalController = fxmlLoader.getController();
         changeQuantityModalController.setChangeQuantityModalStage(modalStage);
+        changeQuantityModalController.setIngredient(ingredient);
+        changeQuantityModalController.setIngredientPopupController(this);
 
     }
 
     public void setIngredientPopupStage(Stage stage) {
         this.ingredientPopupStage = stage;
+    }
+
+    public void displayImage(File file) throws IOException {
+        try {
+            // Read BufferedImage
+            BufferedImage bufferedImage = ImageIO.read(file);
+
+            // Convert BufferedImage to byte array
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            ImageIO.write(bufferedImage, "png", outputStream);
+            ByteArrayInputStream inputStream = new ByteArrayInputStream(outputStream.toByteArray());
+
+            // Create JavaFX Image from byte array
+            Image image = new Image(inputStream);
+            imageView.setImage(image);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void setIngredient(Ingredient ingredient) {
+        this.ingredient = ingredient;
+    }
+
+    public void refreshIngredientStock() {
+        this.ingredientStock.setText(String.valueOf(ingredient.getQuantity()));
     }
 }

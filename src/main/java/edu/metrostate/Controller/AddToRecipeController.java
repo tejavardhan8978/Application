@@ -76,7 +76,8 @@ public class AddToRecipeController {
         int cholesterol = Integer.parseInt(cholesterolField.getText());
 
         // Create a NutritionalChart object
-        NutritionalChart nutrition = new NutritionalChart(servingSize, calories, totalCarbohydrates, totalFat,
+        //!!!!!ID of nutritional chart needs to be accounted for!!!!!!
+        NutritionalChart nutrition = new NutritionalChart(id, servingSize, calories, totalCarbohydrates, totalFat,
                 cholesterol, dietaryFiber, totalProtein, totalSodium, totalSugars);
 
         //Create a cuisine object
