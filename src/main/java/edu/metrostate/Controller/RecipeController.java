@@ -39,7 +39,7 @@ public class RecipeController implements Initializable {
 
     //Switches back to the home screen
     public void switchToHome(MouseEvent event) throws IOException {
-        root = FXMLLoader.load(Main.class.getResource("/HomeScreen.fxml"));
+        root = FXMLLoader.load(Main.class.getResource("/Views/HomeScreen.fxml"));
         this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -47,7 +47,7 @@ public class RecipeController implements Initializable {
     }
 
     public void switchToAddRecipe(MouseEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(Main.class.getResource("/AddToRecipe.fxml"));
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("/Views/AddToRecipe.fxml"));
         Parent root = loader.load();
         //Retrieve the controller associated with the addToRecipe and store it in controller
         AddToRecipeController controller = loader.getController();
@@ -113,7 +113,7 @@ public class RecipeController implements Initializable {
             if (tempRecipe != null) {
                 System.out.println(tempRecipe);
 
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/RecipeDetailedModal.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Views/RecipeDetailedModal.fxml"));
                 //fxmlLoader.setLocation(getClass().getResource("/RecipeDetailedModal.fxml"));
                 AnchorPane recipeModal = fxmlLoader.load();
                 RecipePopupController recipePopupController = fxmlLoader.getController();

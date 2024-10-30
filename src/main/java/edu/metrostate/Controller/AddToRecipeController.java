@@ -74,7 +74,7 @@ public class AddToRecipeController {
         int cholesterol = Integer.parseInt(cholesterolField.getText());
 
         // Create a NutritionalChart object
-        NutritionalChart nutrition = new NutritionalChart(servingSize, calories, totalCarbohydrates, totalFat,
+        NutritionalChart nutrition = new NutritionalChart(0, servingSize, calories, totalCarbohydrates, totalFat,
                 cholesterol, dietaryFiber, totalProtein, totalSodium, totalSugars);
 
         //Create a cuisine object
@@ -137,7 +137,7 @@ public class AddToRecipeController {
     public void ReturnToRecipeHome(MouseEvent event) throws IOException {
         Node source = (Node) event.getSource();
         Stage stage = (Stage) source.getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader(Main.class.getResource("/Recipe-Home.fxml"));
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("/Views/Recipe-Home.fxml"));
         Parent root = loader.load();
         //Retrieve the controller associated with the addToRecipe and store it in controller
         RecipeController recipeController = loader.getController();

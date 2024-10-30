@@ -14,6 +14,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 import java.io.IOException;
 import java.util.Date;
@@ -70,11 +72,11 @@ public class AddIngredientToInventoryController {
         this.inventoryController = inventoryController;
     }
 
-    @FXML
-    public void setSaveButton(MouseEvent event) throws IOException {
-        int id =0;
+    //What allows the user to save an item
+    public void setSaveButton(MouseEvent event) {
+        //First we can set some String fields and initialize our nutritional chart
+        NutritionalChart nutrition = null;
         String name = itemNameField.getText();
-        String category = categoryListView.getSelectionModel().getSelectedItem();
         String expiryDateString = expiryDateField.getText();
         String quantityString = quantityField.getText();
         String description = itemDescriptionArea.getText();
@@ -98,42 +100,70 @@ public class AddIngredientToInventoryController {
             int dietaryFiber = Integer.parseInt(fiberField.getText());
             int cholesterol = Integer.parseInt(cholesterolField.getText());
 
-            // Create a NutritionalChart object
-            NutritionalChart nutrition = new NutritionalChart(servingSize, calories, totalCarbohydrates, totalFat,
-                    cholesterol, dietaryFiber, totalProtein, totalSodium, totalSugars);
-
-            //Gets the selected enum's
+            //Get the information from the ListView selections
             MacroNutrient selectedMacroNutrient = MacroNutrient.valueOf(macroNutrientListView.getSelectionModel().getSelectedItem());
             Storage selectedStorage = Storage.valueOf(storageListView.getSelectionModel().getSelectedItem());
+            Category selectedCategory = Category.valueOf(categoryListView.getSelectionModel().getSelectedItem());
 
-            // Create a new Ingredient object
-            Ingredient newIngredient = new Ingredient(
-                    id,
-                    name,
-                    expiryDateObj,
-                    nutrition, // Use the created NutritionalChart
-                    selectedMacroNutrient, // Use selected macro nutrient from the ListView
-                    selectedStorage, // Use selected storage from the ListView
-                    quantity,
-                    category,
-                    description
-            );
+            //We try to create a connection with the database through the database class
+            try (Connection connection = Database.getConnection()) {
+                // Create the nutritional chart object
+                nutrition = new NutritionalChart(
+                        0,
+                        servingSize,
+                        calories,
+                        totalCarbohydrates,
+                        totalFat,
+                        totalProtein,
+                        totalSodium,
+                        totalSugars,
+                        dietaryFiber,
+                        cholesterol
+                );
+                //We use the insert method that inserts the object to the database amd returns a unique id
+                int nutritionID = nutrition.insert(connection);
+                System.out.println("The id to be set " + nutritionID);
+                if (nutritionID == -1) {
+                    throw new SQLException("Failed to receive a valid nutritionID.");
+                }
+                System.out.println("Acquired NutritionalChart: " + nutrition);
 
-            //Add the new ingredient to the list
-            System.out.println("Creating new ingredient: " + newIngredient);
-            inventoryController.addIngredient(newIngredient);
+                // Create and insert the Ingredient
+                Ingredient item = new Ingredient(
+                        name,
+                        expiryDateObj,
+                        selectedMacroNutrient,
+                        selectedStorage,
+                        quantity,
+                        selectedCategory,
+                        description
+                );
+                //We use the insert method that inserts the object to the database amd returns a unique id
+                int ingredientID = item.insert(connection);
+                System.out.println("The id to be set " + ingredientID);
+                if (ingredientID == -1) {
+                    throw new SQLException("Failed to receive a valid ingredientID.");
+                }
+                System.out.println("Acquired ingredient: " + item);
 
-            // Clear fields after saving
-            clearFields();
-            ReturnToInventoryHome(event);
+                //Ensure that the ID primary/foreign keys are accurately set so they can reference one another
+                nutrition.setIngredientID(ingredientID);
+                item.setNutritionID(nutritionID);
+                nutrition.updateIngredientID(connection, ingredientID);
+                item.updateNutritionID(connection, nutritionID);
 
-        } catch (Exception e) {
-            e.printStackTrace(); // Handle the exception appropriately
+                System.out.println("Item added to the db: " + item);
+
+                //Add the new item to the singleton list to be viewed
+                IngredientListSingleton.getInstance().addIngredientToList(item);
+                ReturnToInventoryHome(event);
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
     public void setCancelButton(MouseEvent event) throws IOException {
-        clearFields();
         ReturnToInventoryHome(event);
     }
 
@@ -154,12 +184,12 @@ public class AddIngredientToInventoryController {
 
     //Go back to the referenced Inventory Controller to display changes
     public void ReturnToInventoryHome(MouseEvent event) throws IOException{
+        clearFields();
         Node source = (Node) event.getSource();
         Stage stage = (Stage) source.getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader(Main.class.getResource("/Inventory-Home.fxml"));
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("/Views/Inventory-Home.fxml"));
         Parent root = loader.load();
         InventoryController inventoryController = loader.getController();
-        inventoryController.setIngredientList(IngredientListSingleton.getInstance(), inventoryController); // Keep the reference
         inventoryController.updateTableView();
         Scene scene = new Scene(root);
         stage.setScene(scene);

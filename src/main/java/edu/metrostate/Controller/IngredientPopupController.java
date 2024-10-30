@@ -9,13 +9,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import java.io.Console;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -25,20 +23,13 @@ public class IngredientPopupController implements Initializable {
     private InventoryController inventoryController;
     private Stage ingredientPopupStage;
 
-    @FXML
-    private Text ingredientTitle;
-    @FXML
-    private Text ingredientCategory;
-    @FXML
-    private Text ingredientDescription;
-    @FXML
-    private TextField ingredientStock;
-    @FXML
-    private TableView ingredientNutritionChartTable1;
-    @FXML
-    private TableView ingredientNutritionChartTable2;
-    @FXML
-    private TableView ingredientRecipeTable;
+    @FXML private Text ingredientTitle;
+    @FXML private Text ingredientCategory;
+    @FXML private Text ingredientDescription;
+    @FXML private TextField ingredientStock;
+    @FXML private TableView ingredientNutritionChartTable1;
+    @FXML private TableView ingredientNutritionChartTable2;
+    @FXML private TableView ingredientRecipeTable;
     private Stage inventoryControllerStage;
 
 
@@ -74,14 +65,14 @@ public class IngredientPopupController implements Initializable {
 
     public void setIngredientModalDetails(Ingredient ingredient) {
         this.ingredientTitle.setText(ingredient.getName());
-        this.ingredientCategory.setText(ingredient.getCategory());
+        this.ingredientCategory.setText(ingredient.getCategory().name());
         this.ingredientDescription.setText(ingredient.getDescription());
     }
 
     public void handleAddButtonClick(MouseEvent event) throws IOException {
         System.out.println("Opening add quantity modal");
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/ChangeQuantityModal.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Views/ChangeQuantityModal.fxml"));
         Pane addModal = fxmlLoader.load();
 
         Stage modalStage = new Stage();

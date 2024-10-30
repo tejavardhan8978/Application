@@ -29,7 +29,7 @@ public class EditIngredient {
     private Parent root;
 
     public void IngredientBackButton(MouseEvent event) throws IOException {
-        root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("/Inventory-Home.fxml")));
+        root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("/Views/Inventory-Home.fxml")));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -47,10 +47,10 @@ public class EditIngredient {
         LocalDate TempDate = LocalDate.parse(DateString);
         Date updateDate = java.sql.Date.valueOf(TempDate);
 
-        IngredientList ingredientList = IngredientListSingleton.getInstance();
-        ingredientList.updateIngredient(tempIngredient, tempQuantity, updateDate);
+        //IngredientList ingredientList = IngredientListSingleton.getInstance();
+        //ingredientList.updateIngredient(tempIngredient, tempQuantity, updateDate);
 
-        root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("/Inventory-Home.fxml")));
+        root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("/Views/Inventory-Home.fxml")));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
