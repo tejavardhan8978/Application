@@ -99,6 +99,14 @@ public class Recipe {
         this.ingredients = ingredients;
     }
 
+    public NutritionalChart getNutrition() {
+        return nutrition;
+    }
+
+    public void setNutrition(NutritionalChart nutrition) {
+        this.nutrition = nutrition;
+    }
+
     @Override
     public String toString() {
         return "Recipe{" +

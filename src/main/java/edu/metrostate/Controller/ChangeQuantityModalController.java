@@ -1,6 +1,7 @@
 package edu.metrostate.Controller;
 
 import edu.metrostate.Main;
+import edu.metrostate.Model.Ingredient;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -23,6 +24,8 @@ public class ChangeQuantityModalController implements Initializable {
     private Stage stage;
     private Scene scene;
     private Parent root;
+    private Ingredient ingredient;
+    private IngredientPopupController ingredientPopupController;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -38,13 +41,18 @@ public class ChangeQuantityModalController implements Initializable {
         Stage modalStage = new Stage();
         Scene modalScene = new Scene(addInventoryModal);
 
+        ChangeQuantityInventoryModalController inventoryModalController = fxmlLoader.getController();
+        inventoryModalController.setIngredient(ingredient);
+        System.out.println(ingredient + "in change quantity modal controller");
+
         modalStage.setScene(modalScene);
         modalStage.setTitle("Add to Inventory Quantity");
         modalStage.initModality(Modality.APPLICATION_MODAL);
 
         modalStage.show();
-        ChangeQuantityInventoryModalController inventoryModalController = fxmlLoader.getController();
+
         inventoryModalController.setChangeQuantityInventoryModalstage(modalStage);
+
 
     }
 
@@ -70,6 +78,8 @@ public class ChangeQuantityModalController implements Initializable {
     public void handleBackButtonClick(MouseEvent event) {
         System.out.println("Close add to quantity modal");
         this.changeQuantityModalStage.close();
+        ingredientPopupController.refreshIngredientStock();
+
     }
 
     public void setChangeQuantityModalStage(Stage stage) {
@@ -85,9 +95,12 @@ public class ChangeQuantityModalController implements Initializable {
         stage.show();
     }
 
+    public void setIngredient(Ingredient ingredient) {
+        this.ingredient = ingredient;
+        System.out.println(ingredient + " in setIngredient in change quantity modal controller");
+    }
 
-
-
-
-
+    public void setIngredientPopupController(IngredientPopupController ingredientPopupController) {
+        this.ingredientPopupController = ingredientPopupController;
+    }
 }

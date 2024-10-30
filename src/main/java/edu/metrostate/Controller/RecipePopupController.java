@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -22,6 +23,16 @@ public class RecipePopupController implements Initializable {
     @FXML private Text recipeCuisine;
     @FXML private Text recipeDescription;
     @FXML private TextArea recipeInstructions;
+
+    @FXML private Text caloriesColumn;
+    @FXML private Text carbohydratesColumn;
+    @FXML private Text fatColumn;
+    @FXML private Text proteinColumn;
+    @FXML private Text sodiumColumn;
+    @FXML private Text sugarsColumn;
+    @FXML private Text dietaryFiberColumn;
+    @FXML private Text cholesterolColumn;
+    @FXML private Text servingSizeColumn;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -58,5 +69,15 @@ public class RecipePopupController implements Initializable {
         this.recipeCuisine.setText(recipe.getCuisine().getName());
         this.recipeDescription.setText(recipe.getDescription());
         this.recipeInstructions.setText(recipe.getInstructions());
+        this.caloriesColumn.setText(String.valueOf(recipe.getNutrition().getCalories()));
+        this.servingSizeColumn.setText(String.valueOf(recipe.getNutrition().getServingSize()));
+        this.carbohydratesColumn.setText(String.valueOf(recipe.getNutrition().getTotalCarbohydrates()));
+        this.fatColumn.setText(String.valueOf(recipe.getNutrition().getTotalFat()));
+        this.proteinColumn.setText(String.valueOf(recipe.getNutrition().getTotalProtein()));
+        this.sugarsColumn.setText(String.valueOf(recipe.getNutrition().getTotalSugars()));;
+        this.sodiumColumn.setText(String.valueOf(recipe.getNutrition().getTotalSodium()));
+        this.dietaryFiberColumn.setText(String.valueOf(recipe.getNutrition().getDietaryFiber()));
+        this.cholesterolColumn.setText(String.valueOf(recipe.getNutrition().getCholesterol()));
+
     }
 }

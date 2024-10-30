@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.metrostate.Controller.RecipePopupController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.metrostate.Controller.RecipePopupController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d6b4fc" height="700.0" stroke="BLACK" strokeType="INSIDE" width="900.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffc94096" height="620.0" layoutX="35.0" layoutY="39.0" stroke="BLACK" strokeType="INSIDE" width="210.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="40.0" />
@@ -69,18 +69,6 @@
             <Font size="18.0" />
          </font>
       </Text>
-      <TableView layoutX="287.0" layoutY="83.0" prefHeight="115.0" prefWidth="275.0" AnchorPane.bottomAnchor="490.0" AnchorPane.leftAnchor="290.0" AnchorPane.rightAnchor="335.0" AnchorPane.topAnchor="95.0">
-        <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
-        </columns>
-      </TableView>
-      <TableView layoutX="606.0" layoutY="50.0" prefHeight="160.0" prefWidth="275.0" AnchorPane.bottomAnchor="490.0" AnchorPane.leftAnchor="575.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0">
-         <columns>
-            <TableColumn prefWidth="75.0" text="C1" />
-            <TableColumn prefWidth="75.0" text="C2" />
-         </columns>
-      </TableView>
       <TextArea fx:id="recipeInstructions" layoutX="296.0" layoutY="267.0" prefHeight="377.0" prefWidth="548.0" style="-fx-background-color: #ffc940;" text="Instructions&#10;1. Bring a large pot of lightly salted water to a boil. Add fettuccine and cook for &#10;    8 to 10 minutes or until al dente; drain.&#10;2. Melt butter into cream in a large saucepan over low heat; add salt, pepper, and&#10;    garlic salt.&#10;3. Increase the heat to medium; stir in grated Romano and Parmesan cheese until &#10;    melted and sauce has thickened.&#10;4. Add cooked pasta to sauce and toss until thoroughly coated; serve immediately.">
          <font>
             <Font size="14.0" />
@@ -90,6 +78,116 @@
       <Text layoutX="300.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NUTRITIONAL VALUE" textAlignment="CENTER">
          <font>
             <Font size="18.0" />
+         </font>
+      </Text>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="160.0" layoutX="580.0" layoutY="60.0" stroke="BLACK" strokeType="INSIDE" width="275.0" AnchorPane.bottomAnchor="490.0" AnchorPane.leftAnchor="575.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="115.0" layoutX="290.0" layoutY="99.0" stroke="BLACK" strokeType="INSIDE" width="275.0" AnchorPane.bottomAnchor="490.0" AnchorPane.leftAnchor="290.0" AnchorPane.rightAnchor="335.0" AnchorPane.topAnchor="95.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f2f2f2" height="29.0" layoutX="290.0" layoutY="97.0" stroke="BLACK" strokeType="INSIDE" width="175.0" AnchorPane.leftAnchor="290.0" AnchorPane.topAnchor="95.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f2f2f2" height="29.0" layoutX="300.0" layoutY="105.0" stroke="BLACK" strokeType="INSIDE" width="175.0" AnchorPane.leftAnchor="290.0" AnchorPane.topAnchor="123.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f2f2f2" height="29.0" layoutX="310.0" layoutY="115.0" stroke="BLACK" strokeType="INSIDE" width="175.0" AnchorPane.leftAnchor="290.0" AnchorPane.topAnchor="151.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f2f2f2" height="32.0" layoutX="304.0" layoutY="198.0" stroke="BLACK" strokeType="INSIDE" width="175.0" AnchorPane.leftAnchor="290.0" AnchorPane.topAnchor="178.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f2f2f2" height="29.0" layoutX="475.0" layoutY="107.0" stroke="BLACK" strokeType="INSIDE" width="100.0" AnchorPane.leftAnchor="465.0" AnchorPane.topAnchor="123.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f2f2f2" height="29.0" layoutX="475.0" layoutY="107.0" stroke="BLACK" strokeType="INSIDE" width="100.0" AnchorPane.leftAnchor="465.0" AnchorPane.topAnchor="95.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f2f2f2" height="29.0" layoutX="465.0" layoutY="137.0" stroke="BLACK" strokeType="INSIDE" width="100.0" AnchorPane.leftAnchor="465.0" AnchorPane.topAnchor="151.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f2f2f2" height="32.0" layoutX="480.0" layoutY="178.0" stroke="BLACK" strokeType="INSIDE" width="100.0" AnchorPane.leftAnchor="465.0" AnchorPane.topAnchor="178.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f2f2f2" height="32.0" layoutX="575.0" layoutY="52.0" stroke="BLACK" strokeType="INSIDE" width="175.0" AnchorPane.leftAnchor="575.0" AnchorPane.topAnchor="50.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f2f2f2" height="32.0" layoutX="585.0" layoutY="188.0" stroke="BLACK" strokeType="INSIDE" width="175.0" AnchorPane.leftAnchor="575.0" AnchorPane.topAnchor="82.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f2f2f2" height="32.0" layoutX="595.0" layoutY="198.0" stroke="BLACK" strokeType="INSIDE" width="175.0" AnchorPane.leftAnchor="575.0" AnchorPane.topAnchor="114.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f2f2f2" height="32.0" layoutX="605.0" layoutY="208.0" stroke="BLACK" strokeType="INSIDE" width="175.0" AnchorPane.leftAnchor="575.0" AnchorPane.topAnchor="146.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f2f2f2" height="32.0" layoutX="615.0" layoutY="218.0" stroke="BLACK" strokeType="INSIDE" width="175.0" AnchorPane.leftAnchor="575.0" AnchorPane.topAnchor="178.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f2f2f2" height="32.0" layoutX="750.0" layoutY="52.0" stroke="BLACK" strokeType="INSIDE" width="100.0" AnchorPane.leftAnchor="750.0" AnchorPane.topAnchor="50.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f2f2f2" height="32.0" layoutX="760.0" layoutY="60.0" stroke="BLACK" strokeType="INSIDE" width="100.0" AnchorPane.leftAnchor="750.0" AnchorPane.topAnchor="82.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f2f2f2" height="32.0" layoutX="770.0" layoutY="70.0" stroke="BLACK" strokeType="INSIDE" width="100.0" AnchorPane.leftAnchor="750.0" AnchorPane.topAnchor="114.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f2f2f2" height="32.0" layoutX="780.0" layoutY="80.0" stroke="BLACK" strokeType="INSIDE" width="100.0" AnchorPane.leftAnchor="750.0" AnchorPane.topAnchor="178.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f2f2f2" height="32.0" layoutX="790.0" layoutY="90.0" stroke="BLACK" strokeType="INSIDE" width="100.0" AnchorPane.leftAnchor="750.0" AnchorPane.topAnchor="146.0" />
+      <Text layoutX="293.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CALORIES" textAlignment="CENTER" wrappingWidth="169.8222656249999">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text layoutX="293.0" layoutY="171.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CARBOHYDRATES" textAlignment="CENTER" wrappingWidth="169.8222656249999">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text layoutX="293.0" layoutY="199.0" strokeType="OUTSIDE" strokeWidth="0.0" text="FAT" textAlignment="CENTER" wrappingWidth="169.8222656249999">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text layoutX="293.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SERVING SIZE" textAlignment="CENTER" wrappingWidth="169.8222656249999">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text layoutX="578.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PROTEIN" textAlignment="CENTER" wrappingWidth="169.8222656249999">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text layoutX="578.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SUGAR" textAlignment="CENTER" wrappingWidth="169.8222656249999">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text layoutX="578.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SODIUM" textAlignment="CENTER" wrappingWidth="169.8222656249999">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text layoutX="578.0" layoutY="167.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DIETARY FIBER" textAlignment="CENTER" wrappingWidth="169.8222656249999">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text layoutX="578.0" layoutY="199.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CHOLESTEROL" textAlignment="CENTER" wrappingWidth="169.8222656249999">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text fx:id="servingSizeColumn" layoutX="477.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0000" textAlignment="CENTER" wrappingWidth="75.20000000000005">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text fx:id="caloriesColumn" layoutX="477.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0000" textAlignment="CENTER" wrappingWidth="75.20000000000005">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text fx:id="carbohydratesColumn" layoutX="477.0" layoutY="171.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0000" textAlignment="CENTER" wrappingWidth="75.20000000000005">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text fx:id="fatColumn" layoutX="477.0" layoutY="199.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0000" textAlignment="CENTER" wrappingWidth="75.20000000000005">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text fx:id="proteinColumn" layoutX="762.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0000" textAlignment="CENTER" wrappingWidth="75.20000000000005">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text fx:id="sugarsColumn" layoutX="762.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0000" textAlignment="CENTER" wrappingWidth="75.20000000000005">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text fx:id="sodiumColumn" layoutX="762.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0000" textAlignment="CENTER" wrappingWidth="75.20000000000005">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text fx:id="dietaryFiberColumn" layoutX="762.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0000" textAlignment="CENTER" wrappingWidth="75.20000000000005">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text fx:id="cholesterolColumn" layoutX="762.0" layoutY="199.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0000" textAlignment="CENTER" wrappingWidth="75.20000000000005">
+         <font>
+            <Font size="14.0" />
          </font>
       </Text>
    </children>
