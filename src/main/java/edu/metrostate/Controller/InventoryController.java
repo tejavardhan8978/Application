@@ -51,16 +51,6 @@ public class InventoryController implements Initializable {
         stage.show();
     }
 
-    public void switchToHomeV2(MouseEvent event) throws IOException {
-        root = FXMLLoader.load(Main.class.getResource("/HomeScreen.fxml"));
-        System.out.println(stage);
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        System.out.println(stage);
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-
     public void switchToAddIngredient(MouseEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("/AddToInventory.fxml"));
         Parent root = loader.load();
@@ -88,26 +78,9 @@ public class InventoryController implements Initializable {
         quantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         category.setCellValueFactory(new PropertyValueFactory<>("category"));
 
-        //setInitialIngredientItemsList();
         updateTableView();
         inventoryTable.refresh();
         System.out.println("Initialize end - Inventory controller");
-    }
-
-    //Code to add ingredients to list
-    public void setInitialIngredientItemsList() {
-        InventoryController testingController = this;
-        System.out.println("InventoryController address:  " + testingController);
-        if (!this.initialInventoryFlag) {
-            System.out.println(initialInventoryFlag);
-            System.out.println("Adding intital ingredients");
-            ingredientList.addIngredient(new Ingredient(1, "Chicken", new java.util.Date(), new NutritionalChart(), MacroNutrient.PROTEIN, Storage.FRIDGE, 5, "Meat", "good meat"));
-            ingredientList.addIngredient(new Ingredient(2, "Mutton", new java.util.Date(), new NutritionalChart(), MacroNutrient.PROTEIN, Storage.FRIDGE, 5, "Meat", "best meat"));
-            ingredientList.addIngredient(new Ingredient(3, "Broccoli", new java.util.Date(), new NutritionalChart(), MacroNutrient.FIBER, Storage.FRIDGE, 5, "Vegetable", "Least favoured vegetable"));
-            ingredientList.addIngredient(new Ingredient(4, "Beans", new java.util.Date(), new NutritionalChart(), MacroNutrient.FIBER, Storage.FRIDGE, 5, "Vegetable", "no comments"));
-            initialInventoryFlag = true;
-        }
-        System.out.println(initialInventoryFlag);
     }
 
 
@@ -155,7 +128,6 @@ public class InventoryController implements Initializable {
             }
         }
     }
-
 
     public void switchToEditIngredient(MouseEvent event) throws IOException {
         if (inventoryTable.getSelectionModel().getSelectedItem() != null) {
