@@ -76,8 +76,17 @@ public class AddToRecipeController {
         int cholesterol = Integer.parseInt(cholesterolField.getText());
 
         // Create a NutritionalChart object
-        NutritionalChart nutrition = new NutritionalChart(0, servingSize, calories, totalCarbohydrates, totalFat,
-                cholesterol, dietaryFiber, totalProtein, totalSodium, totalSugars);
+        NutritionalChart nutrition = new NutritionalChart.Builder()
+                .servingSize(servingSize)
+                .calories(calories)
+                .totalCarbohydrates(totalCarbohydrates)
+                .totalFat(totalFat)
+                .cholesterol(cholesterol)
+                .dietaryFiber(dietaryFiber)
+                .totalProtein(totalProtein)
+                .totalSodium(totalSodium)
+                .totalSugars(totalSugars)
+                .build();
 
         //Create a cuisine object
         Cuisine cuisine = new Cuisine(cuisineName, cuisineCountry);
@@ -137,19 +146,6 @@ public class AddToRecipeController {
     }
 
     public void ReturnToRecipeHome(MouseEvent event) throws IOException {
-//        Node source = (Node) event.getSource();
-//        Stage stage = (Stage) source.getScene().getWindow();
-//        FXMLLoader loader = new FXMLLoader(Main.class.getResource("/Recipe-Home.fxml"));
-//        Parent root = loader.load();
-//        //Retrieve the controller associated with the addToRecipe and store it in controller
-//        RecipeController recipeController = loader.getController();
-//        //Sets a recipe list from the recipeController and pass the singleton list and the reference to the controller.
-//        recipeController.setRecipeList(RecipeListSingleton.getInstance(), recipeController);
-//        //Calls to update the table view after a successful addition.
-//        recipeController.updateTableView();
-//        Scene scene = new Scene(root);
-//        stage.setScene(scene);
-//        stage.show();
         recipeController.updateTableView();
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.close();

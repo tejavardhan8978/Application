@@ -79,21 +79,10 @@ public class RecipeController implements Initializable {
         servingsColumn.setCellValueFactory(new PropertyValueFactory<>("servings"));
         primaryIngredientColumn.setCellValueFactory(new PropertyValueFactory<>("primaryIngredient"));
         //load default data for testing
-        recipeTable.setItems(getRecipeItems());
 
         updateTableView();
         recipeTable.refresh();
         System.out.println("Initialize end - Recipe Controller");
-    }
-
-    public ObservableList<Recipe> getRecipeItems() {
-        ObservableList<Recipe> recipeList = FXCollections.observableArrayList();
-        recipeList.add(new Recipe(1, "Steak", new Cuisine("American", "America"), "Big chunk of meat", 20, 1, "Steak", new NutritionalChart(), "Steak, Butter, Spices", "cook till medium rare"));
-        recipeList.add(new Recipe(2, "Steak", new Cuisine("American", "America"), "Big chunk of meat", 25, 1, "Steak", new NutritionalChart(), "Steak, Butter, Spices", "cook till medium rare"));
-        recipeList.add(new Recipe(3, "Steak", new Cuisine("American", "America"), "Big chunk of meat", 23, 1, "Steak", new NutritionalChart(), "Steak, Butter, Spices", "cook till medium rare"));
-        recipeList.add(new Recipe(4, "Steak", new Cuisine("American", "America"), "Big chunk of meat", 22, 1, "Steak", new NutritionalChart(), "Steak, Butter, Spices", "cook till medium rare"));
-
-        return recipeList;
     }
 
     //Adds a new recipe to the list and updates the view

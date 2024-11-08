@@ -1,36 +1,125 @@
 package edu.metrostate.Model;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class NutritionalChart {
 
-    private int nutritionID;
-    private int ingredientID;
-    private int servingSize;
-    private int calories;
-    private int totalCarbohydrates;
-    private int totalFat;
-    private int totalProtein;
-    private int totalSodium;
-    private int totalSugars;
-    private int dietaryFiber;
-    private int cholesterol;
+    private Integer nutritionID;
+    private Integer ingredientID;
+    private Integer servingSize;
+    private Integer calories;
+    private Integer totalCarbohydrates;
+    private Integer totalFat;
+    private Integer totalProtein;
+    private Integer totalSodium;
+    private Integer totalSugars;
+    private Integer dietaryFiber;
+    private Integer cholesterol;
 
-    public NutritionalChart(int ingredientID, int servingSize, int calories, int totalCarbohydrates, int totalFat,
-                            int cholesterol, int dietaryFiber, int totalProtein, int totalSodium, int totalSugars) {
+    private NutritionalChart(Builder builder){
+        this.nutritionID = builder.nutritionID;
+        this.ingredientID = builder.ingredientID;
+        this.servingSize = builder.servingSize;
+        this.calories = builder.calories;
+        this.totalCarbohydrates = builder.totalCarbohydrates;
+        this.totalFat = builder.totalFat;
+        this.totalProtein = builder.totalProtein;
+        this.totalSodium = builder.totalSodium;
+        this.totalSugars = builder.totalSugars;
+        this.dietaryFiber = builder.dietaryFiber;
+        this.cholesterol = builder.cholesterol;
+    }
+
+    public static Builder builder(){
+        return new Builder();
+    }
+
+    public void setIngredientID(int ingredientID){
         this.ingredientID = ingredientID;
+    }
+
+    public Integer getIngredientID(){
+        return ingredientID;
+    }
+
+    public void setNutritionID(int nutritionID){
+        this.nutritionID = nutritionID;
+    }
+
+    public Integer getNutritionID(){
+        return nutritionID;
+    }
+
+    public void setServingSize(int servingSize){
         this.servingSize = servingSize;
+    }
+
+    public Integer getServingSize() {
+        return servingSize;
+    }
+
+    public void setCalories(int calories){
         this.calories = calories;
+    }
+
+    public Integer getCalories() {
+        return calories;
+    }
+
+    public void setTotalCarbohydrates(int totalCarbohydrates){
         this.totalCarbohydrates = totalCarbohydrates;
+    }
+
+    public Integer getTotalCarbohydrates() {
+        return totalCarbohydrates;
+    }
+
+    public void setTotalFat(int totalFat){
         this.totalFat = totalFat;
+    }
+
+    public Integer getTotalFat() {
+        return totalFat;
+    }
+
+    public void setTotalProtein(int totalProtein){
         this.totalProtein = totalProtein;
+    }
+
+    public Integer getTotalProtein() {
+        return totalProtein;
+    }
+
+    public void setTotalSodium(int totalSodium){
         this.totalSodium = totalSodium;
+    }
+
+    public Integer getTotalSodium() {
+        return totalSodium;
+    }
+
+    public void setTotalSugars(int totalSugars){
         this.totalSugars = totalSugars;
+    }
+
+    public Integer getTotalSugars() {
+        return totalSugars;
+    }
+
+    public void setDietaryFiber(int dietaryFiber){
         this.dietaryFiber = dietaryFiber;
+    }
+
+    public Integer getDietaryFiber() {
+        return dietaryFiber;
+    }
+
+    public void setCholesterol(int cholesterol){
         this.cholesterol = cholesterol;
+    }
+
+    public Integer getCholesterol() {
+        return cholesterol;
     }
 
     public static void createTable(Connection connection) throws SQLException{
@@ -67,16 +156,16 @@ public class NutritionalChart {
                 "cholesterol) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
-            stmt.setInt(1, this.ingredientID);
-            stmt.setInt(2, this.servingSize);
-            stmt.setInt(3, this.calories);
-            stmt.setInt(4, this.totalCarbohydrates);
-            stmt.setInt(5, this.totalFat);
-            stmt.setInt(6, this.totalProtein);
-            stmt.setInt(7, this.totalSodium);
-            stmt.setInt(8, this.totalSugars);
-            stmt.setInt(9, this.dietaryFiber);
-            stmt.setInt(10, this.cholesterol);
+            stmt.setObject(1, this.ingredientID, Types.INTEGER);
+            stmt.setObject(2, this.servingSize, Types.INTEGER);
+            stmt.setObject(3, this.calories, Types.INTEGER);
+            stmt.setObject(4, this.totalCarbohydrates, Types.INTEGER);
+            stmt.setObject(5, this.totalFat, Types.INTEGER);
+            stmt.setObject(6, this.totalProtein, Types.INTEGER);
+            stmt.setObject(7, this.totalSodium, Types.INTEGER);
+            stmt.setObject(8, this.totalSugars, Types.INTEGER);
+            stmt.setObject(9, this.dietaryFiber, Types.INTEGER);
+            stmt.setObject(10, this.cholesterol, Types.INTEGER);
 
             stmt.execute();
 
@@ -100,54 +189,76 @@ public class NutritionalChart {
         }
     }
 
-    public NutritionalChart() {}
+    public static class Builder {
+        private Integer nutritionID;
+        private Integer  ingredientID;
+        private Integer  servingSize;
+        private Integer  calories;
+        private Integer  totalCarbohydrates;
+        private Integer  totalFat;
+        private Integer  totalProtein;
+        private Integer  totalSodium;
+        private Integer  totalSugars;
+        private Integer  dietaryFiber;
+        private Integer  cholesterol;
 
-    public void setIngredientID(int ingredientID){
-        this.ingredientID = ingredientID;
+        public Builder nutritionID(Integer nutritionID){
+            this.nutritionID = nutritionID;
+            return this;
+        }
+
+        public Builder ingredientID(Integer ingredientID){
+            this.ingredientID = ingredientID;
+            return this;
+        }
+
+        public Builder servingSize(Integer servingSize){
+            this.servingSize = servingSize;
+            return this;
+        }
+
+        public Builder calories(Integer calories){
+            this.calories = calories;
+            return this;
+        }
+
+        public Builder totalCarbohydrates(Integer totalCarbohydrates){
+            this.totalCarbohydrates = totalCarbohydrates;
+            return this;
+        }
+
+        public Builder totalFat(Integer totalFat){
+            this.totalFat = totalFat;
+            return this;
+        }
+
+        public Builder totalProtein(Integer totalProtein){
+            this.totalProtein = totalProtein;
+            return this;
+        }
+
+        public Builder totalSodium(Integer totalSodium){
+            this.totalSodium = totalSodium;
+            return this;
+        }
+
+        public Builder totalSugars(Integer totalSugars){
+            this.totalSugars = totalSugars;
+            return this;
+        }
+
+        public Builder dietaryFiber(Integer dietaryFiber){
+            this.dietaryFiber = dietaryFiber;
+            return this;
+        }
+
+        public Builder cholesterol(Integer cholesterol){
+            this.cholesterol = cholesterol;
+            return this;
+        }
+
+        public NutritionalChart build(){
+            return new NutritionalChart(this);
+        }
     }
-
-    public int getIngredientID(){
-        return ingredientID;
-    }
-
-    public void setNutritionID(int nutritionID){
-        this.nutritionID = nutritionID;
-    }
-
-    public int getServingSize() {
-        return servingSize;
-    }
-
-    public int getCalories() {
-        return calories;
-    }
-
-    public int getTotalCarbohydrates() {
-        return totalCarbohydrates;
-    }
-
-    public int getTotalFat() {
-        return totalFat;
-    }
-
-    public int getTotalProtein() {
-        return totalProtein;
-    }
-
-    public int getTotalSodium() {
-        return totalSodium;
-    }
-
-    public int getTotalSugars() {
-        return totalSugars;
-    }
-
-    public int getDietaryFiber() {
-        return dietaryFiber;
-    }
-
-    public int getCholesterol() {
-        return cholesterol;
-    }
-
 }

@@ -1,10 +1,7 @@
 package edu.metrostate.Model;
 
 import java.sql.ResultSet;
-import javafx.scene.image.Image;
-
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Date;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -24,34 +21,110 @@ public class Ingredient {
     private String description;
     private File image;
 
-    public Ingredient(){
+    private Ingredient(Builder builder) {
+        this.ingredientID = builder.ingredientID;
+        this.name = builder.name;
+        this.expiryDate = builder.expiryDate;
+        this.nutritionID = builder.nutritionID;
+        this.nutrition = builder.nutrition;
+        this.primaryMacroNutrient = builder.primaryMacroNutrient;
+        this.storage = builder.storage;
+        this.quantity = builder.quantity;
+        this.category = builder.category;
+        this.description = builder.description;
+        this.image = builder.image;
     }
 
-    //Buying an ingredient for the first time
-    public Ingredient(String name, Date expiryDate,
-                      MacroNutrient primaryMacroNutrient, NutritionalChart nutrition,
-                      Storage storage, int quantity, Category category,
-                      String description){
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    public int getIngredientID() {
+        return ingredientID;
+    }
+
+    public void setIngredientID(int ingredientID){
+        this.ingredientID = ingredientID;
+    }
+
+    public int getNutritionID() {
+        return nutritionID;
+    }
+
+    public void setNutritionID(int nutritionID){
+        this.nutritionID = nutritionID;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name){
         this.name = name;
+    }
+
+    public Date getExpiryDate() {
+        return expiryDate;
+    }
+
+    public void setExpiryDate(Date expiryDate){
         this.expiryDate = expiryDate;
+    }
+
+    public MacroNutrient getPrimaryMacroNutrient() {
+        return primaryMacroNutrient;
+    }
+
+    public void setPrimaryMacroNutrient(MacroNutrient primaryMacroNutrient){
         this.primaryMacroNutrient = primaryMacroNutrient;
-        this.nutrition = nutrition;
+    }
+
+    public Storage getStorage() {
+        return storage;
+    }
+
+    public void setStorage(Storage storage){
         this.storage = storage;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity){
         this.quantity = quantity;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category){
         this.category = category;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public void setDescription(String description){
         this.description = description;
     }
 
-    //This constructor will add items to the singleton list as it is called upon to view them in the table
-    public Ingredient(int ingredientID, String name, Date expiryDate, int quantity, MacroNutrient primaryMacroNutrient,
-                      Storage storage, Category category){
-        this.ingredientID = ingredientID;
-        this.name = name;
-        this.expiryDate = expiryDate;
-        this.quantity = quantity;
-        this.primaryMacroNutrient = primaryMacroNutrient;
-        this.storage = storage;
-        this.category = category;
+    public NutritionalChart getNutrition() {
+        return nutrition;
+    }
+
+    public void setNutrition(NutritionalChart nutrition){
+        this.nutrition = nutrition;
+    }
+
+    public File getImage() {
+        return image;
+    }
+
+    public void setImage(File image){
+        this.image = image;
     }
 
     //This will be the method to update quantity as more ingredients are bought
@@ -62,8 +135,7 @@ public class Ingredient {
         return false;
     }
 
-    //Creating a table for the first time
-    public static void createTable(Connection connection) throws SQLException{
+    public static void createTable(Connection connection) throws SQLException {
         String sql = "CREATE TABLE IF NOT EXISTS IngredientTable(" +
                 "ingredientID INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "name TEXT, " +
@@ -76,13 +148,13 @@ public class Ingredient {
                 "description TEXT," +
                 "FOREIGN KEY (nutritionID) REFERENCES NutritionalChart(nutritionID) ON DELETE CASCADE" +
                 ");";
-        try (PreparedStatement stmt = connection.prepareStatement(sql)){
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.execute();
         }
     }
 
     //inserting an item into the db
-    public int insert(Connection connection) throws SQLException{
+    public int insert(Connection connection) throws SQLException {
         String sql = "INSERT INTO IngredientTable (" +
                 "name, " +
                 "expiryDate, " +
@@ -93,17 +165,17 @@ public class Ingredient {
                 "category, " +
                 "description)" +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-        try (PreparedStatement stmt = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)){
-           stmt.setString(1, this.name);
-           stmt.setDate(2, new java.sql.Date(this.expiryDate.getTime()));
-           stmt.setInt(3, this.nutritionID);
-           stmt.setString(4, this.primaryMacroNutrient.name());
-           stmt.setString(5, this.storage.name());
-           stmt.setInt(6, this.quantity);
-           stmt.setString(7, this.category.name());
-           stmt.setString(8, this.description);
+        try (PreparedStatement stmt = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
+            stmt.setString(1, this.name);
+            stmt.setDate(2, new java.sql.Date(this.expiryDate.getTime()));
+            stmt.setInt(3, this.nutritionID);
+            stmt.setString(4, this.primaryMacroNutrient != null ? this.primaryMacroNutrient.name() : null);
+            stmt.setString(5, this.storage != null ? this.storage.name() : null);
+            stmt.setInt(6, this.quantity);
+            stmt.setString(7, this.category != null ? this.category.name() : null);
+            stmt.setString(8, this.description);
 
-           stmt.executeUpdate();
+            stmt.executeUpdate();
 
             try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
@@ -126,84 +198,76 @@ public class Ingredient {
         }
     }
 
-    //This Will Search through all stored ingredients to find matching ID and return quantity of it
-    public int GetQuantity(int id){
-        return quantity;
+    public static class Builder {
+        private int ingredientID;
+        private String name;
+        private Date expiryDate;
+        private int nutritionID;
+        private NutritionalChart nutrition;
+        private MacroNutrient primaryMacroNutrient;
+        private Storage storage;
+        private int quantity;
+        private Category category;
+        private String description;
+        private File image;
+
+        public Builder ingredientID(int ingredientID) {
+            this.ingredientID = ingredientID;
+            return this;
+        }
+
+        public Builder name(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public Builder expiryDate(Date expiryDate) {
+            this.expiryDate = expiryDate;
+            return this;
+        }
+
+        public Builder nutritionID(int nutritionID) {
+            this.nutritionID = nutritionID;
+            return this;
+        }
+
+        public Builder nutrition(NutritionalChart nutrition) {
+            this.nutrition = nutrition;
+            return this;
+        }
+
+        public Builder primaryMacroNutrient(MacroNutrient primaryMacroNutrient) {
+            this.primaryMacroNutrient = primaryMacroNutrient;
+            return this;
+        }
+
+        public Builder storage(Storage storage) {
+            this.storage = storage;
+            return this;
+        }
+
+        public Builder quantity(int quantity) {
+            this.quantity = quantity;
+            return this;
+        }
+
+        public Builder category(Category category) {
+            this.category = category;
+            return this;
+        }
+
+        public Builder description(String description) {
+            this.description = description;
+            return this;
+        }
+
+        public Builder image(File image) {
+            this.image = image;
+            return this;
+        }
+
+        public Ingredient build(){
+            return new Ingredient(this);
+        }
     }
-
-    /**
-     * This method takes an ingredient as a parameter and returns a list of recipes that use this specific ingredient.
-     * @param ingredient Ingredient to be searched for.
-     * @return ArrayList of Recipes that use the given ingredient.
-     */
-
-    public static ArrayList<Recipe> queryRecipes(Ingredient ingredient) {
-        ArrayList<Recipe> recipes = new ArrayList<>();
-        return recipes;
-    }
-
-    public void setIngredientID(int ingredientID){
-        this.ingredientID = ingredientID;
-    }
-
-    public int getIngredientID(){
-        return ingredientID;
-    }
-
-    public void setNutritionID(int nutritionID){
-        this.nutritionID = nutritionID;
-    }
-
-    public int getNutritionID(){
-        return nutritionID;
-    }
-
-    public String getName(){
-        return name;
-    }
-
-    public Date getExpiryDate(){
-        return expiryDate;
-    }
-
-    public MacroNutrient getPrimaryMacroNutrient(){
-        return primaryMacroNutrient;
-    }
-
-    public Storage getStorage(){
-        return storage;
-    }
-
-    public int getQuantity(){
-        return quantity;
-    }
-
-    public Category getCategory(){
-        return category;
-    }
-
-    public String getDescription() {
-        return this.description;
-    }
-
-    public NutritionalChart getNutrition() {
-        return nutrition;
-    }
-
-    public void setNutrition(NutritionalChart nutrition) {
-        this.nutrition = nutrition;
-    }
-
-    public File getImage() {
-        return image;
-    }
-
-    public void setImage(File image) {this.image = image;}
-
-    public void setExpiryDate(Date expiryDate) {
-        this.expiryDate = expiryDate;
-    }
-
-    public void setQuantity(int quantity) {this.quantity = quantity;}
-
 }

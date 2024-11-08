@@ -37,13 +37,49 @@ public class IngredientListSingleton {
                     int ingredientID = rs.getInt("ingredientID");
                     String name = rs.getString("name");
                     Date expiryDate = rs.getDate("expiryDate");
-                    MacroNutrient primaryMacroNutrient = MacroNutrient.valueOf(rs.getString("primaryMacroNutrient").toUpperCase());
-                    Storage storage = Storage.valueOf(rs.getString("Storage").toUpperCase());
                     int quantity = rs.getInt("quantity");
-                    Category category = Category.valueOf(rs.getString("Category").toUpperCase());
+
+                    String primaryMacroNutrientString = rs.getString("primaryMacroNutrient");
+                    MacroNutrient primaryMacroNutrient = null;
+                    if (primaryMacroNutrientString != null) {
+                        try {
+                            primaryMacroNutrient = MacroNutrient.valueOf(primaryMacroNutrientString.toUpperCase());
+                        } catch (IllegalArgumentException e) {
+                            // Handle invalid enum value
+                            System.out.println("Invalid primaryMacroNutrient value: " + primaryMacroNutrientString);
+                        }
+                    }
+
+                    String storageString = rs.getString("storage");
+                    Storage storage = null;
+                    if (storageString != null){
+                        try{
+                            storage = Storage.valueOf(storageString.toUpperCase());
+                        } catch (IllegalArgumentException e){
+                            System.out.println("invalid storage value: " + storageString);
+                        }
+                    }
+
+                    String categoryString = rs.getString("category");
+                    Category category = null;
+                    if (categoryString != null){
+                        try{
+                            category = Category.valueOf(categoryString.toUpperCase());
+                        } catch (IllegalArgumentException e) {
+                            System.out.println("Invalid category value: " + categoryString);
+                        }
+                    }
 
                     //Creates new objects of items through a simpler constructor for user viewing
-                    Ingredient ingredient = new Ingredient(ingredientID, name, expiryDate, quantity, primaryMacroNutrient, storage, category);
+                    Ingredient ingredient = new Ingredient.Builder()
+                    .ingredientID(ingredientID)
+                    .name(name)
+                    .expiryDate(expiryDate)
+                    .quantity(quantity)
+                    .primaryMacroNutrient(primaryMacroNutrient)
+                    .storage(storage)
+                    .category(category)
+                    .build();
                     ingredientList.addIngredient(ingredient);
                 }
             }

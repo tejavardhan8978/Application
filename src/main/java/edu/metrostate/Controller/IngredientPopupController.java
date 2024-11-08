@@ -98,8 +98,8 @@ public class IngredientPopupController implements Initializable {
         System.out.println(ingredient + "in ingredientpopup controller");
         //setting details of all text fields
         this.ingredientTitle.setText(ingredient.getName());
-        this.ingredientCategory.setText(ingredient.getCategory().name());
-        this.ingredientDescription.setText(ingredient.getDescription());
+        this.ingredientCategory.setText(ingredient.getCategory() != null ? ingredient.getCategory().name() : "No Category");
+        this.ingredientDescription.setText(ingredient.getDescription() == null || ingredient.getDescription().isEmpty() ? "No Description" : ingredient.getDescription());
         this.caloriesColumn.setText(String.valueOf(ingredient.getNutrition().getCalories()));
         this.servingSizeColumn.setText(String.valueOf(ingredient.getNutrition().getServingSize()));
         this.carbohydratesColumn.setText(String.valueOf(ingredient.getNutrition().getTotalCarbohydrates()));

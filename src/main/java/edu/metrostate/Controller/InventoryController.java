@@ -82,22 +82,12 @@ public class InventoryController implements Initializable {
         System.out.println("Initialize end - Inventory controller");
     }
 
-
-    public void addIngredient(Ingredient ingredient) {
-        ingredientList.addIngredient(ingredient);
-        System.out.println("You have added an ingredient!");
-    }
-
     public void updateTableView() {
-        System.out.println("you've reached the update");
         System.out.println("updateTableView - inventoryController");
+        System.out.println("Ingredients loaded: " + ingredientList.getIngredients().size());
         ObservableList<Ingredient> items = FXCollections.observableArrayList(ingredientList.getIngredients());
         inventoryTable.setItems(items);
         inventoryTable.refresh();
-    }
-
-    public void setIngredientList(IngredientList ingredientList, InventoryController inventoryController) {
-        this.ingredientList = ingredientList;
     }
 
     public void openIngredientModal(MouseEvent event) throws IOException {

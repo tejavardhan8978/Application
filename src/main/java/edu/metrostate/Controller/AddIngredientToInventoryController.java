@@ -1,15 +1,12 @@
 package edu.metrostate.Controller;
 
-import edu.metrostate.Main;
 import edu.metrostate.Model.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -18,12 +15,11 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import java.sql.Connection;
 import java.sql.SQLException;
+import javafx.scene.control.Alert.AlertType;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Date;
 import java.time.LocalDate;
-import java.util.Objects;
 
 public class AddIngredientToInventoryController {
     @FXML private TextField itemNameField;
@@ -82,52 +78,77 @@ public class AddIngredientToInventoryController {
 
     //What allows the user to save an item
     public void setSaveButton(MouseEvent event) {
-        //First we can set some String fields and initialize our nutritional chart
+        //First we can set some String fields and initialize variables needed in/out of try and catch blocks
         NutritionalChart nutrition = null;
+        LocalDate expiryDate = null;
+        java.sql.Date expiryDateObj = null;
+        int quantity = 0;
         String name = itemNameField.getText();
         String expiryDateString = expiryDateField.getText();
         String quantityString = quantityField.getText();
         String description = itemDescriptionArea.getText();
 
+        //Exception handling
+        if (name.isEmpty()){
+            displayErrorMessage("Name", "Items name cannot be empty!");
+            return;
+        }
+
         try {
-            // Parse expiry date
-            LocalDate expiryDate = LocalDate.parse(expiryDateString);
-            Date expiryDateObj = java.sql.Date.valueOf(expiryDate);
+            if (quantityString.isEmpty()) {
+                displayErrorMessage("Quantity", "Items must have a quantity!");
+                return;
+            }
+            quantity = Integer.parseInt(quantityString);
+        }catch (Exception e){
+            displayErrorMessage("Quantity", "Please specify quantity in a digit character!!");
+            return;
+            }
 
-            // Parse quantity
-            int quantity = Integer.parseInt(quantityString);
+        try{
+            if (expiryDateString.isEmpty()) {
+                displayErrorMessage("Expiration Date", "Items must have a expiration date!");
+                return;
+            }
+            expiryDate = LocalDate.parse(expiryDateString);
+            expiryDateObj = java.sql.Date.valueOf(expiryDate);
+        } catch (Exception e){
+            displayErrorMessage("Expiration Date", "There was an error saving your date. Please " +
+                    "follow the specified format YYYY-MM-DD");
+            return;
+        }
 
+        try {
             // Gather nutritional information
-            int servingSize = Integer.parseInt(servingSizeField.getText());
-            int calories = Integer.parseInt(caloriesField.getText());
-            int totalCarbohydrates = Integer.parseInt(carbsField.getText());
-            int totalFat = Integer.parseInt(fatField.getText());
-            int totalProtein = Integer.parseInt(proteinField.getText());
-            int totalSodium = Integer.parseInt(sodiumField.getText());
-            int totalSugars = Integer.parseInt(sugarField.getText());
-            int dietaryFiber = Integer.parseInt(fiberField.getText());
-            int cholesterol = Integer.parseInt(cholesterolField.getText());
+            Integer servingSize = tryParseInt(servingSizeField.getText());
+            Integer calories = tryParseInt(caloriesField.getText());
+            Integer totalCarbohydrates = tryParseInt(carbsField.getText());
+            Integer totalFat = tryParseInt(fatField.getText());
+            Integer totalProtein = tryParseInt(proteinField.getText());
+            Integer totalSodium = tryParseInt(sodiumField.getText());
+            Integer totalSugars = tryParseInt(sugarField.getText());
+            Integer dietaryFiber = tryParseInt(fiberField.getText());
+            Integer cholesterol = tryParseInt(cholesterolField.getText());
 
-            //Get the information from the ListView selections
-            MacroNutrient selectedMacroNutrient = MacroNutrient.valueOf(macroNutrientListView.getSelectionModel().getSelectedItem());
-            Storage selectedStorage = Storage.valueOf(storageListView.getSelectionModel().getSelectedItem());
-            Category selectedCategory = Category.valueOf(categoryListView.getSelectionModel().getSelectedItem());
+            MacroNutrient selectedMacroNutrient = getEnumValue(macroNutrientListView, MacroNutrient.class, "MacroNutrient");
+            Storage selectedStorage = getEnumValue(storageListView, Storage.class, "Storage");
+            Category selectedCategory = getEnumValue(categoryListView, Category.class, "Category");
 
             //We try to create a connection with the database through the database class
             try (Connection connection = Database.getConnection()) {
                 // Create the nutritional chart object
-                nutrition = new NutritionalChart(
-                        0,
-                        servingSize,
-                        calories,
-                        totalCarbohydrates,
-                        totalFat,
-                        totalProtein,
-                        totalSodium,
-                        totalSugars,
-                        dietaryFiber,
-                        cholesterol
-                );
+                nutrition = new NutritionalChart.Builder()
+                        .servingSize(servingSize)
+                        .calories(calories)
+                        .totalCarbohydrates(totalCarbohydrates)
+                        .totalFat(totalFat)
+                        .totalProtein(totalProtein)
+                        .totalSodium(totalSodium)
+                        .totalSugars(totalSugars)
+                        .dietaryFiber(dietaryFiber)
+                        .cholesterol(cholesterol)
+                        .build();
+
                 //We use the insert method that inserts the object to the database amd returns a unique id
                 int nutritionID = nutrition.insert(connection);
                 System.out.println("The id to be set " + nutritionID);
@@ -137,16 +158,19 @@ public class AddIngredientToInventoryController {
                 System.out.println("Acquired NutritionalChart: " + nutrition);
 
                 // Create and insert the Ingredient
-                Ingredient item = new Ingredient(
-                        name,
-                        expiryDateObj,
-                        selectedMacroNutrient,
-                        nutrition,
-                        selectedStorage,
-                        quantity,
-                        selectedCategory,
-                        description
-                );
+                Ingredient item = new Ingredient.Builder()
+                        .name(name)
+                        .expiryDate(expiryDateObj)
+                        .nutritionID(nutritionID)
+                        .nutrition(nutrition)
+                        .primaryMacroNutrient(selectedMacroNutrient)
+                        .storage(selectedStorage)
+                        .quantity(quantity)
+                        .category(selectedCategory)
+                        .description(description)
+                        .image(file)
+                        .build();
+
                 //We use the insert method that inserts the object to the database amd returns a unique id
                 int ingredientID = item.insert(connection);
                 System.out.println("The id to be set " + ingredientID);
@@ -160,7 +184,7 @@ public class AddIngredientToInventoryController {
                 item.setNutritionID(nutritionID);
                 nutrition.updateIngredientID(connection, ingredientID);
                 item.updateNutritionID(connection, nutritionID);
-                item.setImage(file);
+                //item.setImage(file);
 
                 System.out.println("Item added to the db: " + item);
 
@@ -170,10 +194,45 @@ public class AddIngredientToInventoryController {
             }
         }catch (Exception e) {
             e.printStackTrace();
+            displayErrorMessage("Database Error", "An error occurred while attempting to save your item");
         }
     }
 
+    private <T extends Enum<T>> T getEnumValue(ListView<String> listView, Class<T> enumClass, String typeName) {
+        String selectedValue = listView.getSelectionModel().getSelectedItem();
+        if (selectedValue == null || selectedValue.isEmpty()) {
+            return null; // Return null for unselected enum values
+        }
+        try {
+            return Enum.valueOf(enumClass, selectedValue.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            displayErrorMessage(typeName, "Invalid selection for " + typeName + ".");
+            return null;
+        }
+    }
+
+    public static Integer tryParseInt(String value) {
+        try {
+            if (value == null || value.isEmpty()) {
+                return null;  // Return null if input is empty
+            }
+            return Integer.parseInt(value);  // Parse and return the integer value
+        } catch (NumberFormatException e) {
+            return null;  // Return null if input is not a valid integer
+        }
+    }
+
+
+    public void displayErrorMessage(String guiltyField, String message){
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle("Input Error");
+        alert.setHeaderText("Invalid Input in " + guiltyField);
+        alert.setHeaderText(message);
+        alert.showAndWait();
+    }
+
     public void setCancelButton(MouseEvent event) throws IOException {
+        clearFields();
         ReturnToInventoryHome(event);
     }
 
