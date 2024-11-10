@@ -176,7 +176,7 @@ public class Ingredient {
             stmt.setString(8, this.description);
 
             stmt.executeUpdate();
-
+            Database.dbDisconnect();
             try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
                     this.ingredientID = generatedKeys.getInt(1);
