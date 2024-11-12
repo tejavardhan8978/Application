@@ -12,9 +12,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.*;
 import java.io.IOException;
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -47,6 +49,7 @@ public class EditIngredient {
         LocalDate TempDate = LocalDate.parse(DateString);
         Date updateDate = java.sql.Date.valueOf(TempDate);
 
+
         //IngredientList ingredientList = IngredientListSingleton.getInstance();
         //ingredientList.updateIngredient(tempIngredient, tempQuantity, updateDate);
 
@@ -55,5 +58,24 @@ public class EditIngredient {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+    public static void UpdateData(int updateID, int updateQuantity, Date newExpiry){
+        String query ="UPDATE IngredientTable SET expiryDate = ?, quantity = ? WHERE id = ?";
+        try (Connection conn= DatabaseConnection.connect();
+             PreparedStatement preparedStatement = conn.prepareStatement(query)){
+            preparedStatement.setDate(1, newExpiry);
+            preparedStatement.setInt(2, updateQuantity);
+            preparedStatement.setInt(3, updateID);
+
+            int rowsAffected = preparedStatement.executeUpdate();
+            System.out.println("DID THE UPDATE");
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
+
+
+
+
     }
 }
