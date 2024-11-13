@@ -100,20 +100,22 @@ public class IngredientPopupController implements Initializable {
         this.ingredientTitle.setText(ingredient.getName());
         this.ingredientCategory.setText(ingredient.getCategory() != null ? ingredient.getCategory().name() : "No Category");
         this.ingredientDescription.setText(ingredient.getDescription() == null || ingredient.getDescription().isEmpty() ? "No Description" : ingredient.getDescription());
-        this.caloriesColumn.setText(String.valueOf(ingredient.getNutrition().getCalories()));
-        this.servingSizeColumn.setText(String.valueOf(ingredient.getNutrition().getServingSize()));
-        this.carbohydratesColumn.setText(String.valueOf(ingredient.getNutrition().getTotalCarbohydrates()));
-        this.fatColumn.setText(String.valueOf(ingredient.getNutrition().getTotalFat()));
-        this.proteinColumn.setText(String.valueOf(ingredient.getNutrition().getTotalProtein()));
-        this.sugarsColumn.setText(String.valueOf(ingredient.getNutrition().getTotalSugars()));;
-        this.sodiumColumn.setText(String.valueOf(ingredient.getNutrition().getTotalSodium()));
-        this.dietaryFiberColumn.setText(String.valueOf(ingredient.getNutrition().getDietaryFiber()));
-        this.cholesterolColumn.setText(String.valueOf(ingredient.getNutrition().getCholesterol()));
+        if (ingredient.getNutrition() != null) {
+            this.caloriesColumn.setText(String.valueOf(ingredient.getNutrition().getCalories()));
+            this.servingSizeColumn.setText(String.valueOf(ingredient.getNutrition().getServingSize()));
+            this.carbohydratesColumn.setText(String.valueOf(ingredient.getNutrition().getTotalCarbohydrates()));
+            this.fatColumn.setText(String.valueOf(ingredient.getNutrition().getTotalFat()));
+            this.proteinColumn.setText(String.valueOf(ingredient.getNutrition().getTotalProtein()));
+            this.sugarsColumn.setText(String.valueOf(ingredient.getNutrition().getTotalSugars()));
+            this.sodiumColumn.setText(String.valueOf(ingredient.getNutrition().getTotalSodium()));
+            this.dietaryFiberColumn.setText(String.valueOf(ingredient.getNutrition().getDietaryFiber()));
+            this.cholesterolColumn.setText(String.valueOf(ingredient.getNutrition().getCholesterol()));
+        }
         refreshIngredientStock();
         try {
             displayImage(ingredient.getImage());
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
     }
 
@@ -144,20 +146,22 @@ public class IngredientPopupController implements Initializable {
     }
 
     public void displayImage(File file) throws IOException {
-        try {
-            // Read BufferedImage
-            BufferedImage bufferedImage = ImageIO.read(file);
+        if (file != null) {
+            try {
+                // Read BufferedImage
+                BufferedImage bufferedImage = ImageIO.read(file);
 
-            // Convert BufferedImage to byte array
-            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-            ImageIO.write(bufferedImage, "png", outputStream);
-            ByteArrayInputStream inputStream = new ByteArrayInputStream(outputStream.toByteArray());
+                // Convert BufferedImage to byte array
+                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                ImageIO.write(bufferedImage, "png", outputStream);
+                ByteArrayInputStream inputStream = new ByteArrayInputStream(outputStream.toByteArray());
 
-            // Create JavaFX Image from byte array
-            Image image = new Image(inputStream);
-            imageView.setImage(image);
-        } catch (Exception e) {
-            e.printStackTrace();
+                // Create JavaFX Image from byte array
+                Image image = new Image(inputStream);
+                imageView.setImage(image);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
     }

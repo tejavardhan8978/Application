@@ -20,13 +20,14 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class RecipeController implements Initializable {
     Stage stage;
     Scene scene;
     Parent root;
-    RecipeListModel recipeList;
+    private static RecipeListModel recipeList = new RecipeListModel();
 
     //Create fields for the table view and its columns
     @FXML private TableView<Recipe> recipeTable;
@@ -70,17 +71,27 @@ public class RecipeController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("Initialize start - Recipe Controller");
         //Set up singleton
-        recipeList = RecipeListSingleton.getInstance();
+//        recipeList = RecipeListSingleton.getInstance();
+//        recipeList = new RecipeListModel();
         //Setup columns
-        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+//        try {
+//            recipeList.loadRecipesFromDB();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+        idColumn.setCellValueFactory(new PropertyValueFactory<>("recipeID"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         cuisineColumn.setCellValueFactory(new PropertyValueFactory<>("cuisine"));
         cookTimeColumn.setCellValueFactory(new PropertyValueFactory<>("cookTime"));
         servingsColumn.setCellValueFactory(new PropertyValueFactory<>("servings"));
         primaryIngredientColumn.setCellValueFactory(new PropertyValueFactory<>("primaryIngredient"));
-        //load default data for testing
 
-        updateTableView();
+
+        try {
+            updateTableView();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         recipeTable.refresh();
         System.out.println("Initialize end - Recipe Controller");
     }
@@ -92,10 +103,12 @@ public class RecipeController implements Initializable {
     }
 
     //Prints the current recipes in the list
-    public void updateTableView(){
+    public void updateTableView() throws SQLException {
         System.out.println("You've reached the update");
         System.out.println("updateTableView - recipeController");
         ObservableList<Recipe> items = FXCollections.observableArrayList(recipeList.getRecipes());
+        System.out.println(recipeList + "   recipelist address");
+        System.out.println(this);
         recipeTable.setItems(items);
         recipeTable.refresh();
     }
@@ -118,6 +131,7 @@ public class RecipeController implements Initializable {
                 AnchorPane recipeModal = fxmlLoader.load();
                 RecipePopupController recipePopupController = fxmlLoader.getController();
                 recipePopupController.setRecipeController(this);
+                System.out.println("....!!!!!..... " + tempRecipe);
                 recipePopupController.setRecipeModalDetails(tempRecipe);
 
 
