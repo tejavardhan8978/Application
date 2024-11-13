@@ -14,6 +14,8 @@ public class Database {
             // Create the table if it doesn't exist
             Ingredient.createTable(connection);
             NutritionalChart.createTable(connection);
+            Recipe.createTable(connection);
+            Cuisine.createTable(connection);
             return connection;
         } catch (SQLException e) {
             System.out.println("Connection error IngredientTable: " + e.getMessage());
