@@ -187,6 +187,72 @@ public class Ingredient {
         return -1;
     }
 
+    public static Ingredient getIngredientByID(int ID) {
+
+        String sql = "SELECT * FROM IngredientTable " +
+                "WHERE ingredientID = ? ";
+        try (Connection connection = Database.getConnection()) {
+            assert connection != null;
+            try (PreparedStatement stmt = connection.prepareStatement(sql)
+                 ) {
+                stmt.setInt(1, ID);
+                ResultSet rs = stmt.executeQuery();
+                while (rs.next()) {
+                    int ingredientID = rs.getInt("ingredientID");
+                    String name = rs.getString("name");
+                    Date expiryDate = rs.getDate("expiryDate");
+                    int quantity = rs.getInt("quantity");
+
+                    String primaryMacroNutrientString = rs.getString("primaryMacroNutrient");
+                    MacroNutrient primaryMacroNutrient = null;
+                    if (primaryMacroNutrientString != null) {
+                        try {
+                            primaryMacroNutrient = MacroNutrient.valueOf(primaryMacroNutrientString.toUpperCase());
+                        } catch (IllegalArgumentException e) {
+                            // Handle invalid enum value
+                            System.out.println("Invalid primaryMacroNutrient value: " + primaryMacroNutrientString);
+                        }
+                    }
+
+                    String storageString = rs.getString("storage");
+                    Storage storage = null;
+                    if (storageString != null){
+                        try{
+                            storage = Storage.valueOf(storageString.toUpperCase());
+                        } catch (IllegalArgumentException e){
+                            System.out.println("invalid storage value: " + storageString);
+                        }
+                    }
+
+                    String categoryString = rs.getString("category");
+                    Category category = null;
+                    if (categoryString != null){
+                        try{
+                            category = Category.valueOf(categoryString.toUpperCase());
+                        } catch (IllegalArgumentException e) {
+                            System.out.println("Invalid category value: " + categoryString);
+                        }
+                    }
+
+                    //Creates new objects of items through a simpler constructor for user viewing
+                    Ingredient ingredient = new Ingredient.Builder()
+                            .ingredientID(ingredientID)
+                            .name(name)
+                            .expiryDate(expiryDate)
+                            .quantity(quantity)
+                            .primaryMacroNutrient(primaryMacroNutrient)
+                            .storage(storage)
+                            .category(category)
+                            .build();
+                    return ingredient;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Handle exceptions appropriately
+        }
+    return null;
+    }
+
     //Updating the keys after insertion
     public void updateNutritionID(Connection connection, int nutritionID) throws SQLException {
         System.out.println("I've received the nutritionID and it's being set to " + nutritionID);

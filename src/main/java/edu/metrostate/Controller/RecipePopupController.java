@@ -69,15 +69,28 @@ public class RecipePopupController implements Initializable {
         this.recipeCuisine.setText(recipe.getCuisine().getName());
         this.recipeDescription.setText(recipe.getDescription());
         this.recipeInstructions.setText(recipe.getInstructions());
-        this.caloriesColumn.setText(String.valueOf(recipe.getNutrition().getCalories()));
-        this.servingSizeColumn.setText(String.valueOf(recipe.getNutrition().getServingSize()));
-        this.carbohydratesColumn.setText(String.valueOf(recipe.getNutrition().getTotalCarbohydrates()));
-        this.fatColumn.setText(String.valueOf(recipe.getNutrition().getTotalFat()));
-        this.proteinColumn.setText(String.valueOf(recipe.getNutrition().getTotalProtein()));
-        this.sugarsColumn.setText(String.valueOf(recipe.getNutrition().getTotalSugars()));;
-        this.sodiumColumn.setText(String.valueOf(recipe.getNutrition().getTotalSodium()));
-        this.dietaryFiberColumn.setText(String.valueOf(recipe.getNutrition().getDietaryFiber()));
-        this.cholesterolColumn.setText(String.valueOf(recipe.getNutrition().getCholesterol()));
+        if (recipe.getNutrition() == null) {
+            this.caloriesColumn.setText("0");
+            this.servingSizeColumn.setText("0");
+            this.carbohydratesColumn.setText("0");
+            this.fatColumn.setText("0");
+            this.proteinColumn.setText("0");
+            this.sugarsColumn.setText("0");;
+            this.sodiumColumn.setText("0");
+            this.dietaryFiberColumn.setText("0");
+            this.cholesterolColumn.setText("0");
 
+        } else {
+            this.caloriesColumn.setText(String.valueOf(recipe.getNutrition().getCalories()));
+            this.servingSizeColumn.setText(String.valueOf(recipe.getNutrition().getServingSize()));
+            this.carbohydratesColumn.setText(String.valueOf(recipe.getNutrition().getTotalCarbohydrates()));
+            this.fatColumn.setText(String.valueOf(recipe.getNutrition().getTotalFat()));
+            this.proteinColumn.setText(String.valueOf(recipe.getNutrition().getTotalProtein()));
+            this.sugarsColumn.setText(String.valueOf(recipe.getNutrition().getTotalSugars()));
+
+            this.sodiumColumn.setText(String.valueOf(recipe.getNutrition().getTotalSodium()));
+            this.dietaryFiberColumn.setText(String.valueOf(recipe.getNutrition().getDietaryFiber()));
+            this.cholesterolColumn.setText(String.valueOf(recipe.getNutrition().getCholesterol()));
+        }
     }
 }
