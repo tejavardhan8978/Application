@@ -11,17 +11,19 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Date;
+import java.sql.*;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class InventoryController implements Initializable {
@@ -40,6 +42,26 @@ public class InventoryController implements Initializable {
     @FXML private TableColumn<Ingredient, Storage> storage;
     @FXML private TableColumn<Ingredient, Integer> quantity;
     @FXML private TableColumn<Ingredient, String> category;
+    @FXML private TextField searchBar;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        System.out.println("Initialize start - Inventory controller");
+        ingredientList = IngredientListSingleton.getInstance().getIngredients();
+        idColumn.setCellValueFactory(new PropertyValueFactory<>("ingredientID"));
+        name.setCellValueFactory(new PropertyValueFactory<>("name"));
+        expiryDate.setCellValueFactory(new PropertyValueFactory<>("expiryDate"));
+        primaryMacroNutrient.setCellValueFactory(new PropertyValueFactory<>("primaryMacroNutrient"));
+        storage.setCellValueFactory(new PropertyValueFactory<>("storage"));
+        quantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+        category.setCellValueFactory(new PropertyValueFactory<>("category"));
+
+        updateTableView();
+        inventoryTable.refresh();
+        // Add this line in your initialize method to bind the search to the search bar
+        searchBar.textProperty().addListener((observable, oldValue, newValue) -> onSearch());
+        System.out.println("Initialize end - Inventory controller");
+    }
 
     public void switchToHome(MouseEvent event) throws IOException {
         root = FXMLLoader.load(Main.class.getResource("/Views/HomeScreen.fxml"));
@@ -65,21 +87,19 @@ public class InventoryController implements Initializable {
         stage.show();
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle){
-        System.out.println("Initialize start - Inventory controller");
-        ingredientList = IngredientListSingleton.getInstance().getIngredients();
-        idColumn.setCellValueFactory(new PropertyValueFactory<>("ingredientID"));
-        name.setCellValueFactory(new PropertyValueFactory<>("name"));
-        expiryDate.setCellValueFactory(new PropertyValueFactory<>("expiryDate"));
-        primaryMacroNutrient.setCellValueFactory(new PropertyValueFactory<>("primaryMacroNutrient"));
-        storage.setCellValueFactory(new PropertyValueFactory<>("storage"));
-        quantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
-        category.setCellValueFactory(new PropertyValueFactory<>("category"));
-
-        updateTableView();
-        inventoryTable.refresh();
-        System.out.println("Initialize end - Inventory controller");
+    public void switchToEditIngredient(MouseEvent event) throws IOException {
+        if (inventoryTable.getSelectionModel().getSelectedItem() != null) {
+            tempIngredient = inventoryTable.getSelectionModel().getSelectedItem();
+            FXMLLoader loader = new FXMLLoader(Main.class.getResource("/Views/ChangeQuantityInventoryModal.fxml"));
+            Parent root = loader.load();
+            // Get the controller
+            EditIngredient controller = loader.getController();
+            // Switch to the new scene
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        }
     }
 
     public void updateTableView() {
@@ -118,21 +138,6 @@ public class InventoryController implements Initializable {
         }
     }
 
-    public void switchToEditIngredient(MouseEvent event) throws IOException {
-        if (inventoryTable.getSelectionModel().getSelectedItem() != null) {
-            tempIngredient = inventoryTable.getSelectionModel().getSelectedItem();
-            FXMLLoader loader = new FXMLLoader(Main.class.getResource("/Views/ChangeQuantityInventoryModal.fxml"));
-            Parent root = loader.load();
-            // Get the controller
-            EditIngredient controller = loader.getController();
-            // Switch to the new scene
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        }
-    }
-
     public InventoryController getController() {
         return this;
     }
@@ -142,4 +147,91 @@ public class InventoryController implements Initializable {
         switchToHome(event);
     }
 
+    private void performIngredientSearch(String searchTerm) {
+        String query = "SELECT * FROM IngredientTable WHERE name LIKE ?";
+
+        try (Connection conn = Database.getConnection()) {
+            try (PreparedStatement stmt = conn.prepareStatement(query)) {
+                // Set the search term to filter by ingredient name
+                stmt.setString(1, "%" + searchTerm + "%");
+
+                // Execute the query and get the results
+                ResultSet rs = stmt.executeQuery();
+
+                ObservableList<Ingredient> searchResults = FXCollections.observableArrayList();
+
+                // Process the result set and add matching ingredients to the list
+                while (rs.next()) {
+                    int ingredientID = rs.getInt("ingredientID");
+                    String name = rs.getString("name");
+                    Date expiryDate = rs.getDate("expiryDate");
+                    int quantity = rs.getInt("quantity");
+
+                    //Ensure that we do not try to get an enum for a null value
+                    try {
+                        String primaryMacroString = rs.getString("primaryMacroNutrient");
+                        MacroNutrient primaryMacroNutrient = null;
+                        if (primaryMacroString != null){
+                            primaryMacroNutrient = MacroNutrient .valueOf(primaryMacroString.toUpperCase());
+                        }
+
+                        String storageString = rs.getString("storage");
+                        Storage storage = null;
+                        if (storageString != null){
+                            storage = Storage.valueOf(storageString.toUpperCase());
+                        }
+
+                        String categoryString = rs.getString("category");
+                        Category category = null;
+                        if (categoryString != null){
+                            category = Category.valueOf(categoryString.toUpperCase());
+                        }
+
+
+                        Ingredient ingredient = new Ingredient.Builder()
+                                .ingredientID(ingredientID)
+                                .name(name)
+                                .expiryDate(expiryDate)
+                                .quantity(quantity)
+                                .primaryMacroNutrient(primaryMacroNutrient)
+                                .storage(storage)
+                                .category(category)
+
+                                .build();
+
+                        searchResults.add(ingredient);
+                        Database.dbDisconnect();
+                    } catch (SQLException e){
+                        System.out.println("One of the searched for items has missing information");
+                    }
+                }
+
+                // Update the table with the search results
+                inventoryTable.setItems(searchResults);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Called when the user types in the search bar
+    @FXML
+    public void onSearch() {
+        String searchTerm = searchBar.getText().trim();
+        performIngredientSearch(searchTerm);
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
