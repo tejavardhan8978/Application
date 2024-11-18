@@ -93,7 +93,7 @@ public class InventoryController implements Initializable {
             // Get the controller
             //EditIngredient controller = loader.getController();
             // Switch to the new scene
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Stage stage = new Stage();
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
