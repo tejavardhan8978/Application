@@ -78,23 +78,4 @@ public class EditIngredient {
 
 
     }
-    public static void UpdateData(int updateID, int updateQuantity, Date newExpiry){
-        String query ="UPDATE IngredientTable SET expiryDate = ?, quantity = ? WHERE id = ?";
-        try (Connection conn= DatabaseConnection.connect();
-             PreparedStatement preparedStatement = conn.prepareStatement(query)){
-            preparedStatement.setDate(1, newExpiry);
-            preparedStatement.setInt(2, updateQuantity);
-            preparedStatement.setInt(3, updateID);
-
-            int rowsAffected = preparedStatement.executeUpdate();
-            System.out.println("DID THE UPDATE");
-        }catch (SQLException e){
-            e.printStackTrace();
-        }
-
-
-
-
-
-    }
 }
