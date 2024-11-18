@@ -17,7 +17,6 @@ repositories {
 
 dependencies {
     implementation 'org.xerial:sqlite-jdbc:3.47.0.0'
-    implementation 'org.slf4j:slf4j-api:1.7.36'
     compileOnly 'org.projectlombok:lombok:1.18.34'
     annotationProcessor 'org.projectlombok:lombok:1.18.34'
     testCompileOnly 'org.projectlombok:lombok:1.18.34'
