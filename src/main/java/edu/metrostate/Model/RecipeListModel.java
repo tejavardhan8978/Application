@@ -11,16 +11,19 @@ public class RecipeListModel {
     private ArrayList<Recipe> recipes;
     private String name;
     private int listType;
-    private static int lastId =0;
+    private static int lastId = 0;
+    private boolean isLoaded;
 
     public RecipeListModel() {
         this.recipes = new ArrayList<>();
+        this.isLoaded = false;
     }
 
     public RecipeListModel(ArrayList<Recipe> recipes, String name, int listType) {
         this.recipes = recipes;
         this.name = name;
         this.listType = listType;
+        this.isLoaded = true;
     }
 
     public void addRecipe(Recipe recipe){
@@ -29,7 +32,10 @@ public class RecipeListModel {
     }
 
     public ArrayList<Recipe> getRecipes() throws SQLException {
-        loadRecipesFromDB();
+        if (!isLoaded) {
+            loadRecipesFromDB();
+            isLoaded = true;
+        }
         return recipes;
     }
 
@@ -88,7 +94,7 @@ public class RecipeListModel {
                             .setInstruction(instruction)
                             .setNutritionID(nutritionID)
                             .setServings(servings)
-                           // .setCuisine(cuisine)
+                            //.setCuisine(cuisine)
                             //.setPrimaryIngredient(primaryIngredient)
                             .build();
                     this.addRecipe(recipe);

@@ -5,30 +5,34 @@ import java.sql.*;
 public class Database {
     private static String databaseName = "test.db";
     private static String connectionString = "jdbc:sqlite:" + databaseName;
-    private static Connection conn = null;
 
     // Method to establish a connection to the database
     public static Connection getConnection() {
+       Connection connection = null;
         try {
-            Connection connection = DriverManager.getConnection(connectionString);
+            connection = DriverManager.getConnection(connectionString);
+            System.out.println("Connected to database!");
             // Create the table if it doesn't exist
             Ingredient.createTable(connection);
             NutritionalChart.createTable(connection);
             Recipe.createTable(connection);
             Cuisine.createTable(connection);
-            return connection;
         } catch (SQLException e) {
-            System.out.println("Connection error IngredientTable: " + e.getMessage());
+            System.out.println("Connection error: " + e.getMessage());
             return null;
         }
+        return connection;
     }
 
     public static void dbDisconnect() throws SQLException {
+        Connection connection = null;
         try {
-            if (conn != null && !conn.isClosed()) {
-                conn.close();
+            if (connection != null && !connection.isClosed()) {
+                connection.close();
+                System.out.println("Database connection closed.");
             }
         } catch (Exception e) {
+            System.out.println("Error closing connection: " + e.getMessage());
             throw e;
         }
     }

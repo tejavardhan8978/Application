@@ -14,29 +14,21 @@ public class Recipe {
     //object
 
     private String instructions;//
-
     private String description;
     private int cookTime;//
     private int servings;//
     //ENUM
 
-
     //nutrition object
     private NutritionalChart nutrition;
-    private int nutritionID;//
-
-
-
+    private int nutritionID;
     private Cuisine cuisine;
-    private int cuisineID;//
-
+    private int cuisineID;
     private Ingredient primaryIngredient;
-    private int primaryIngredientID;//
+    private int primaryIngredientID;
 
     //LEAVING AS STRING FOR NOW. CHANGE TO LIST LATER AND INCORPORATE ADDING INGREDIENT TO RECIPE LIST.
     private String ingredients;//
-
-
 
     //default constructor
     public Recipe() {
@@ -191,9 +183,9 @@ public class Recipe {
     public static void createTable(Connection connection) throws SQLException {
         String sql = "CREATE TABLE IF NOT EXISTS RecipeTable (" +
                 "recipeID INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "name TEXT" +
-                "cuisineID INTEGER, " +
-                "description TEXT" +
+                "name TEXT," +
+                "cuisineID INTEGER," +
+                "description TEXT," +
                 "cookTime INTEGER, " +
                 "servings INTEGER, " +
                 "primaryIngredientID INTEGER, " +
@@ -210,7 +202,6 @@ public class Recipe {
     }
 
     public int insert(Connection connection) throws SQLException {
-
         String sql = "INSERT INTO RecipeTable (" +
                 "name, " +
                 "cuisineID, " +
@@ -233,7 +224,7 @@ public class Recipe {
             preparedStatement.setString(8, this.ingredients);
             preparedStatement.setString(9, this.instructions);
 
-            preparedStatement.execute();
+            preparedStatement.executeUpdate();
 
             try (ResultSet generatedKey = preparedStatement.getGeneratedKeys()) {
                 if (generatedKey.next()) {
@@ -342,7 +333,3 @@ public class Recipe {
         }
     }
 }
-
-
-
-

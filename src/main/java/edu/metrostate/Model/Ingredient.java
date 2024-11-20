@@ -187,14 +187,33 @@ public class Ingredient {
         return -1;
     }
 
-    public static Ingredient getIngredientByID(int ID) {
+    public static Ingredient getIngredientByName(String name) {
+        try (Connection connection = Database.getConnection()){
+            String sql = "SELECT * FROM IngredientTable WHERE name = ?";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)){
+                preparedStatement.setString(1, name);
+                try (ResultSet resultSet = preparedStatement.executeQuery()){
+                    if(resultSet.next()){
+                        Ingredient item = new Ingredient.Builder()
+                                .name(name)
+                                .build();
+                        return item;
+                    }
+                }
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
 
+    public static Ingredient getIngredientByID(int ID){
         String sql = "SELECT * FROM IngredientTable " +
                 "WHERE ingredientID = ? ";
         try (Connection connection = Database.getConnection()) {
             assert connection != null;
             try (PreparedStatement stmt = connection.prepareStatement(sql)
-                 ) {
+            ) {
                 stmt.setInt(1, ID);
                 ResultSet rs = stmt.executeQuery();
                 while (rs.next()) {
@@ -250,7 +269,7 @@ public class Ingredient {
         } catch (SQLException e) {
             e.printStackTrace(); // Handle exceptions appropriately
         }
-    return null;
+        return null;
     }
 
     //Updating the keys after insertion

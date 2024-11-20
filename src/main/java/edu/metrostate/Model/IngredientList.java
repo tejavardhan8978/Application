@@ -3,9 +3,6 @@ package edu.metrostate.Model;
 import java.util.ArrayList;
 import java.util.Date;
 
-/**
- * This class instantiates an object which contains the list of ingredients and which category the list belongs to.
- */
 public class IngredientList {
 
     private ArrayList<Ingredient> ingredients;
@@ -13,17 +10,6 @@ public class IngredientList {
     private int listType;
     private static int lastId = 0;
 
-
-    /**
-     * ListType field represents whether the list is of:
-     * 1 - Ingredients in inventory.
-     * 2 - Ingredients in a given recipe.
-     * 3 - Ingredients in the grocery list.
-     */
-
-    /**
-     * Default constructor
-     */
     public IngredientList() {
         this.ingredients = new ArrayList<>();
     }
