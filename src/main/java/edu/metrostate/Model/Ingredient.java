@@ -206,6 +206,26 @@ public class Ingredient {
         return -1;
     }
 
+    public static Ingredient getIngredientByName(String name) {
+        try (Connection connection = Database.getConnection()){
+            String sql = "SELECT * FROM IngredientTable WHERE name = ?";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)){
+                preparedStatement.setString(1, name);
+                try (ResultSet resultSet = preparedStatement.executeQuery()){
+                    if(resultSet.next()){
+                        Ingredient item = new Ingredient.Builder()
+                                .name(name)
+                                .build();
+                        return item;
+                    }
+                }
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public static Ingredient getIngredientByID(int ID) {
 
         String sql = "SELECT * FROM IngredientTable " +

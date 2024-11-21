@@ -39,8 +39,6 @@ public class IngredientPopupController implements Initializable {
     @FXML private Text ingredientCategory;
     @FXML private Text ingredientDescription;
     @FXML private TextField ingredientStock;
-//    @FXML private TableView ingredientNutritionChartTable1;
-//    @FXML private TableView ingredientNutritionChartTable2;
     @FXML private TableView ingredientRecipeTable;
     private Stage inventoryControllerStage;
     private Ingredient ingredient;
