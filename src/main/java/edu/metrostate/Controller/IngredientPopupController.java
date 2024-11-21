@@ -27,6 +27,7 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.PrimitiveIterator;
 import java.util.ResourceBundle;
 
@@ -34,6 +35,8 @@ public class IngredientPopupController implements Initializable {
 
     private InventoryController inventoryController;
     private Stage ingredientPopupStage;
+    private Stage inventoryControllerStage;
+    private Ingredient ingredient;
 
     @FXML private Text ingredientTitle;
     @FXML private Text ingredientCategory;
@@ -42,9 +45,6 @@ public class IngredientPopupController implements Initializable {
     @FXML private TableView ingredientNutritionChartTable1;
     @FXML private TableView ingredientNutritionChartTable2;
     @FXML private TableView ingredientRecipeTable;
-    private Stage inventoryControllerStage;
-    private Ingredient ingredient;
-
     @FXML private Text caloriesColumn;
     @FXML private Text carbohydratesColumn;
     @FXML private Text fatColumn;
@@ -54,11 +54,7 @@ public class IngredientPopupController implements Initializable {
     @FXML private Text dietaryFiberColumn;
     @FXML private Text cholesterolColumn;
     @FXML private Text servingSizeColumn;
-
     @FXML private ImageView imageView;
-
-
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -66,11 +62,10 @@ public class IngredientPopupController implements Initializable {
     }
 
     @FXML
-    public void handleBackButtonClick(MouseEvent event) {
+    public void handleBackButtonClick(MouseEvent event) throws SQLException {
         System.out.println("Closing Ingredient Popup");
         Stage modalStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         modalStage.close();
-        inventoryController.updateTableView();
     }
 
     @FXML
@@ -92,31 +87,63 @@ public class IngredientPopupController implements Initializable {
         this.inventoryControllerStage = stage;
     }
 
-    public void setIngredientModalDetails(Ingredient ingredient) {
+    public void setIngredientModalDetails(Ingredient ingredient) throws SQLException {
+        NutritionalChart tempNutritional = null;
         //saving ingredient as a local variable
         setIngredient(ingredient);
-        System.out.println(ingredient + "in ingredientpopup controller");
+        NutritionalChart nutritionalChart = NutritionalChart.getNutritionalChartByID(ingredient.getNutritionID());
+        ingredient.setNutrition(nutritionalChart);
+        ingredient.getNutrition().toString();
+        System.out.println(ingredient.getName() + " in ingredient popup controller");
+        System.out.println(ingredient.getName() + " ingredientID is " + ingredient.getIngredientID());
+        System.out.println(ingredient.getName() + " nutritionID is " + ingredient.getNutritionID());
+
+
         //setting details of all text fields
         this.ingredientTitle.setText(ingredient.getName());
         this.ingredientCategory.setText(ingredient.getCategory() != null ? ingredient.getCategory().name() : "No Category");
+        System.out.println(ingredient.getDescription());
         this.ingredientDescription.setText(ingredient.getDescription() == null || ingredient.getDescription().isEmpty() ? "No Description" : ingredient.getDescription());
-        if (ingredient.getNutrition() != null) {
-            this.caloriesColumn.setText(String.valueOf(ingredient.getNutrition().getCalories()));
-            this.servingSizeColumn.setText(String.valueOf(ingredient.getNutrition().getServingSize()));
-            this.carbohydratesColumn.setText(String.valueOf(ingredient.getNutrition().getTotalCarbohydrates()));
-            this.fatColumn.setText(String.valueOf(ingredient.getNutrition().getTotalFat()));
-            this.proteinColumn.setText(String.valueOf(ingredient.getNutrition().getTotalProtein()));
-            this.sugarsColumn.setText(String.valueOf(ingredient.getNutrition().getTotalSugars()));
-            this.sodiumColumn.setText(String.valueOf(ingredient.getNutrition().getTotalSodium()));
-            this.dietaryFiberColumn.setText(String.valueOf(ingredient.getNutrition().getDietaryFiber()));
-            this.cholesterolColumn.setText(String.valueOf(ingredient.getNutrition().getCholesterol()));
-        }
-        refreshIngredientStock();
         try {
-            displayImage(ingredient.getImage());
-        } catch (IOException e) {
+            if (ingredient.getNutritionID() > 0) {
+                if (ingredient.getNutrition() != null) {
+                   // tempNutritional = new NutritionalChart.Builder()
+                      //      .build();
+                    System.out.println("Nutritional Chart fetched successfully!");
+                    System.out.println("Nutritional data is available for " + ingredient.getName() + " with id " + ingredient.getIngredientID());
+                    this.caloriesColumn.setText(String.valueOf(ingredient.getNutrition().getCalories()));
+                    this.servingSizeColumn.setText(String.valueOf(ingredient.getNutrition().getServingSize()));
+                    this.carbohydratesColumn.setText(String.valueOf(ingredient.getNutrition().getTotalCarbohydrates()));
+                    this.fatColumn.setText(String.valueOf(ingredient.getNutrition().getTotalFat()));
+                    this.proteinColumn.setText(String.valueOf(ingredient.getNutrition().getTotalProtein()));
+                    this.sugarsColumn.setText(String.valueOf(ingredient.getNutrition().getTotalSugars()));
+                    this.sodiumColumn.setText(String.valueOf(ingredient.getNutrition().getTotalSodium()));
+                    this.dietaryFiberColumn.setText(String.valueOf(ingredient.getNutrition().getDietaryFiber()));
+                    this.cholesterolColumn.setText(String.valueOf(ingredient.getNutrition().getCholesterol()));
+                } else {
+                    System.out.println("Nutritional data is missing for " + ingredient.getName());
+                    setNutritionalDataUnavailable();
+                }
+            }else {
+                System.out.println("Nutritional chart not found");
+                setNutritionalDataUnavailable();
+            }
+        } catch (Exception e) {
             e.printStackTrace();
+            System.out.println("Invalid nutrition ID for" + ingredient.getName());
         }
+    }
+
+    private void setNutritionalDataUnavailable() {
+        this.caloriesColumn.setText("N/A");
+        this.servingSizeColumn.setText("N/A");
+        this.carbohydratesColumn.setText("N/A");
+        this.fatColumn.setText("N/A");
+        this.proteinColumn.setText("N/A");
+        this.sugarsColumn.setText("N/A");
+        this.sodiumColumn.setText("N/A");
+        this.dietaryFiberColumn.setText("N/A");
+        this.cholesterolColumn.setText("N/A");
     }
 
     public void handleAddButtonClick(MouseEvent event) throws IOException {
@@ -138,7 +165,6 @@ public class IngredientPopupController implements Initializable {
         changeQuantityModalController.setChangeQuantityModalStage(modalStage);
         changeQuantityModalController.setIngredient(ingredient);
         changeQuantityModalController.setIngredientPopupController(this);
-
     }
 
     public void setIngredientPopupStage(Stage stage) {

@@ -1,6 +1,5 @@
 package edu.metrostate.Controller;
 
-import edu.metrostate.Model.IngredientList;
 import edu.metrostate.Main;
 import edu.metrostate.Model.*;
 import javafx.collections.FXCollections;
@@ -29,7 +28,6 @@ public class InventoryController implements Initializable {
     Stage stage;
     Scene scene;
     Parent root;
-    IngredientList ingredientList;
     private boolean initialInventoryFlag = false;
     public static Ingredient tempIngredient;
 
@@ -46,7 +44,6 @@ public class InventoryController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("Initialize start - Inventory controller");
-        ingredientList = IngredientListSingleton.getInstance().getIngredients();
         idColumn.setCellValueFactory(new PropertyValueFactory<>("ingredientID"));
         name.setCellValueFactory(new PropertyValueFactory<>("name"));
         expiryDate.setCellValueFactory(new PropertyValueFactory<>("expiryDate"));
@@ -54,8 +51,11 @@ public class InventoryController implements Initializable {
         storage.setCellValueFactory(new PropertyValueFactory<>("storage"));
         quantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         category.setCellValueFactory(new PropertyValueFactory<>("category"));
-
-        updateTableView();
+        try {
+            loadIngredientsFromDB();
+        } catch (SQLException e){
+            throw new RuntimeException(e);
+        }
         inventoryTable.refresh();
         searchBar.textProperty().addListener((observable, oldValue, newValue) -> onSearch());
         System.out.println("Initialize end - Inventory controller");
@@ -75,9 +75,9 @@ public class InventoryController implements Initializable {
         Parent root = loader.load();
         // Get the controller
         AddIngredientToInventoryController controller = loader.getController();
+        // Pass the parent controller to the child controller
+        controller.setInventoryController(this);
         controller.setRoot(root);
-        // Pass the ingredientList to the IngredientQuantityController
-        controller.setIngredientList(this.ingredientList, this);
         // Switch to the new scene
         stage = new Stage();
         scene = new Scene(root);
@@ -100,35 +100,31 @@ public class InventoryController implements Initializable {
         }
     }
 
-    public void updateTableView() {
+    public void updateTableView(ObservableList<Ingredient> ingredients) throws SQLException {
         System.out.println("updateTableView - inventoryController");
-        System.out.println("Ingredients loaded: " + ingredientList.getIngredients().size());
-        ObservableList<Ingredient> items = FXCollections.observableArrayList(ingredientList.getIngredients());
-        inventoryTable.setItems(items);
+        inventoryTable.setItems(ingredients);
         inventoryTable.refresh();
     }
 
-    public void openIngredientModal(MouseEvent event) throws IOException {
+    public void openIngredientModal(MouseEvent event) throws IOException, SQLException {
         if (event.getClickCount() == 2) {
-            Ingredient tempIngredient = inventoryTable.getSelectionModel().getSelectedItem();
-            if (tempIngredient != null) {
-                System.out.println(tempIngredient);
+            Ingredient selectedIngredient = inventoryTable.getSelectionModel().getSelectedItem();
+
+            if(selectedIngredient != null){
+                System.out.println("Selected Ingredient: " + selectedIngredient.getName());
 
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Views/IngredientDetailedModal.fxml"));
-
                 AnchorPane ingredientModal = fxmlLoader.load();
                 IngredientPopupController ingredientPopupController = fxmlLoader.getController();
                 ingredientPopupController.setInventoryController(this);
-                ingredientPopupController.setIngredientModalDetails(tempIngredient);
 
+                ingredientPopupController.setIngredientModalDetails(selectedIngredient);
 
-                stage = new Stage();
-                scene = new Scene(ingredientModal);
+                Stage stage = new Stage();
+                Scene scene = new Scene(ingredientModal);
                 stage.setScene(scene);
                 stage.setTitle("Ingredient Popup");
                 stage.initModality(Modality.APPLICATION_MODAL);
-                System.out.println(this);
-
                 stage.show();
                 ingredientPopupController.setIngredientPopupStage(stage);
 
@@ -143,6 +139,64 @@ public class InventoryController implements Initializable {
     public void backToHome(MouseEvent event) throws IOException {
         System.out.println("Going back to home");
         switchToHome(event);
+    }
+
+    public ObservableList<Ingredient> loadIngredientsFromDB() throws SQLException {
+        String query = "SELECT * FROM IngredientTable";  //SQL query to fetch ingredients
+        ObservableList<Ingredient> items = FXCollections.observableArrayList();
+        try (Connection conn = Database.getConnection()) {
+            try (PreparedStatement stmt = conn.prepareStatement(query)) {
+                ResultSet rs = stmt.executeQuery();
+
+                // Loop through the result set and create Ingredient objects
+                while (rs.next()) {
+                    int ingredientID = rs.getInt("ingredientID");
+                    String name = rs.getString("name");
+                    Date expiryDate = rs.getDate("expiryDate");
+                    int quantity = rs.getInt("quantity");
+                    int nutritionID = rs.getInt("nutritionID");
+                    String description = rs.getString("description");
+
+                    // Handle enum values for primaryMacroNutrient, storage, and category
+                    MacroNutrient primaryMacroNutrient = getEnumValue(MacroNutrient.class, rs, "primaryMacroNutrient");
+                    Storage storage = getEnumValue(Storage.class, rs, "Storage");
+                    Category category = getEnumValue(Category.class, rs, "Category");
+
+                    // Create an Ingredient object with the retrieved data
+                    Ingredient ingredient = new Ingredient.Builder()
+                            .ingredientID(ingredientID)
+                            .nutritionID(nutritionID)
+                            .name(name)
+                            .expiryDate(expiryDate)
+                            .quantity(quantity)
+                            .primaryMacroNutrient(primaryMacroNutrient)
+                            .storage(storage)
+                            .category(category)
+                            .description(description)
+                            .build();
+
+                    // Add the ingredient to the TableView
+                    items.add(ingredient);
+                }
+                updateTableView(items);
+                Database.dbDisconnect(conn);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return items;
+    }
+
+    private <T extends Enum<T>> T getEnumValue(Class<T> enumClass, ResultSet resultSet, String columnName) throws SQLException {
+        String selectedValue = resultSet.getString(columnName);
+        if (selectedValue == null || selectedValue.isEmpty()){
+            return null;
+        }
+        try{
+            return Enum.valueOf(enumClass, selectedValue.toUpperCase());
+        } catch(IllegalArgumentException e){
+            return null;
+        }
     }
 
     private void performIngredientSearch(String searchTerm) {
@@ -193,18 +247,16 @@ public class InventoryController implements Initializable {
                                 .primaryMacroNutrient(primaryMacroNutrient)
                                 .storage(storage)
                                 .category(category)
-
                                 .build();
 
                         searchResults.add(ingredient);
-                        Database.dbDisconnect();
                     } catch (SQLException e){
                         System.out.println("One of the searched for items has missing information");
                     }
                 }
-
                 // Update the table with the search results
                 inventoryTable.setItems(searchResults);
+                Database.dbDisconnect(conn);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -218,17 +270,3 @@ public class InventoryController implements Initializable {
         performIngredientSearch(searchTerm);
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

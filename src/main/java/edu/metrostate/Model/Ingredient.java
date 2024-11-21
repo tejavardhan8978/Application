@@ -176,7 +176,6 @@ public class Ingredient {
             stmt.setString(8, this.description);
 
             stmt.executeUpdate();
-            Database.dbDisconnect();
             try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
                     this.ingredientID = generatedKeys.getInt(1);
@@ -184,6 +183,7 @@ public class Ingredient {
                 }
             }
         }
+        Database.dbDisconnect(connection);
         return -1;
     }
 
@@ -208,8 +208,7 @@ public class Ingredient {
     }
 
     public static Ingredient getIngredientByID(int ID){
-        String sql = "SELECT * FROM IngredientTable " +
-                "WHERE ingredientID = ? ";
+        String sql = "SELECT * FROM IngredientTable WHERE ingredientID = ? ";
         try (Connection connection = Database.getConnection()) {
             assert connection != null;
             try (PreparedStatement stmt = connection.prepareStatement(sql)
@@ -221,6 +220,12 @@ public class Ingredient {
                     String name = rs.getString("name");
                     Date expiryDate = rs.getDate("expiryDate");
                     int quantity = rs.getInt("quantity");
+                    int nutritionID = rs.getInt("nutritionID");
+
+                    System.out.println("The queried ingredient ID is " + ingredientID);
+                    System.out.println("The queried nutrition ID is " + nutritionID);
+
+                    NutritionalChart nutrition = NutritionalChart.getNutritionalChartByID(nutritionID);
 
                     String primaryMacroNutrientString = rs.getString("primaryMacroNutrient");
                     MacroNutrient primaryMacroNutrient = null;
@@ -254,8 +259,10 @@ public class Ingredient {
                     }
 
                     //Creates new objects of items through a simpler constructor for user viewing
-                    Ingredient ingredient = new Ingredient.Builder()
+                    Ingredient ingredient = new Builder()
                             .ingredientID(ingredientID)
+                            .nutritionID(nutritionID)
+                            .nutrition(nutrition)
                             .name(name)
                             .expiryDate(expiryDate)
                             .quantity(quantity)

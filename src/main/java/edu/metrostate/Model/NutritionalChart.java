@@ -247,6 +247,7 @@ public class NutritionalChart {
 
     public static NutritionalChart getNutritionalChartByID(int ID) throws SQLException {
         String sql = "SELECT * FROM NutritionalChart WHERE nutritionID = ?";
+        System.out.println("In the getNutritionalChartByID for " + ID);
         try (Connection connection = Database.getConnection()) {
             assert connection != null;
             try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
@@ -254,9 +255,10 @@ public class NutritionalChart {
                 ResultSet rs = preparedStatement.executeQuery();
 
                 while (rs.next()) {
-
-                   int servingSize = rs.getInt("servingSize");
+                    int servingSize = rs.getInt("servingSize");
+                    System.out.println("The serving size is " + servingSize);
                     int calories = rs.getInt("calories");
+                    System.out.println("The calories are " + calories);
                     int totalCarbohydrates = rs.getInt("totalCarbohydrates");
                     int totalFat = rs.getInt("totalFat");
                     int totalProtein = rs.getInt("totalProtein");
@@ -279,6 +281,9 @@ public class NutritionalChart {
                     return nutritionalChart;
                 }
             }
+        } catch (SQLException e){
+            e.printStackTrace();
+            throw new SQLException("Error fetching data for ID " + ID, e);
         }
         return null;
     }

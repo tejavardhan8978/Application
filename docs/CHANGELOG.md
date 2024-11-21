@@ -46,6 +46,7 @@
 - [Quintin] Implemented a sql lite database for data persistence for ingredients
 - [Quintin] Added some exception handling on the add to ingredients to require the user to only enter a name, expiry date,
 and quantity allowing them to skip the nutritional chart values and automatically assigning them to null if they do.
+- [Quintin] Deleted the singleton pattern and created a list for the table view straight from the db
 
 # Milestone 6
 - [Quintin] Added the methods to both recipes and ingredients to be able to search the database.

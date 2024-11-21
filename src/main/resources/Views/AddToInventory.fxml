@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="605.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.metrostate.Controller.AddIngredientToInventoryController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="605.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.metrostate.Controller.AddIngredientToInventoryController">
     <children>
         <Pane prefHeight="605.0" prefWidth="700.0" style="-fx-background-color: #fc9ea6;">
             <children>
@@ -69,7 +69,7 @@
             <TextField fx:id="proteinField" layoutX="376.0" layoutY="370.0" prefHeight="27.0" prefWidth="70.0" />
             <TextField fx:id="sodiumField" layoutX="494.0" layoutY="299.0" prefHeight="27.0" prefWidth="70.0" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#8cc4f8" height="133.0" layoutX="16.0" layoutY="453.0" stroke="BLACK" strokeType="INSIDE" width="259.0" />
-            <TextArea fx:id="itemDescriptionArea" layoutX="27.0" layoutY="481.0" prefHeight="91.0" prefWidth="235.0" />
+            <TextArea fx:id="itemDescriptionArea" layoutX="27.0" layoutY="481.0" prefHeight="91.0" prefWidth="235.0" wrapText="true" />
             <Label layoutX="27.0" layoutY="457.0" prefHeight="25.0" prefWidth="187.0" text="Add a Description of Your Item" />
             <Rectangle fx:id="setSaveButton" arcHeight="5.0" arcWidth="5.0" fill="#8cc4f8" height="45.0" layoutX="493.0" layoutY="460.0" onMouseClicked="#setSaveButton" stroke="BLACK" strokeType="INSIDE" width="175.0" />
             <Text layoutX="560.0" layoutY="489.0" onMouseClicked="#setSaveButton" strokeType="OUTSIDE" strokeWidth="0.0" text="SAVE" textAlignment="CENTER">

@@ -1,5 +1,12 @@
+
 package edu.metrostate.Model;
 
+import javafx.scene.control.ListView;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -9,26 +16,31 @@ public class IngredientList {
     private String name;
     private int listType;
     private static int lastId = 0;
+    private boolean isLoaded;
 
     public IngredientList() {
         this.ingredients = new ArrayList<>();
+        this.isLoaded = false;
+        lastId = 0;
     }
 
     public IngredientList(ArrayList<Ingredient> ingredients, String name, int listType) {
         this.ingredients = ingredients;
         this.name = name;
         this.listType = listType;
+        this.isLoaded = true;
     }
 
     public void addIngredient(Ingredient ingredient) {
         ingredient.setIngredientID(++lastId);
         ingredients.add(ingredient);
     }
+
     public void updateIngredient(Ingredient ingredient, int newQuantity, Date newDate){
         ingredient.UpdateIngredient(ingredient.getIngredientID(), newQuantity, newDate);
     }
 
-    public ArrayList<Ingredient> getIngredients() {
+    public ArrayList<Ingredient> getIngredients() throws SQLException {
         return ingredients;
     }
 
@@ -52,3 +64,4 @@ public class IngredientList {
         this.listType = listType;
     }
 }
+

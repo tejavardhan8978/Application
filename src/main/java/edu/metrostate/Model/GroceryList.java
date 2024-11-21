@@ -5,14 +5,17 @@ public class GroceryList {
     private String name;
     private String storeName;
     private int totalItemsInList;
-    private IngredientList list;
+    //private IngredientList list;
 
+    /*
     public GroceryList(String name, String storeName, int totalItemsInList, IngredientList list) {
         this.name = name;
         this.storeName = storeName;
         this.totalItemsInList = totalItemsInList;
         this.list = list;
     }
+
+     */
 
     public void addItemToCart(Ingredient ingredient) {
 
@@ -44,13 +47,5 @@ public class GroceryList {
 
     public void setTotalItemsInList(int totalItemsInList) {
         this.totalItemsInList = totalItemsInList;
-    }
-
-    public IngredientList getList() {
-        return list;
-    }
-
-    public void setList(IngredientList list) {
-        this.list = list;
     }
 }

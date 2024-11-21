@@ -41,7 +41,7 @@ public class AddIngredientToInventoryController {
     @FXML private TextArea fileNameDisplay;
 
     private File file;
-    IngredientList ingredientList;
+    //IngredientList ingredientList;
     private InventoryController inventoryController;
     private Parent root;
     private Stage stage;
@@ -68,12 +68,12 @@ public class AddIngredientToInventoryController {
             categoryOptions.add(category.name());
         }
         categoryListView.setItems(categoryOptions);
+
+        setInventoryController(inventoryController);
     }
 
-    // Set reference to InventoryController
-    public void setIngredientList(IngredientList ingredientList, InventoryController inventoryController) {
-        this.ingredientList = ingredientList;
-        this.inventoryController = inventoryController;
+    public void setInventoryController(InventoryController inventoryController) {
+        this.inventoryController = inventoryController;  // Properly set the inventory controller
     }
 
     //What allows the user to save an item
@@ -189,8 +189,10 @@ public class AddIngredientToInventoryController {
                 System.out.println("Item added to the db: " + item);
 
                 //Add the new item to the singleton list to be viewed
-                IngredientListSingleton.getInstance().addIngredientToList(item);
+                ObservableList<Ingredient> updatedIngredients = inventoryController.loadIngredientsFromDB();
+                inventoryController.updateTableView(updatedIngredients);
                 ReturnToInventoryHome(event);
+                Database.dbDisconnect(connection);
             }
         }catch (Exception e) {
             e.printStackTrace();
@@ -227,11 +229,11 @@ public class AddIngredientToInventoryController {
         Alert alert = new Alert(AlertType.ERROR);
         alert.setTitle("Input Error");
         alert.setHeaderText("Invalid Input in " + guiltyField);
-        alert.setHeaderText(message);
+        alert.setContentText(message);
         alert.showAndWait();
     }
 
-    public void setCancelButton(MouseEvent event) throws IOException {
+    public void setCancelButton(MouseEvent event) throws IOException, SQLException {
         clearFields();
         ReturnToInventoryHome(event);
     }
@@ -252,8 +254,8 @@ public class AddIngredientToInventoryController {
     }
 
     //Go back to the referenced Inventory Controller to display changes
-    public void ReturnToInventoryHome(MouseEvent event) throws IOException {
-        inventoryController.updateTableView();
+    public void ReturnToInventoryHome(MouseEvent event) throws IOException, SQLException {
+        //inventoryController.updateTableView();
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.close();
     }

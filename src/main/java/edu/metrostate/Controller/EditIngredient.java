@@ -2,8 +2,6 @@ package edu.metrostate.Controller;
 
 import edu.metrostate.Main;
 import edu.metrostate.Model.Ingredient;
-import edu.metrostate.Model.IngredientList;
-import edu.metrostate.Model.IngredientListSingleton;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -44,9 +42,6 @@ public class EditIngredient {
         String DateString = newExpiration.getText();
         LocalDate TempDate = LocalDate.parse(DateString);
         Date updateDate = java.sql.Date.valueOf(TempDate);
-
-        //IngredientList ingredientList = IngredientListSingleton.getInstance();
-        //ingredientList.updateIngredient(tempIngredient, tempQuantity, updateDate);
 
         root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("/Views/Inventory-Home.fxml")));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();

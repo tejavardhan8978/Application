@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="615.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.metrostate.Controller.AddToRecipeController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="615.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.metrostate.Controller.AddToRecipeController">
    <children>
       <Pane prefHeight="615.0" prefWidth="700.0" style="-fx-background-color: #fc9ea6;">
          <children>
@@ -75,9 +75,9 @@
       <Label layoutX="100.0" layoutY="480.0" prefHeight="17.0" prefWidth="156.0" text="min" textAlignment="CENTER" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#8cc4f8" height="167.0" layoutX="170.0" layoutY="353.0" stroke="BLACK" strokeType="INSIDE" width="288.0" />
       <Label layoutX="185.0" layoutY="359.0" prefHeight="17.0" prefWidth="156.0" text="Directions " textAlignment="CENTER" />
-      <TextArea fx:id="directionsArea" layoutX="185.0" layoutY="380.0" prefHeight="125.0" prefWidth="259.0" />
+      <TextArea fx:id="directionsArea" layoutX="185.0" layoutY="380.0" prefHeight="125.0" prefWidth="259.0" wrapText="true" />
       <Label layoutX="495.0" layoutY="359.0" prefHeight="17.0" prefWidth="156.0" text="Ingredients" textAlignment="CENTER" />
-      <TextArea fx:id="ingredientsField" layoutX="495.0" layoutY="380.0" prefHeight="125.0" prefWidth="175.0" />
+      <TextArea fx:id="ingredientsField" layoutX="495.0" layoutY="380.0" prefHeight="125.0" prefWidth="175.0" wrapText="true" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#8cc4f8" height="45.0" layoutX="509.0" layoutY="540.0" onMouseClicked="#setCancelButton" stroke="BLACK" strokeType="INSIDE" width="175.0" />
       <Text layoutX="548.0" layoutY="570.0" onMouseClicked="#setCancelButton" strokeType="OUTSIDE" strokeWidth="0.0" text="CANCEL" textAlignment="CENTER" wrappingWidth="98.55336695580445">
          <font>

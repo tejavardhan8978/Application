@@ -76,12 +76,8 @@ public class RecipeListModel {
                     int primaryIngredientID = resultSet.getInt("primaryIngredientID");
                     String ingredients = resultSet.getString("ingredients");
                     String instruction = resultSet.getString("instructions");
-                    //nutritionID
                     int nutritionID = resultSet.getInt("nutritionID");
                     int servings = resultSet.getInt("servings");
-                    //servings
-                    //Cuisine cuisine = Cuisine.getCuisineByID(cuisineID);
-                    //Ingredient primaryIngredient = Ingredient.getIngredientByID(primaryIngredientID);
 
                     Recipe recipe = new Recipe.RecipeBuilder()
                             .setRecipeID(recipeID)
@@ -94,8 +90,6 @@ public class RecipeListModel {
                             .setInstruction(instruction)
                             .setNutritionID(nutritionID)
                             .setServings(servings)
-                            //.setCuisine(cuisine)
-                            //.setPrimaryIngredient(primaryIngredient)
                             .build();
                     this.addRecipe(recipe);
 
