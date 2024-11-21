@@ -13,7 +13,6 @@ import java.util.Date;
 import java.util.ResourceBundle;
 
 public class ChangeQuantityInventoryModalController implements Initializable {
-
     private Stage changeQuantityInventoryModalstage;
     private Ingredient ingredient;
 
@@ -21,11 +20,9 @@ public class ChangeQuantityInventoryModalController implements Initializable {
     @FXML private TextField inStock;
     @FXML private TextField addQuantity;
 
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("Inventory Quantity modal is initialized");
-
     }
 
     public void handleSaveButton(MouseEvent event) {
@@ -58,6 +55,4 @@ public class ChangeQuantityInventoryModalController implements Initializable {
         inStock.setText(String.valueOf(ingredient.getQuantity()));
         System.out.println(ingredient + "in setIngredient in change quantity inventory modal controller");
     }
-
-
 }

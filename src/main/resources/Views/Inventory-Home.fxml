@@ -10,11 +10,10 @@
 
 <AnchorPane prefHeight="650.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.metrostate.Controller.InventoryController">
     <children>
-        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d6b4fc" height="100.0" layoutX="38.0" layoutY="33.0" onMouseClicked="#switchToHome" stroke="BLACK" strokeType="INSIDE" width="100.0" AnchorPane.leftAnchor="38.0" AnchorPane.topAnchor="33.0" />
-        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d6b4fc" height="100.0" layoutX="300.0" layoutY="34.0" onMouseClicked="#switchToEditIngredient" stroke="BLACK" strokeType="INSIDE" width="100.0" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="34.0" />
-        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d6b4fc" height="100.0" layoutX="169.0" layoutY="33.0" stroke="BLACK" strokeType="INSIDE" width="100.0" AnchorPane.rightAnchor="831.0" AnchorPane.topAnchor="33.0" />
-        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffc94096" height="100.0" layoutX="45.0" layoutY="173.0" stroke="BLACK" strokeType="INSIDE" width="230.0" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="170.0" />
-        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d6b4fc" height="310.0" layoutX="45.0" layoutY="292.0" stroke="BLACK" strokeType="INSIDE" width="230.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="300.0" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d6b4fc" height="100.0" layoutX="40.0" layoutY="57.0" onMouseClicked="#switchToHome" stroke="BLACK" strokeType="INSIDE" width="230.0" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d6b4fc" height="100.0" layoutX="40.0" layoutY="504.0" onMouseClicked="#switchToEditIngredient" stroke="BLACK" strokeType="INSIDE" width="230.0" AnchorPane.leftAnchor="38.0" AnchorPane.topAnchor="510.0" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d6b4fc" height="100.0" layoutX="40.0" layoutY="355.0" stroke="BLACK" strokeType="INSIDE" width="230.0" AnchorPane.rightAnchor="832.0" AnchorPane.topAnchor="359.0" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffc94096" height="100.0" layoutX="40.0" layoutY="206.0" stroke="BLACK" strokeType="INSIDE" width="230.0" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="206.0" />
         <TableView fx:id="inventoryTable" layoutX="290.0" layoutY="180.0" onMouseClicked="#openIngredientModal" prefHeight="440.0" prefWidth="760.0" AnchorPane.bottomAnchor="40.0" AnchorPane.rightAnchor="40.0">
             <columns>
                 <TableColumn fx:id="idColumn" prefWidth="47.0" text="ID" />
@@ -26,27 +25,27 @@
                 <TableColumn fx:id="category" prefWidth="100.0" text="CATEGORY" />
             </columns>
         </TableView>
-        <Text layoutX="49.0" layoutY="229.0" strokeType="OUTSIDE" strokeWidth="0.0" text="INVENTORY" textAlignment="CENTER" wrappingWidth="212.0">
+        <Text layoutX="49.0" layoutY="264.0" strokeType="OUTSIDE" strokeWidth="0.0" text="INVENTORY" textAlignment="CENTER" wrappingWidth="212.0">
             <font>
                 <Font name="System Bold" size="24.0" />
             </font>
         </Text>
-        <Text layoutX="54.0" layoutY="89.0" onMouseClicked="#switchToHome" strokeType="OUTSIDE" strokeWidth="0.0" text="HOME" textAlignment="CENTER">
+        <Text layoutX="121.0" layoutY="115.0" onMouseClicked="#switchToHome" strokeType="OUTSIDE" strokeWidth="0.0" text="HOME" textAlignment="CENTER">
             <font>
                 <Font name="System Bold" size="24.0" />
             </font>
         </Text>
-        <Text layoutX="328.0" layoutY="94.0" onMouseClicked="#switchToEditIngredient" strokeType="OUTSIDE" strokeWidth="0.0" text="EDIT" textAlignment="CENTER">
+        <Text layoutX="129.0" layoutY="569.0" onMouseClicked="#switchToEditIngredient" strokeType="OUTSIDE" strokeWidth="0.0" text="EDIT" textAlignment="CENTER">
             <font>
                 <Font name="System Bold" size="24.0" />
             </font>
         </Text>
-        <Text layoutX="169.0" layoutY="61.0" onMouseClicked="#switchToAddIngredient" strokeType="OUTSIDE" strokeWidth="0.0" text="ADD NEW ITEM" textAlignment="CENTER" wrappingWidth="100.0">
+        <Text layoutX="70.0" layoutY="413.0" onMouseClicked="#switchToAddIngredient" strokeType="OUTSIDE" strokeWidth="0.0" text="ADD NEW ITEM" textAlignment="CENTER" wrappingWidth="166.0">
             <font>
                 <Font name="System Bold" size="24.0" />
             </font>
         </Text>
-      <TextField fx:id="searchBar" layoutX="428.0" layoutY="47.0" prefHeight="74.0" prefWidth="632.0" promptText="Search By Name">
+      <TextField fx:id="searchBar" layoutX="300.0" layoutY="57.0" prefHeight="74.0" prefWidth="760.0" promptText="Search By Name">
          <font>
             <Font size="24.0" />
          </font>

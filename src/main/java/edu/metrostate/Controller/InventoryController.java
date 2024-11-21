@@ -11,7 +11,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -57,7 +56,6 @@ public class InventoryController implements Initializable {
 
         updateTableView();
         inventoryTable.refresh();
-        // Add this line in your initialize method to bind the search to the search bar
         searchBar.textProperty().addListener((observable, oldValue, newValue) -> onSearch());
         System.out.println("Initialize end - Inventory controller");
     }
@@ -140,7 +138,6 @@ public class InventoryController implements Initializable {
 
     private void performIngredientSearch(String searchTerm) {
         String query = "SELECT * FROM IngredientTable WHERE name LIKE ?";
-
         try (Connection conn = Database.getConnection()) {
             try (PreparedStatement stmt = conn.prepareStatement(query)) {
                 // Set the search term to filter by ingredient name

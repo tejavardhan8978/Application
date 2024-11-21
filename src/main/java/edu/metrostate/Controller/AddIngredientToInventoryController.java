@@ -224,7 +224,7 @@ public class AddIngredientToInventoryController {
     }
 
 
-    public void displayErrorMessage(String guiltyField, String message){
+    public void displayErrorMessage(String guiltyField, String message) {
         Alert alert = new Alert(AlertType.ERROR);
         alert.setTitle("Input Error");
         alert.setHeaderText("Invalid Input in " + guiltyField);
@@ -253,7 +253,7 @@ public class AddIngredientToInventoryController {
     }
 
     //Go back to the referenced Inventory Controller to display changes
-    public void ReturnToInventoryHome(MouseEvent event) throws IOException{
+    public void ReturnToInventoryHome(MouseEvent event) throws IOException {
         inventoryController.updateTableView();
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.close();
@@ -271,8 +271,6 @@ public class AddIngredientToInventoryController {
 
         if (file != null) {
             fileNameDisplay.setText(file.getPath());
-
         }
     }
-
 }

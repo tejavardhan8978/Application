@@ -1,5 +1,4 @@
 # Phase1
-We have decided to implement the two functional requirements.
 
 ## Add to the Inventory
 Our application is satisfying the functional requirement by utilizing 2 views, 2 controllers, and 3 models. 
@@ -28,3 +27,24 @@ item is created and then passed to the RecipeController to be added to the list
 2) Select the option to add a new recipe, leading to a new view.
 3) Enter the required information and press Save (You can also hit cancel to abort.)
 4) Your recipe should be in your recipe table now.
+
+# Phase 2
+
+## Delete From Recipes
+
+## Edit/Delete from Ingredients
+
+# Phase 3
+
+## Search the Database
+Our application is satisfying the functional requirement by first creating a sql query, then get a connection to the database
+then gathering the information that is similar to the search query and adding it to a the recipeTable results. In order 
+to implement this we had to ensure that the fields that were allowed to null were handled properly when trying to gather 
+them from the database. 
+
+### Process
+1) Launch the application and select either recipes or inventory
+2) Find the search bar and search for something by the name
+3) As you keep entering characters your search will become more accurate
+
+## Check Inventory for Recipe Ingredients

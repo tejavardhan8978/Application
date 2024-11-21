@@ -18,8 +18,6 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Objects;
 
-
-
 public class EditIngredient {
     @FXML
     private TextField addedQuantity;
@@ -35,8 +33,8 @@ public class EditIngredient {
         stage.setScene(scene);
         stage.show();
     }
-    public void saveButton(MouseEvent event) throws IOException {
 
+    public void saveButton(MouseEvent event) throws IOException {
         Ingredient tempIngredient = InventoryController.tempIngredient;
         String quantityString = addedQuantity.getText();
         int quantity = Integer.parseInt(quantityString);
