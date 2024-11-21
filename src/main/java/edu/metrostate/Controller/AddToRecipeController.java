@@ -135,6 +135,17 @@ public class AddToRecipeController {
             }
 
             Integer primaryIngredientID = Integer.valueOf(primaryIngredientField.getText());
+
+//            if (!primaryIngredientName.isEmpty()) {
+//                primaryIngredient = Ingredient.getIngredientByName((primaryIngredientName));
+//                if (primaryIngredient != null) {
+//                    recipe.setPrimaryIngredientID(primaryIngredient.getIngredientID());
+//                    recipe.setPrimaryIngredient(primaryIngredient);
+//                } else {
+//                    recipe.setPrimaryIngredientID(0);
+//                    recipe.setPrimaryIngredient(null);
+//                }
+
             if (primaryIngredientID == 0) {
                 recipe.setPrimaryIngredientID(0);
                 recipe.setPrimaryIngredient(getIngredientByID(0));
