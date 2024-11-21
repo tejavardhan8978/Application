@@ -8,30 +8,25 @@ public class Database {
 
     // Method to establish a connection to the database
     public static Connection getConnection() {
-       Connection connection = null;
         try {
-            connection = DriverManager.getConnection(connectionString);
-            System.out.println("Connected to database!");
+            Connection connection = DriverManager.getConnection(connectionString);
             // Create the table if it doesn't exist
             Ingredient.createTable(connection);
             NutritionalChart.createTable(connection);
             Recipe.createTable(connection);
             Cuisine.createTable(connection);
+            return connection;
         } catch (SQLException e) {
-            System.out.println("Connection error: " + e.getMessage());
             return null;
         }
-        return connection;
     }
 
-    public static void dbDisconnect(Connection connection) throws SQLException {
+    public static void dbDisconnect(Connection conn) throws SQLException {
         try {
-            if (connection != null && !connection.isClosed()) {
-                connection.close();
-                System.out.println("Database connection closed.");
+            if (conn != null && !conn.isClosed()) {
+                conn.close();
             }
         } catch (Exception e) {
-            System.out.println("Error closing connection: " + e.getMessage());
             throw e;
         }
     }

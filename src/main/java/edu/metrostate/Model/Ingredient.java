@@ -2,6 +2,7 @@ package edu.metrostate.Model;
 
 import java.sql.ResultSet;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Date;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -127,6 +128,23 @@ public class Ingredient {
         this.image = image;
     }
 
+    @Override
+    public String toString() {
+        return "Ingredient{" +
+                "ingredientID=" + ingredientID +
+                ", name='" + name + '\'' +
+                ", expiryDate=" + expiryDate +
+                ", nutritionID=" + nutritionID +
+                ", nutrition=" + nutrition +
+                ", primaryMacroNutrient=" + primaryMacroNutrient +
+                ", storage=" + storage +
+                ", quantity=" + quantity +
+                ", category=" + category +
+                ", description='" + description + '\'' +
+                ", image=" + image +
+                '}';
+    }
+
     //This will be the method to update quantity as more ingredients are bought
     public boolean UpdateIngredient(int ingredientID, int NewQuantity, Date NewDate){
         this.ingredientID = ingredientID;
@@ -150,6 +168,7 @@ public class Ingredient {
                 ");";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.execute();
+            Database.dbDisconnect(connection);
         }
     }
 
@@ -211,10 +230,10 @@ public class Ingredient {
         String sql = "SELECT * FROM IngredientTable WHERE ingredientID = ? ";
         try (Connection connection = Database.getConnection()) {
             assert connection != null;
-            try (PreparedStatement stmt = connection.prepareStatement(sql)
-            ) {
+            try (PreparedStatement stmt = connection.prepareStatement(sql)) {
                 stmt.setInt(1, ID);
                 ResultSet rs = stmt.executeQuery();
+                Database.dbDisconnect();
                 while (rs.next()) {
                     int ingredientID = rs.getInt("ingredientID");
                     String name = rs.getString("name");
@@ -233,7 +252,7 @@ public class Ingredient {
                         try {
                             primaryMacroNutrient = MacroNutrient.valueOf(primaryMacroNutrientString.toUpperCase());
                         } catch (IllegalArgumentException e) {
-                            // Handle invalid enum value
+                            e.printStackTrace();
                             System.out.println("Invalid primaryMacroNutrient value: " + primaryMacroNutrientString);
                         }
                     }
@@ -276,7 +295,83 @@ public class Ingredient {
         } catch (SQLException e) {
             e.printStackTrace(); // Handle exceptions appropriately
         }
-        return null;
+    return null;
+    }
+
+
+    public static ArrayList<Recipe> getIngredientByID(ArrayList<Recipe> recipeArrayList) {
+        try (Connection connection = Database.getConnection()) {
+            assert connection != null;
+
+            for (Recipe recipe : recipeArrayList) {
+                int ID = recipe.getPrimaryIngredientID();
+
+                String sql = "SELECT * FROM IngredientTable " +
+                        "WHERE ingredientID = ? ";
+
+                try (PreparedStatement stmt = connection.prepareStatement(sql)
+                ) {
+                    stmt.setInt(1, ID);
+                    ResultSet rs = stmt.executeQuery();
+                    Database.dbDisconnect();
+                    while (rs.next()) {
+                        int ingredientID = rs.getInt("ingredientID");
+                        String name = rs.getString("name");
+                        Date expiryDate = rs.getDate("expiryDate");
+                        int quantity = rs.getInt("quantity");
+
+                        String primaryMacroNutrientString = rs.getString("primaryMacroNutrient");
+                        MacroNutrient primaryMacroNutrient = null;
+                        if (primaryMacroNutrientString != null) {
+                            try {
+                                primaryMacroNutrient = MacroNutrient.valueOf(primaryMacroNutrientString.toUpperCase());
+                            } catch (IllegalArgumentException e) {
+                                e.printStackTrace();
+                                System.out.println("Invalid primaryMacroNutrient value: " + primaryMacroNutrientString);
+                            }
+                        }
+
+                        String storageString = rs.getString("storage");
+                        Storage storage = null;
+                        if (storageString != null) {
+                            try {
+                                storage = Storage.valueOf(storageString.toUpperCase());
+                            } catch (IllegalArgumentException e) {
+                                e.printStackTrace();
+                                System.out.println("invalid storage value: " + storageString);
+                            }
+                        }
+
+                        String categoryString = rs.getString("category");
+                        Category category = null;
+                        if (categoryString != null) {
+                            try {
+                                category = Category.valueOf(categoryString.toUpperCase());
+                            } catch (IllegalArgumentException e) {
+                                e.printStackTrace();
+                                System.out.println("Invalid category value: " + categoryString);
+                            }
+                        }
+
+                        //Creates new objects of items through a simpler constructor for user viewing
+                        Ingredient ingredient = new Ingredient.Builder()
+                                .ingredientID(ingredientID)
+                                .name(name)
+                                .expiryDate(expiryDate)
+                                .quantity(quantity)
+                                .primaryMacroNutrient(primaryMacroNutrient)
+                                .storage(storage)
+                                .category(category)
+                                .build();
+                        recipe.setPrimaryIngredient(ingredient);
+                    }
+                }
+            }
+            } catch(SQLException e){
+                e.printStackTrace(); // Handle exceptions appropriately
+            }
+
+        return recipeArrayList;
     }
 
     //Updating the keys after insertion

@@ -1,6 +1,7 @@
 package edu.metrostate.Model;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.stream.Stream;
 
@@ -18,7 +19,7 @@ public class NutritionalChart {
     private Integer dietaryFiber;
     private Integer cholesterol;
 
-    private NutritionalChart(Builder builder){
+    private NutritionalChart(Builder builder) {
         this.nutritionID = builder.nutritionID;
         this.ingredientID = builder.ingredientID;
         this.servingSize = builder.servingSize;
@@ -32,23 +33,23 @@ public class NutritionalChart {
         this.cholesterol = builder.cholesterol;
     }
 
-    public static Builder builder(){
+    public static Builder builder() {
         return new Builder();
     }
 
-    public void setIngredientID(int ingredientID){
+    public void setIngredientID(int ingredientID) {
         this.ingredientID = ingredientID;
     }
 
-    public Integer getIngredientID(){
+    public Integer getIngredientID() {
         return ingredientID;
     }
 
-    public void setNutritionID(int nutritionID){
+    public void setNutritionID(int nutritionID) {
         this.nutritionID = nutritionID;
     }
 
-    public Integer getNutritionID(){
+    public Integer getNutritionID() {
         return nutritionID;
     }
 
@@ -141,47 +142,7 @@ public class NutritionalChart {
                 ");";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.execute();
-        }
-
-        /*
-        Add a blank nutritional chart at the beginning of the chart with value 0.
-        This blank can be used to reference when user does not provide any values for nutritional chart.
-         */
-        String insertBlank = "INSERT INTO NutritionalChart (" +
-                "ingredientID, " +
-                "servingSize, " +
-                "calories, " +
-                "totalCarbohydrates, " +
-                "totalFat, " +
-                "totalProtein, " +
-                "totalSodium, " +
-                "totalSugars, " +
-                "dietaryFiber, " +
-                "cholesterol) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        try (PreparedStatement stmt = connection.prepareStatement(insertBlank, PreparedStatement.RETURN_GENERATED_KEYS)) {
-            stmt.setObject(1, 0, Types.INTEGER);
-            stmt.setObject(2, 0, Types.INTEGER);
-            stmt.setObject(3, 0, Types.INTEGER);
-            stmt.setObject(4, 0, Types.INTEGER);
-            stmt.setObject(5, 0, Types.INTEGER);
-            stmt.setObject(6, 0, Types.INTEGER);
-            stmt.setObject(7, 0, Types.INTEGER);
-            stmt.setObject(8, 0, Types.INTEGER);
-            stmt.setObject(9, 0, Types.INTEGER);
-            stmt.setObject(10, 0, Types.INTEGER);
-
-            stmt.execute();
-            try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
-                if (generatedKeys.next()) {
-                    Integer nutritionID = generatedKeys.getInt(1);
-                    if (nutritionID == 0) {
-                        System.out.println("Blank nutritional chart has been successfully added..!");
-                    }
-                }
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+            Database.dbDisconnect();
         }
     }
 
@@ -211,6 +172,7 @@ public class NutritionalChart {
             stmt.setObject(10, this.cholesterol, Types.INTEGER);
 
             stmt.execute();
+            Database.dbDisconnect();
 
             try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
@@ -233,7 +195,7 @@ public class NutritionalChart {
     }
 
     public boolean checkAllValuesExist() {
-        boolean isFilled = Stream.of(this.getNutritionID(), this.getServingSize(),
+        boolean isFilled = Stream.of(this.getServingSize(),
                 this.getCalories(),
                 this.getTotalCarbohydrates(),
                 this.getTotalFat(),
@@ -253,6 +215,7 @@ public class NutritionalChart {
             try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
                 preparedStatement.setInt(1, ID);
                 ResultSet rs = preparedStatement.executeQuery();
+                Database.dbDisconnect();
 
                 while (rs.next()) {
                     int servingSize = rs.getInt("servingSize");
@@ -288,20 +251,63 @@ public class NutritionalChart {
         return null;
     }
 
+    public static ArrayList<Recipe> getNutritionalChartByID(ArrayList<Recipe> recipeArrayList) throws SQLException {
+        try (Connection connection = Database.getConnection()) {
+
+            for (Recipe recipe : recipeArrayList) {
+                int ID = recipe.getNutritionID();
+                String sql = "SELECT * FROM NutritionalChart WHERE nutritionID = ?";
+
+                assert connection != null;
+                try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                    preparedStatement.setInt(1, ID);
+                    ResultSet rs = preparedStatement.executeQuery();
+                    Database.dbDisconnect();
+
+                    while (rs.next()) {
+
+                        int servingSize = rs.getInt("servingSize");
+                        int calories = rs.getInt("calories");
+                        int totalCarbohydrates = rs.getInt("totalCarbohydrates");
+                        int totalFat = rs.getInt("totalFat");
+                        int totalProtein = rs.getInt("totalProtein");
+                        int totalSodium = rs.getInt("totalSodium");
+                        int totalSugars = rs.getInt("totalSugars");
+                        int dietaryFiber = rs.getInt("dietaryFiber");
+                        int cholesterol = rs.getInt("cholesterol");
+
+                        NutritionalChart nutritionalChart = new Builder()
+                                .servingSize(servingSize)
+                                .calories(calories)
+                                .totalCarbohydrates(totalCarbohydrates)
+                                .totalFat(totalFat)
+                                .totalProtein(totalProtein)
+                                .totalSodium(totalSodium)
+                                .totalSugars(totalSugars)
+                                .dietaryFiber(dietaryFiber)
+                                .cholesterol(cholesterol)
+                                .build();
+                        recipe.setNutrition(nutritionalChart);
+                    }
+                }
+            }
+        }
+        return recipeArrayList;
+    }
 
 
     public static class Builder {
         private Integer nutritionID;
-        private Integer  ingredientID;
-        private Integer  servingSize;
-        private Integer  calories;
-        private Integer  totalCarbohydrates;
-        private Integer  totalFat;
-        private Integer  totalProtein;
-        private Integer  totalSodium;
-        private Integer  totalSugars;
-        private Integer  dietaryFiber;
-        private Integer  cholesterol;
+        private Integer ingredientID;
+        private Integer servingSize;
+        private Integer calories;
+        private Integer totalCarbohydrates;
+        private Integer totalFat;
+        private Integer totalProtein;
+        private Integer totalSodium;
+        private Integer totalSugars;
+        private Integer dietaryFiber;
+        private Integer cholesterol;
 
         public Builder nutritionID(Integer nutritionID){
             this.nutritionID = nutritionID;
