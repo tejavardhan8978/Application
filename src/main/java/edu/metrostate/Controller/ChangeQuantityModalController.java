@@ -79,6 +79,7 @@ public class ChangeQuantityModalController implements Initializable {
         System.out.println("Close add to quantity modal");
         this.changeQuantityModalStage.close();
         ingredientPopupController.refreshIngredientStock();
+
     }
 
     public void setChangeQuantityModalStage(Stage stage) {

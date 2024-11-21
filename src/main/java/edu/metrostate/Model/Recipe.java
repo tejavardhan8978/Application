@@ -9,21 +9,34 @@ import java.util.stream.Stream;
 
 public class Recipe {
 
-    private int recipeID;
+    private int recipeID;//
     private String name;
-    private String instructions;
+    //object
+
+    private String instructions;//
+
     private String description;
-    private int cookTime;
-    private int servings;
+    private int cookTime;//
+    private int servings;//
+    //ENUM
+
+
+    //nutrition object
     private NutritionalChart nutrition;
-    private int nutritionID;
+    private int nutritionID;//
+
+
+
     private Cuisine cuisine;
-    private int cuisineID;
+    private int cuisineID;//
+
     private Ingredient primaryIngredient;
-    private int primaryIngredientID;
+    private int primaryIngredientID;//
 
     //LEAVING AS STRING FOR NOW. CHANGE TO LIST LATER AND INCORPORATE ADDING INGREDIENT TO RECIPE LIST.
-    private String ingredients;
+    private String ingredients;//
+
+
 
     //default constructor
     public Recipe() {
@@ -178,9 +191,9 @@ public class Recipe {
     public static void createTable(Connection connection) throws SQLException {
         String sql = "CREATE TABLE IF NOT EXISTS RecipeTable (" +
                 "recipeID INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "name TEXT," +
+                "name TEXT" +
                 "cuisineID INTEGER, " +
-                "description TEXT," +
+                "description TEXT" +
                 "cookTime INTEGER, " +
                 "servings INTEGER, " +
                 "primaryIngredientID INTEGER, " +
@@ -193,7 +206,6 @@ public class Recipe {
                 ");";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.execute();
-            Database.dbDisconnect();
         }
     }
 

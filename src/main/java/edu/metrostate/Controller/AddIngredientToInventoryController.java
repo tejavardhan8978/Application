@@ -135,7 +135,6 @@ public class AddIngredientToInventoryController {
             Category selectedCategory = getEnumValue(categoryListView, Category.class, "Category");
 
             //We try to create a connection with the database through the database class
-            System.out.println("get connection - set save button: add ingredient to inventory controller");
             try (Connection connection = Database.getConnection()) {
                 // Create the nutritional chart object
                 nutrition = new NutritionalChart.Builder()

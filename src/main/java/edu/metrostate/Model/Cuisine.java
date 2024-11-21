@@ -1,7 +1,6 @@
 package edu.metrostate.Model;
 
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.Objects;
 import java.util.stream.Stream;
 
@@ -51,7 +50,27 @@ public class Cuisine {
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.execute();
-            Database.dbDisconnect();
+        }
+
+        String insertBlank = "INSERT INTO CuisineTable(" +
+                "name," +
+                "country)" +
+                "VALUES (?, ?)";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(insertBlank, PreparedStatement.RETURN_GENERATED_KEYS)) {
+            preparedStatement.setString(1, "PANGAEA");
+            preparedStatement.setString(2, "PANGAEA");
+
+            preparedStatement.execute();
+            try (ResultSet generatedKey = preparedStatement.getGeneratedKeys()) {
+                if (generatedKey.next()) {
+                    Integer cuisineID = generatedKey.getInt(1);
+                    if (cuisineID == 0) {
+                        System.out.println("Blank cuisine has been successfully added.");
+                    }
+                }
+            }
+            } catch (SQLException exception) {
+            exception.printStackTrace();
         }
 
     }
@@ -67,16 +86,17 @@ public class Cuisine {
             preparedStatement.setString(2, this.country);
 
             preparedStatement.execute();
-            Database.dbDisconnect();
             try (ResultSet generatedKey = preparedStatement.getGeneratedKeys()) {
                 if (generatedKey.next()) {
                     this.cuisineID = generatedKey.getInt(1);
                     return cuisineID;
                 }
             }
+
         } catch (SQLException exception) {
         exception.printStackTrace();
         }
+
         return -1;
     }
 
@@ -87,48 +107,17 @@ public class Cuisine {
             try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
                 preparedStatement.setInt(1, ID);
                 ResultSet rs = preparedStatement.executeQuery();
-                Database.dbDisconnect();
 
                 while (rs.next()) {
+
                     String name = rs.getString("name");
                     String country = rs.getString("country");
 
                     return new Cuisine(name, country);
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
             }
         }
         return null;
-    }
-
-    public static ArrayList<Recipe> getCuisineByID(ArrayList<Recipe> recipeArrayList) throws SQLException {
-        try (Connection connection = Database.getConnection()) {
-        for (Recipe recipe : recipeArrayList) {
-            int ID = recipe.getCuisineID();
-
-            String sql = "SELECT * FROM CuisineTable WHERE cuisineID = ?";
-
-            assert connection != null;
-            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-                preparedStatement.setInt(1, ID);
-                ResultSet rs = preparedStatement.executeQuery();
-                Database.dbDisconnect();
-
-                while (rs.next()) {
-
-                    String name = rs.getString("name");
-                    String country = rs.getString("country");
-
-                    recipe.setCuisine(new Cuisine(name, country));
-
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        }
-        return recipeArrayList;
     }
 
     public boolean checkAllValuesExist() {

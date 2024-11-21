@@ -39,8 +39,8 @@ public class IngredientPopupController implements Initializable {
     @FXML private Text ingredientCategory;
     @FXML private Text ingredientDescription;
     @FXML private TextField ingredientStock;
-//    @FXML private TableView ingredientNutritionChartTable1;
-//    @FXML private TableView ingredientNutritionChartTable2;
+    @FXML private TableView ingredientNutritionChartTable1;
+    @FXML private TableView ingredientNutritionChartTable2;
     @FXML private TableView ingredientRecipeTable;
     private Stage inventoryControllerStage;
     private Ingredient ingredient;
@@ -54,7 +54,11 @@ public class IngredientPopupController implements Initializable {
     @FXML private Text dietaryFiberColumn;
     @FXML private Text cholesterolColumn;
     @FXML private Text servingSizeColumn;
+
     @FXML private ImageView imageView;
+
+
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -91,6 +95,7 @@ public class IngredientPopupController implements Initializable {
     public void setIngredientModalDetails(Ingredient ingredient) {
         //saving ingredient as a local variable
         setIngredient(ingredient);
+        System.out.println(ingredient + "in ingredientpopup controller");
         //setting details of all text fields
         this.ingredientTitle.setText(ingredient.getName());
         this.ingredientCategory.setText(ingredient.getCategory() != null ? ingredient.getCategory().name() : "No Category");

@@ -55,18 +55,13 @@ public class RecipeListModel {
 
 
     public void loadRecipesFromDB() throws SQLException {
-        if (!this.recipes.isEmpty()) {
-            this.recipes.clear();
-        }
         String sql = "SELECT * FROM RecipeTable";
         try (Connection connection = Database.getConnection()) {
             assert connection != null;
-
+            System.out.println(connection + "trying to get connection .............................");
             try (PreparedStatement preparedStatement = connection.prepareStatement(sql);
                 ResultSet resultSet = preparedStatement.executeQuery()) {
-
                 while (resultSet.next()) {
-
                     int recipeID = resultSet.getInt("recipeID");
                     String name = resultSet.getString("name");
                     int cuisineID = resultSet.getInt("cuisineID");
@@ -75,8 +70,12 @@ public class RecipeListModel {
                     int primaryIngredientID = resultSet.getInt("primaryIngredientID");
                     String ingredients = resultSet.getString("ingredients");
                     String instruction = resultSet.getString("instructions");
+                    //nutritionID
                     int nutritionID = resultSet.getInt("nutritionID");
                     int servings = resultSet.getInt("servings");
+                    //servings
+                    //Cuisine cuisine = Cuisine.getCuisineByID(cuisineID);
+                    //Ingredient primaryIngredient = Ingredient.getIngredientByID(primaryIngredientID);
 
                     Recipe recipe = new Recipe.RecipeBuilder()
                             .setRecipeID(recipeID)
@@ -89,6 +88,8 @@ public class RecipeListModel {
                             .setInstruction(instruction)
                             .setNutritionID(nutritionID)
                             .setServings(servings)
+                           // .setCuisine(cuisine)
+                            //.setPrimaryIngredient(primaryIngredient)
                             .build();
                     this.addRecipe(recipe);
 
@@ -99,8 +100,16 @@ public class RecipeListModel {
     }
 
     public void retrieveRestOfData() throws SQLException {
-        this.recipes = Cuisine.getCuisineByID(this.recipes);
-        this.recipes = Ingredient.getIngredientByID(this.recipes);
-        this.recipes = NutritionalChart.getNutritionalChartByID(this.recipes);
+        for (Recipe tempRecipe : this.recipes) {
+            Cuisine tempCuisine = Cuisine.getCuisineByID(tempRecipe.getCuisineID());
+            tempRecipe.setCuisine(tempCuisine);
+
+            Ingredient tempIngredient = Ingredient.getIngredientByID(tempRecipe.getPrimaryIngredientID());
+            tempRecipe.setPrimaryIngredient(tempIngredient);
+
+            NutritionalChart tempChart = NutritionalChart.getNutritionalChartByID(tempRecipe.getNutritionID());
+            tempRecipe.setNutrition(tempChart);
+
+        }
     }
 }
