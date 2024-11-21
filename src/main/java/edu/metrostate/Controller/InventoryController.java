@@ -30,7 +30,6 @@ public class InventoryController implements Initializable {
     Scene scene;
     Parent root;
     IngredientList ingredientList;
-    private boolean initialInventoryFlag = false;
     public static Ingredient tempIngredient;
 
     @FXML private TableView<Ingredient> inventoryTable;
@@ -91,7 +90,7 @@ public class InventoryController implements Initializable {
             FXMLLoader loader = new FXMLLoader(Main.class.getResource("/Views/ChangeQuantityInventoryModal.fxml"));
             Parent root = loader.load();
             // Get the controller
-            EditIngredient controller = loader.getController();
+            //EditIngredient controller = loader.getController();
             // Switch to the new scene
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
@@ -102,7 +101,6 @@ public class InventoryController implements Initializable {
 
     public void updateTableView() {
         System.out.println("updateTableView - inventoryController");
-        System.out.println("Ingredients loaded: " + ingredientList.getIngredients().size());
         ObservableList<Ingredient> items = FXCollections.observableArrayList(ingredientList.getIngredients());
         inventoryTable.setItems(items);
         inventoryTable.refresh();
@@ -112,26 +110,20 @@ public class InventoryController implements Initializable {
         if (event.getClickCount() == 2) {
             Ingredient tempIngredient = inventoryTable.getSelectionModel().getSelectedItem();
             if (tempIngredient != null) {
-                System.out.println(tempIngredient);
-
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Views/IngredientDetailedModal.fxml"));
-
                 AnchorPane ingredientModal = fxmlLoader.load();
                 IngredientPopupController ingredientPopupController = fxmlLoader.getController();
                 ingredientPopupController.setInventoryController(this);
                 ingredientPopupController.setIngredientModalDetails(tempIngredient);
-
 
                 stage = new Stage();
                 scene = new Scene(ingredientModal);
                 stage.setScene(scene);
                 stage.setTitle("Ingredient Popup");
                 stage.initModality(Modality.APPLICATION_MODAL);
-                System.out.println(this);
 
                 stage.show();
                 ingredientPopupController.setIngredientPopupStage(stage);
-
             }
         }
     }
@@ -141,7 +133,6 @@ public class InventoryController implements Initializable {
     }
 
     public void backToHome(MouseEvent event) throws IOException {
-        System.out.println("Going back to home");
         switchToHome(event);
     }
 
@@ -218,17 +209,3 @@ public class InventoryController implements Initializable {
         performIngredientSearch(searchTerm);
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

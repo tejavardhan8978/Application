@@ -12,7 +12,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -21,10 +20,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
-import java.sql.*;
 
 public class RecipeController implements Initializable {
     Stage stage;
@@ -40,12 +38,11 @@ public class RecipeController implements Initializable {
     @FXML private TableColumn<Recipe, Integer> cookTimeColumn;
     @FXML private TableColumn<Recipe, Integer> servingsColumn;
     @FXML private TableColumn<Recipe, Ingredient> primaryIngredientColumn;
-    @FXML private TextField searchBar;
 
     //Switches back to the home screen
     public void switchToHome(MouseEvent event) throws IOException {
         root = FXMLLoader.load(Main.class.getResource("/Views/HomeScreen.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
@@ -69,7 +66,6 @@ public class RecipeController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        System.out.println("Initialize start - Recipe Controller");
         idColumn.setCellValueFactory(new PropertyValueFactory<>("recipeID"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         cuisineColumn.setCellValueFactory(new PropertyValueFactory<>("cuisine"));
@@ -83,104 +79,49 @@ public class RecipeController implements Initializable {
             throw new RuntimeException(e);
         }
         recipeTable.refresh();
-        searchBar.textProperty().addListener((observable, oldValue, newValue) -> onSearch());
-        System.out.println("Initialize end - Recipe Controller");
+    }
+
+    //Adds a new recipe to the list and updates the view
+    public void addRecipe(Recipe recipe){
+        recipeList.addRecipe(recipe);
+        System.out.println("You have added a recipe!");
     }
 
     //Prints the current recipes in the list
     public void updateTableView() throws SQLException {
         System.out.println("updateTableView - recipeController");
-        System.out.println("Ingredients loaded: " + recipeList.getRecipes().size());
         ObservableList<Recipe> items = FXCollections.observableArrayList(recipeList.getRecipes());
-        System.out.println(recipeList + "   recipelist address");
         recipeTable.setItems(items);
         recipeTable.refresh();
     }
 
+    //Sets the recipe list model for the controller
+    public void setRecipeList(RecipeListModel recipeList, RecipeController recipeController){
+        this.recipeList = recipeList;
+    }
+
     @FXML
-    public void openRecipeModal(MouseEvent event) throws IOException {
+    public void openRecipeModal(MouseEvent event) throws IOException, SQLException {
+
         if (event.getClickCount() == 2) {
             Recipe tempRecipe = recipeTable.getSelectionModel().getSelectedItem();
             if (tempRecipe != null) {
                 System.out.println(tempRecipe);
 
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Views/RecipeDetailedModal.fxml"));
-                //fxmlLoader.setLocation(getClass().getResource("/RecipeDetailedModal.fxml"));
                 AnchorPane recipeModal = fxmlLoader.load();
                 RecipePopupController recipePopupController = fxmlLoader.getController();
                 recipePopupController.setRecipeController(this);
-                System.out.println("....!!!!!..... " + tempRecipe);
                 recipePopupController.setRecipeModalDetails(tempRecipe);
+
                 Stage modalStage = new Stage();
                 Scene modalScene = new Scene(recipeModal);
                 modalStage.setScene(modalScene);
                 modalStage.setTitle("Recipe Popup");
                 modalStage.initModality(Modality.APPLICATION_MODAL);
-
                 modalStage.show();
             }
         }
     }
 
-    private void performRecipeSearch(String searchTerm) {
-        String query = "SELECT * FROM RecipeTable WHERE name LIKE ?";
-        try (Connection connection = Database.getConnection()) {
-            try (PreparedStatement stmt = connection.prepareStatement(query)) {
-                stmt.setString(1, "%" + searchTerm + "%");
-                ResultSet rs = stmt.executeQuery();
-                ObservableList<Recipe> searchResults = FXCollections.observableArrayList();
-                while (rs.next()) {
-                    int recipeID = rs.getInt("recipeID");
-                    String name = rs.getString("name");
-                    int cuisineID = rs.getInt("cuisineID");
-                    int cookTime = rs.getInt("cookTime");
-                    int servings = rs.getInt("servings");
-                    int primaryIngredientID = rs.getInt("primaryIngredientID");
-
-                    String ingredientQuery = "SELECT name FROM IngredientTable where ingredientID = ?";
-                    try (PreparedStatement ingredientStmt = connection.prepareStatement(ingredientQuery)){
-                        ingredientStmt.setInt(1, primaryIngredientID);
-                        ResultSet ingredientRs = ingredientStmt.executeQuery();
-                        String ingredientName = null;
-                        if (ingredientRs.next()){
-                            ingredientName = ingredientRs.getString("name");
-                        }
-                        Ingredient primaryIngredient = new Ingredient.Builder()
-                                .name(ingredientName)
-                                .build();
-                    }
-
-                    String cuisineQuery = "SELECT * FROM CuisineTable WHERE cuisineID = ?";
-                    try (PreparedStatement cuisineStmt = connection.prepareStatement(cuisineQuery)) {
-                        cuisineStmt.setInt(1, cuisineID);
-                        ResultSet cuisineRs = cuisineStmt.executeQuery();
-                        String cuisineName = null;
-                        if (cuisineRs.next()) {
-                            cuisineName = cuisineRs.getString("name");
-                        }
-                        Cuisine cuisine = new Cuisine(cuisineName, "");
-
-                        Recipe recipe = new Recipe.RecipeBuilder()
-                                .setRecipeID(recipeID)
-                                .setName(name)
-                                .setCuisine(cuisine)
-                                .setCookTime(cookTime)
-                                .setServings(servings)
-                                .build();
-                        searchResults.add(recipe);
-                    }
-                }
-                    recipeTable.setItems(searchResults);
-            }
-        } catch (SQLException e) {
-                e.printStackTrace();
-            }
-    }
-
-    @FXML
-    public void onSearch() {
-        String searchTerm = searchBar.getText().trim();
-        performRecipeSearch(searchTerm);
-    }
 }
-

@@ -4,15 +4,19 @@ import edu.metrostate.Model.*;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+
+
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.logging.Logger;
 
-//import static edu.metrostate.Model.Ingredient.getIngredientByID;
+import static edu.metrostate.Model.Ingredient.getIngredientByID;
 
 public class AddToRecipeController {
 
@@ -89,6 +93,7 @@ public class AddToRecipeController {
         this.root = root;
     }
 
+
     public void handleSaveButtonAction(MouseEvent event) throws SQLException, IOException {
 
         try {
@@ -96,53 +101,64 @@ public class AddToRecipeController {
 
             //get all info into local variables.
             Recipe recipe = new Recipe();
+
             String recipeName = recipeNameField.getText();
             if (recipeName.isEmpty()) {
-                recipe.setName(" ");
+                displayErrorMessage("Name", "Recipe name cannot be empty!");
+                return;
             } else {
                 recipe.setName(recipeName);
             }
 
             String description = recipeDescriptionArea.getText();
             if (description.isEmpty()) {
-                recipe.setDescription(" ");
+                displayErrorMessage("Description", "Description cannot be empty!");
+                return;
             } else {
                 recipe.setDescription(description);
             }
 
             Integer cookTime = Integer.parseInt(cookTimeField.getText());
-            recipe.setCookTime(cookTime);
+            if (cookTimeField.getText().isEmpty()) {
+                displayErrorMessage("CookTime", "CookTime cannot be empty!");
+                return;
+            } else {
+                recipe.setCookTime(cookTime);
+            }
+
             Integer servings = Integer.parseInt(servingsField.getText());
-            recipe.setServings(servings);
+            if (servingsField.getText().isEmpty()) {
+                displayErrorMessage("Servings", "Servings cannot be empty!");
+                return;
+            } else {
+                recipe.setServings(servings);
+            }
 
-            String primaryIngredientName = primaryIngredientField.getText().trim();
-            Ingredient primaryIngredient = null;
-
-            if (!primaryIngredientName.isEmpty()) {
-                primaryIngredient = Ingredient.getIngredientByName((primaryIngredientName));
-                if (primaryIngredient != null) {
-                    recipe.setPrimaryIngredientID(primaryIngredient.getIngredientID());
-                    recipe.setPrimaryIngredient(primaryIngredient);
-                } else {
-                    recipe.setPrimaryIngredientID(0);
-                    recipe.setPrimaryIngredient(null);
-                }
+            Integer primaryIngredientID = Integer.valueOf(primaryIngredientField.getText());
+            if (primaryIngredientID == 0) {
+                recipe.setPrimaryIngredientID(0);
+                recipe.setPrimaryIngredient(getIngredientByID(0));
+            } else {
+                recipe.setPrimaryIngredientID(primaryIngredientID);
+                recipe.setPrimaryIngredient(getIngredientByID(primaryIngredientID));
             }
 
             String instructions = directionsArea.getText();
             if (instructions.isEmpty()) {
-                recipe.setInstructions(" ");
+                displayErrorMessage("Directions", "Directions cannot be empty!");
+                return;
             } else {
                 recipe.setInstructions(instructions);
             }
 
             String ingredients = ingredientsField.getText();
             if (ingredients.isEmpty()) {
-                recipe.setIngredients(" ");
+                displayErrorMessage("Ingredients", "Ingredients cannot be empty!");
+                return;
             } else {
                 recipe.setIngredients(ingredients);
             }
-
+            try {
             // Getting values for Nutritional chart to insert into recipe.
             Integer servingSize = Integer.parseInt(servingSizeField.getText());
             Integer calories = Integer.parseInt(caloriesField.getText());
@@ -154,7 +170,7 @@ public class AddToRecipeController {
             Integer dietaryFiber = Integer.parseInt(fiberField.getText());
             Integer cholesterol = Integer.parseInt(cholesterolField.getText());
 
-            try {
+
                 NutritionalChart nutritionalChart = new NutritionalChart.Builder()
                         .servingSize(servingSize)
                         .calories(calories)
@@ -166,17 +182,15 @@ public class AddToRecipeController {
                         .dietaryFiber(dietaryFiber)
                         .cholesterol(cholesterol)
                         .build();
-
                 int nutritionID;
                 if (nutritionalChart.checkAllValuesExist()) {
+                    //Inserting nutritional chart to DB
                     nutritionID = nutritionalChart.insert(connection);
                 } else {
                     nutritionID = 0;
                 }
-
                 recipe.setNutritionID(nutritionID);
                 recipe.setNutrition(nutritionalChart);
-
             } catch (Exception e) {
                 e.printStackTrace();
                 System.out.println("Exception thrown while inserting a nutrition chart from AddToRecipeController");
@@ -189,27 +203,33 @@ public class AddToRecipeController {
 
                 Integer cuisineID;
                 if (cuisine.checkAllValuesExist()) {
+                    //Inserting cuisine to DB
                     cuisineID = cuisine.insert(connection);
                 } else {
                     cuisineID = 0;
                 }
-
                 recipe.setCuisineID(cuisineID);
                 recipe.setCuisine(cuisine);
             } catch (Exception e) {
                 e.printStackTrace();
-                System.out.println("Exception thrown when inserting cuisine in AddToRecipeController");
             }
-
-            System.out.println(recipe);
+            //Inserting recipe to DB
             recipe.insert(connection);
-            recipeList.addRecipe(recipe);
-            recipeController.updateTableView();
 
         }catch (Exception e) {
             e.printStackTrace();
         }
+
         clearFields();
         ReturnToRecipeHome(event);
     }
+
+    public void displayErrorMessage(String guiltyField, String message){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Input Error");
+        alert.setHeaderText("Invalid Input in " + guiltyField);
+        alert.setHeaderText(message);
+        alert.showAndWait();
+    }
+
 }

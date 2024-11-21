@@ -41,11 +41,15 @@
             and ingredients while ensuring that this would stay with the user while the app was open. 
 - [Hieu] Created Implementation.md. outline.
 - [Hunter] Created and implemented editing ingredient quantities. Also created the underlying functions in models it do that.
+- [Teja] Created and linked FXML view files. Implemented recipe section of the application where the user can add a new recipe.
+            Implemented detailed pop up views and filled in all the values. Implemented attach image in ingredient section.
+            Fixed bugs.
 
 # Milestone 5
 - [Quintin] Implemented a sql lite database for data persistence for ingredients
 - [Quintin] Added some exception handling on the add to ingredients to require the user to only enter a name, expiry date,
 and quantity allowing them to skip the nutritional chart values and automatically assigning them to null if they do.
+- [Teja] Migrated the recipe, nutritionalChart, Cuisine functionality to SQLite database.
 
 # Milestone 6
 - [Quintin] Added the methods to both recipes and ingredients to be able to search the database.

@@ -1,5 +1,6 @@
 package edu.metrostate.Controller;
 
+import edu.metrostate.Model.NutritionalChart;
 import edu.metrostate.Model.Recipe;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -12,6 +13,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class RecipePopupController implements Initializable {
@@ -41,14 +43,12 @@ public class RecipePopupController implements Initializable {
 
     @FXML
     public void handleBackButtonClick(MouseEvent event) {
-        System.out.println("Closing RecipePopupController");
         Stage modalStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         modalStage.close();
     }
 
     @FXML
     public void handleHomeButtonClick(MouseEvent event) throws IOException {
-        System.out.println("Closing RecipePopupController and returning to HomeScreen");
         Stage modalStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         modalStage.close();
         if (this.recipeController != null) {
@@ -64,12 +64,14 @@ public class RecipePopupController implements Initializable {
         this.RecipeControllerStage = stage;
     }
 
-    public void setRecipeModalDetails(Recipe recipe) {
+    public void setRecipeModalDetails(Recipe recipe) throws SQLException {
         this.recipeTitle.setText(recipe.getName());
         this.recipeCuisine.setText(recipe.getCuisine().getName());
         this.recipeDescription.setText(recipe.getDescription());
         this.recipeInstructions.setText(recipe.getInstructions());
-        if (recipe.getNutrition() == null) {
+
+        NutritionalChart tempNutritionalChart = recipe.getNutrition();
+        if (tempNutritionalChart == null) {
             this.caloriesColumn.setText("0");
             this.servingSizeColumn.setText("0");
             this.carbohydratesColumn.setText("0");
@@ -79,18 +81,16 @@ public class RecipePopupController implements Initializable {
             this.sodiumColumn.setText("0");
             this.dietaryFiberColumn.setText("0");
             this.cholesterolColumn.setText("0");
-
         } else {
-            this.caloriesColumn.setText(String.valueOf(recipe.getNutrition().getCalories()));
-            this.servingSizeColumn.setText(String.valueOf(recipe.getNutrition().getServingSize()));
-            this.carbohydratesColumn.setText(String.valueOf(recipe.getNutrition().getTotalCarbohydrates()));
-            this.fatColumn.setText(String.valueOf(recipe.getNutrition().getTotalFat()));
-            this.proteinColumn.setText(String.valueOf(recipe.getNutrition().getTotalProtein()));
-            this.sugarsColumn.setText(String.valueOf(recipe.getNutrition().getTotalSugars()));
-
-            this.sodiumColumn.setText(String.valueOf(recipe.getNutrition().getTotalSodium()));
-            this.dietaryFiberColumn.setText(String.valueOf(recipe.getNutrition().getDietaryFiber()));
-            this.cholesterolColumn.setText(String.valueOf(recipe.getNutrition().getCholesterol()));
+            this.caloriesColumn.setText(String.valueOf(tempNutritionalChart.getCalories()));
+            this.servingSizeColumn.setText(String.valueOf(tempNutritionalChart.getServingSize()));
+            this.carbohydratesColumn.setText(String.valueOf(tempNutritionalChart.getTotalCarbohydrates()));
+            this.fatColumn.setText(String.valueOf(tempNutritionalChart.getTotalFat()));
+            this.proteinColumn.setText(String.valueOf(tempNutritionalChart.getTotalProtein()));
+            this.sugarsColumn.setText(String.valueOf(tempNutritionalChart.getTotalSugars()));
+            this.sodiumColumn.setText(String.valueOf(tempNutritionalChart.getTotalSodium()));
+            this.dietaryFiberColumn.setText(String.valueOf(tempNutritionalChart.getDietaryFiber()));
+            this.cholesterolColumn.setText(String.valueOf(tempNutritionalChart.getCholesterol()));
         }
     }
 }
