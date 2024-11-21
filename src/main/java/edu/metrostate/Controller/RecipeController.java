@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class RecipeController implements Initializable {
@@ -56,10 +57,6 @@ public class RecipeController implements Initializable {
         //Call on the controller and pass the recipe list and pass the Recipe controller allowing the AddToRecipe controller
         //to modify the list of recipes
         controller.setRecipeList(this.recipeList, this);
-//        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-//        Scene scene = new Scene(root);
-//        stage.setScene(scene);
-//        stage.show();
         stage = new Stage();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -69,16 +66,6 @@ public class RecipeController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        System.out.println("Initialize start - Recipe Controller");
-        //Set up singleton
-//        recipeList = RecipeListSingleton.getInstance();
-//        recipeList = new RecipeListModel();
-        //Setup columns
-//        try {
-//            recipeList.loadRecipesFromDB();
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
         idColumn.setCellValueFactory(new PropertyValueFactory<>("recipeID"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         cuisineColumn.setCellValueFactory(new PropertyValueFactory<>("cuisine"));
@@ -86,14 +73,12 @@ public class RecipeController implements Initializable {
         servingsColumn.setCellValueFactory(new PropertyValueFactory<>("servings"));
         primaryIngredientColumn.setCellValueFactory(new PropertyValueFactory<>("primaryIngredient"));
 
-
         try {
             updateTableView();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         recipeTable.refresh();
-        System.out.println("Initialize end - Recipe Controller");
     }
 
     //Adds a new recipe to the list and updates the view
@@ -104,11 +89,8 @@ public class RecipeController implements Initializable {
 
     //Prints the current recipes in the list
     public void updateTableView() throws SQLException {
-        System.out.println("You've reached the update");
         System.out.println("updateTableView - recipeController");
         ObservableList<Recipe> items = FXCollections.observableArrayList(recipeList.getRecipes());
-        System.out.println(recipeList + "   recipelist address");
-        System.out.println(this);
         recipeTable.setItems(items);
         recipeTable.refresh();
     }
@@ -119,7 +101,7 @@ public class RecipeController implements Initializable {
     }
 
     @FXML
-    public void openRecipeModal(MouseEvent event) throws IOException {
+    public void openRecipeModal(MouseEvent event) throws IOException, SQLException {
 
         if (event.getClickCount() == 2) {
             Recipe tempRecipe = recipeTable.getSelectionModel().getSelectedItem();
@@ -127,26 +109,19 @@ public class RecipeController implements Initializable {
                 System.out.println(tempRecipe);
 
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Views/RecipeDetailedModal.fxml"));
-                //fxmlLoader.setLocation(getClass().getResource("/RecipeDetailedModal.fxml"));
                 AnchorPane recipeModal = fxmlLoader.load();
                 RecipePopupController recipePopupController = fxmlLoader.getController();
                 recipePopupController.setRecipeController(this);
-                System.out.println("....!!!!!..... " + tempRecipe);
                 recipePopupController.setRecipeModalDetails(tempRecipe);
-
 
                 Stage modalStage = new Stage();
                 Scene modalScene = new Scene(recipeModal);
                 modalStage.setScene(modalScene);
                 modalStage.setTitle("Recipe Popup");
                 modalStage.initModality(Modality.APPLICATION_MODAL);
-
                 modalStage.show();
             }
         }
     }
 
-    public void switchToEditRecipe(MouseEvent event) throws IOException {
-        System.out.println("Implement switchToEditRecipe");
-    }
 }

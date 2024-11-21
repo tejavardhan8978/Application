@@ -18,7 +18,6 @@ public class Database {
             Cuisine.createTable(connection);
             return connection;
         } catch (SQLException e) {
-            System.out.println("Connection error IngredientTable: " + e.getMessage());
             return null;
         }
     }
