@@ -101,6 +101,11 @@ public class InventoryController implements Initializable {
         }
     }
 
+    public void backToHome(MouseEvent event) throws IOException {
+        System.out.println("Going back to home");
+        switchToHome(event);
+    }
+
     public void updateTableView(ObservableList<Ingredient> ingredients) throws SQLException {
         System.out.println("updateTableView - inventoryController");
         inventoryTable.setItems(ingredients);
@@ -137,9 +142,26 @@ public class InventoryController implements Initializable {
         return this;
     }
 
-    public void backToHome(MouseEvent event) throws IOException {
-        System.out.println("Going back to home");
-        switchToHome(event);
+    public void setDeleteButton(MouseEvent event) throws SQLException {
+        Ingredient selectedIngredient = inventoryTable.getSelectionModel().getSelectedItem();
+        if (selectedIngredient != null) {
+            String deleteQuery = "DELETE FROM IngredientTable WHERE ingredientID = ?";
+            try (Connection conn = Database.getConnection()) {
+                try (PreparedStatement stmt = conn.prepareStatement(deleteQuery)) {
+                    stmt.setInt(1, selectedIngredient.getIngredientID());
+                    int rowsAffected = stmt.executeUpdate();
+                    if (rowsAffected > 0){
+                        System.out.println("Ingredient deleted successfully!");
+                        inventoryTable.getItems().remove(selectedIngredient);
+                    } else {
+                        System.out.println("Couldn't delete ingredient :(");
+                    }
+                }
+            } catch (SQLException e) {
+                System.out.println("Couldn't get a connection to delete an item :(");
+                e.printStackTrace();
+            }
+        }
     }
 
     public ObservableList<Ingredient> loadIngredientsFromDB() throws SQLException {
@@ -180,10 +202,11 @@ public class InventoryController implements Initializable {
                     items.add(ingredient);
                 }
                 updateTableView(items);
-                Database.dbDisconnect(conn);
             }
         } catch (SQLException e) {
+            System.out.println("Error while loading ingredients from the db :(");
             e.printStackTrace();
+            throw e;
         }
         return items;
     }
@@ -257,9 +280,9 @@ public class InventoryController implements Initializable {
                 }
                 // Update the table with the search results
                 inventoryTable.setItems(searchResults);
-                Database.dbDisconnect(conn);
             }
         } catch (SQLException e) {
+            System.out.println("Error occurred while searching the db :(");
             e.printStackTrace();
         }
     }

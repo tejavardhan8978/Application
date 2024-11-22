@@ -11,7 +11,7 @@
 <AnchorPane prefHeight="650.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.metrostate.Controller.InventoryController">
     <children>
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d6b4fc" height="100.0" layoutX="40.0" layoutY="57.0" onMouseClicked="#switchToHome" stroke="BLACK" strokeType="INSIDE" width="230.0" />
-        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d6b4fc" height="100.0" layoutX="40.0" layoutY="504.0" onMouseClicked="#switchToEditIngredient" stroke="BLACK" strokeType="INSIDE" width="230.0" AnchorPane.leftAnchor="38.0" AnchorPane.topAnchor="510.0" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d6b4fc" height="100.0" layoutX="40.0" layoutY="510.0" onMouseClicked="#switchToEditIngredient" stroke="BLACK" strokeType="INSIDE" width="100.0" />
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d6b4fc" height="100.0" layoutX="40.0" layoutY="355.0" stroke="BLACK" strokeType="INSIDE" width="230.0" AnchorPane.rightAnchor="832.0" AnchorPane.topAnchor="359.0" />
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffc94096" height="100.0" layoutX="40.0" layoutY="206.0" stroke="BLACK" strokeType="INSIDE" width="230.0" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="206.0" />
         <TableView fx:id="inventoryTable" layoutX="290.0" layoutY="180.0" onMouseClicked="#openIngredientModal" prefHeight="440.0" prefWidth="760.0" AnchorPane.bottomAnchor="40.0" AnchorPane.rightAnchor="40.0">
@@ -35,7 +35,7 @@
                 <Font name="System Bold" size="24.0" />
             </font>
         </Text>
-        <Text layoutX="129.0" layoutY="569.0" onMouseClicked="#switchToEditIngredient" strokeType="OUTSIDE" strokeWidth="0.0" text="EDIT" textAlignment="CENTER">
+        <Text layoutX="70.0" layoutY="568.0" onMouseClicked="#switchToEditIngredient" strokeType="OUTSIDE" strokeWidth="0.0" text="EDIT" textAlignment="CENTER">
             <font>
                 <Font name="System Bold" size="24.0" />
             </font>
@@ -50,5 +50,11 @@
             <Font size="24.0" />
          </font>
       </TextField>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d6b4fc" height="100.0" layoutX="168.0" layoutY="510.0" onMouseClicked="#setDeleteButton" stroke="BLACK" strokeType="INSIDE" width="100.0" />
+      <Text layoutX="168.0" layoutY="567.0" onMouseClicked="#setDeleteButton" strokeType="OUTSIDE" strokeWidth="0.0" text="DELETE" textAlignment="CENTER" wrappingWidth="100.00000298023224">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Text>
     </children>
 </AnchorPane>

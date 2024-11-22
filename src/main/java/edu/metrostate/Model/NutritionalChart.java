@@ -142,7 +142,6 @@ public class NutritionalChart {
                 ");";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.execute();
-            Database.dbDisconnect();
         }
     }
 
@@ -170,9 +169,7 @@ public class NutritionalChart {
             stmt.setObject(8, this.totalSugars, Types.INTEGER);
             stmt.setObject(9, this.dietaryFiber, Types.INTEGER);
             stmt.setObject(10, this.cholesterol, Types.INTEGER);
-
             stmt.execute();
-            Database.dbDisconnect();
 
             try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
@@ -215,7 +212,6 @@ public class NutritionalChart {
             try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
                 preparedStatement.setInt(1, ID);
                 ResultSet rs = preparedStatement.executeQuery();
-                Database.dbDisconnect();
 
                 while (rs.next()) {
                     int servingSize = rs.getInt("servingSize");
@@ -262,8 +258,6 @@ public class NutritionalChart {
                 try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
                     preparedStatement.setInt(1, ID);
                     ResultSet rs = preparedStatement.executeQuery();
-                    Database.dbDisconnect();
-
                     while (rs.next()) {
 
                         int servingSize = rs.getInt("servingSize");

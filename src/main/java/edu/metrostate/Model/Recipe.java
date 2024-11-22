@@ -193,7 +193,6 @@ public class Recipe {
                 ");";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.execute();
-            Database.dbDisconnect();
         }
     }
 

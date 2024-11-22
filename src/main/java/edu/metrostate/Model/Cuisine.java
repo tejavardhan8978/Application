@@ -51,7 +51,7 @@ public class Cuisine {
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.execute();
-            Database.dbDisconnect();
+            //Database.dbDisconnect(connection);
         }
 
     }
@@ -67,7 +67,7 @@ public class Cuisine {
             preparedStatement.setString(2, this.country);
 
             preparedStatement.execute();
-            Database.dbDisconnect();
+            //Database.dbDisconnect(connection);
             try (ResultSet generatedKey = preparedStatement.getGeneratedKeys()) {
                 if (generatedKey.next()) {
                     this.cuisineID = generatedKey.getInt(1);
@@ -87,7 +87,7 @@ public class Cuisine {
             try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
                 preparedStatement.setInt(1, ID);
                 ResultSet rs = preparedStatement.executeQuery();
-                Database.dbDisconnect();
+                //Database.dbDisconnect(connection);
 
                 while (rs.next()) {
                     String name = rs.getString("name");
@@ -113,8 +113,6 @@ public class Cuisine {
             try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
                 preparedStatement.setInt(1, ID);
                 ResultSet rs = preparedStatement.executeQuery();
-                Database.dbDisconnect();
-
                 while (rs.next()) {
 
                     String name = rs.getString("name");

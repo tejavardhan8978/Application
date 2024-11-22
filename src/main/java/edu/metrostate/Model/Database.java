@@ -9,6 +9,7 @@ public class Database {
     // Method to establish a connection to the database
     public static Connection getConnection() {
         try {
+            System.out.println("Connection string: " + connectionString);
             Connection connection = DriverManager.getConnection(connectionString);
             // Create the table if it doesn't exist
             Ingredient.createTable(connection);
@@ -17,6 +18,8 @@ public class Database {
             Cuisine.createTable(connection);
             return connection;
         } catch (SQLException e) {
+            System.err.println("Can't get a connection!");
+            e.printStackTrace();
             return null;
         }
     }
@@ -27,6 +30,7 @@ public class Database {
                 conn.close();
             }
         } catch (Exception e) {
+            e.printStackTrace();
             throw e;
         }
     }

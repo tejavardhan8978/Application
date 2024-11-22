@@ -168,7 +168,6 @@ public class Ingredient {
                 ");";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.execute();
-            Database.dbDisconnect(connection);
         }
     }
 
@@ -202,7 +201,6 @@ public class Ingredient {
                 }
             }
         }
-        Database.dbDisconnect(connection);
         return -1;
     }
 
@@ -233,7 +231,6 @@ public class Ingredient {
             try (PreparedStatement stmt = connection.prepareStatement(sql)) {
                 stmt.setInt(1, ID);
                 ResultSet rs = stmt.executeQuery();
-                Database.dbDisconnect();
                 while (rs.next()) {
                     int ingredientID = rs.getInt("ingredientID");
                     String name = rs.getString("name");
@@ -313,7 +310,6 @@ public class Ingredient {
                 ) {
                     stmt.setInt(1, ID);
                     ResultSet rs = stmt.executeQuery();
-                    Database.dbDisconnect();
                     while (rs.next()) {
                         int ingredientID = rs.getInt("ingredientID");
                         String name = rs.getString("name");
