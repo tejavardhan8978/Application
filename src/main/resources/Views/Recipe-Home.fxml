@@ -8,10 +8,10 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="650.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.metrostate.Controller.RecipeController">
+<AnchorPane prefHeight="650.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.metrostate.Controller.RecipeController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d6b4fc" height="100.0" layoutX="37.0" layoutY="69.0" onMouseClicked="#switchToHome" stroke="BLACK" strokeType="INSIDE" width="230.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d6b4fc" height="100.0" layoutX="40.0" layoutY="485.0" stroke="BLACK" strokeType="INSIDE" width="230.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d6b4fc" height="100.0" layoutX="40.0" layoutY="485.0" onMouseClicked="#setDeleteButton" stroke="BLACK" strokeType="INSIDE" width="230.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffc94096" height="100.0" layoutX="40.0" layoutY="206.0" stroke="BLACK" strokeType="INSIDE" width="230.0" />
       <TableView fx:id="recipeTable" layoutX="290.0" layoutY="180.0" onMouseClicked="#openRecipeModal" prefHeight="440.0" prefWidth="760.0" AnchorPane.bottomAnchor="40.0" AnchorPane.rightAnchor="40.0">
         <columns>
@@ -33,7 +33,7 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Text>
-      <Text layoutX="64.0" layoutY="540.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DELETE RECIPE" textAlignment="CENTER" wrappingWidth="188.26836395263672">
+      <Text layoutX="64.0" layoutY="540.0" onMouseClicked="#setDeleteButton" strokeType="OUTSIDE" strokeWidth="0.0" text="DELETE RECIPE" textAlignment="CENTER" wrappingWidth="188.26836395263672">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
