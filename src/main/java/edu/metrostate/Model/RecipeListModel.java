@@ -91,7 +91,7 @@ public class RecipeListModel {
                             .setServings(servings)
                             .build();
                     this.addRecipe(recipe);
-
+                    System.out.println(recipeID + "recipe id in load from db");
                 }
             }
         }

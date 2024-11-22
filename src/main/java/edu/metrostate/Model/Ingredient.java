@@ -370,6 +370,43 @@ public class Ingredient {
         return recipeArrayList;
     }
 
+//    public static void insertIntoIngredientRecipe(ArrayList<Ingredient> ingredientArrayList) {
+//        try (Connection connection = Database.getConnection()) {
+//            for (Ingredient ingredient : ingredientArrayList) {
+//                String sql = "INSERT INTO IngredientRecipeTable (" +
+//                        "name, " +
+//                        "expiryDate, " +
+//                        "nutritionID, " +
+//                        "primaryMacroNutrient, " +
+//                        "storage, " +
+//                        "quantity, " +
+//                        "category, " +
+//                        "description)" +
+//                        "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+//                try (PreparedStatement stmt = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
+//                    stmt.setString(1, ingredient.name);
+//                    stmt.setDate(2, new java.sql.Date(ingredient.expiryDate.getTime()));
+//                    stmt.setInt(3, ingredient.nutritionID);
+//                    stmt.setString(4, ingredient.primaryMacroNutrient != null ? ingredient.primaryMacroNutrient.name() : null);
+//                    stmt.setString(5, ingredient.storage != null ? ingredient.storage.name() : null);
+//                    stmt.setInt(6, ingredient.quantity);
+//                    stmt.setString(7, ingredient.category != null ? ingredient.category.name() : null);
+//                    stmt.setString(8, ingredient.description);
+//
+//                    stmt.executeUpdate();
+//                    try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
+//                        if (generatedKeys.next()) {
+//                            this.ingredientID = generatedKeys.getInt(1);
+//
+//                        }
+//                    }
+//                }
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
+
     //Updating the keys after insertion
     public void updateNutritionID(Connection connection, int nutritionID) throws SQLException {
         System.out.println("I've received the nutritionID and it's being set to " + nutritionID);

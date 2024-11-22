@@ -53,7 +53,8 @@ public class InventoryController implements Initializable {
         quantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         category.setCellValueFactory(new PropertyValueFactory<>("category"));
         try {
-            loadIngredientsFromDB();
+            ObservableList<Ingredient> items = loadIngredientsFromDB();
+            updateTableView(items);
         } catch (SQLException e){
             throw new RuntimeException(e);
         }
@@ -164,7 +165,7 @@ public class InventoryController implements Initializable {
         }
     }
 
-    public ObservableList<Ingredient> loadIngredientsFromDB() throws SQLException {
+    public static ObservableList<Ingredient> loadIngredientsFromDB() throws SQLException {
         String query = "SELECT * FROM IngredientTable";  //SQL query to fetch ingredients
         ObservableList<Ingredient> items = FXCollections.observableArrayList();
         try (Connection conn = Database.getConnection()) {
@@ -201,7 +202,7 @@ public class InventoryController implements Initializable {
                     // Add the ingredient to the TableView
                     items.add(ingredient);
                 }
-                updateTableView(items);
+
             }
         } catch (SQLException e) {
             System.out.println("Error while loading ingredients from the db :(");
@@ -211,7 +212,7 @@ public class InventoryController implements Initializable {
         return items;
     }
 
-    private <T extends Enum<T>> T getEnumValue(Class<T> enumClass, ResultSet resultSet, String columnName) throws SQLException {
+    private static <T extends Enum<T>> T getEnumValue(Class<T> enumClass, ResultSet resultSet, String columnName) throws SQLException {
         String selectedValue = resultSet.getString(columnName);
         if (selectedValue == null || selectedValue.isEmpty()){
             return null;

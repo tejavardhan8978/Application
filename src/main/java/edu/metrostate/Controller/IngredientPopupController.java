@@ -2,6 +2,7 @@ package edu.metrostate.Controller;
 
 import edu.metrostate.Model.Ingredient;
 import edu.metrostate.Model.NutritionalChart;
+import edu.metrostate.Model.Recipe;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -28,6 +29,7 @@ import java.io.*;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.PrimitiveIterator;
 import java.util.ResourceBundle;
 
@@ -42,7 +44,7 @@ public class IngredientPopupController implements Initializable {
     @FXML private Text ingredientCategory;
     @FXML private Text ingredientDescription;
     @FXML private TextField ingredientStock;
-    @FXML private TableView ingredientRecipeTable;
+
     @FXML private Text caloriesColumn;
     @FXML private Text carbohydratesColumn;
     @FXML private Text fatColumn;
@@ -54,9 +56,13 @@ public class IngredientPopupController implements Initializable {
     @FXML private Text servingSizeColumn;
     @FXML private ImageView imageView;
 
+    @FXML private TableView<Recipe> recipeTable;
+    @FXML private TableColumn<Recipe, String> recipeColumn;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("Initializing Ingredient pop up screen");
+        recipeColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
     }
 
     @FXML
@@ -129,6 +135,11 @@ public class IngredientPopupController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Invalid nutrition ID for" + ingredient.getName());
+        }
+        ArrayList<Recipe> recipeArrayList = IngredientRecipeController.retrieveRecipeByIngredientFromDB(ingredient);
+        if (recipeArrayList != null && !recipeArrayList.isEmpty()) {
+            ObservableList<Recipe> recipeObservableList = FXCollections.observableArrayList(recipeArrayList);
+            recipeTable.setItems(recipeObservableList);
         }
     }
 

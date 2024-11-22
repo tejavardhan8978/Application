@@ -1,12 +1,18 @@
 package edu.metrostate.Controller;
 
+import edu.metrostate.Model.Ingredient;
 import edu.metrostate.Model.NutritionalChart;
 import edu.metrostate.Model.Recipe;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -14,6 +20,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class RecipePopupController implements Initializable {
@@ -36,9 +43,15 @@ public class RecipePopupController implements Initializable {
     @FXML private Text cholesterolColumn;
     @FXML private Text servingSizeColumn;
 
+    @FXML private TableView<Ingredient> ingredientTable;
+    @FXML private TableColumn<Ingredient, Integer> ingredientQuantitycolumn;
+    @FXML private TableColumn<Ingredient, String> ingredientColumn;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("Initializing RecipePopupController");
+        ingredientQuantitycolumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+        ingredientColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
     }
 
     @FXML
@@ -92,5 +105,13 @@ public class RecipePopupController implements Initializable {
             this.dietaryFiberColumn.setText(String.valueOf(tempNutritionalChart.getDietaryFiber()));
             this.cholesterolColumn.setText(String.valueOf(tempNutritionalChart.getCholesterol()));
         }
+        System.out.println("hereeeeeeee");
+        ArrayList<Ingredient> ingredientArrayList = IngredientRecipeController.retrieveIngredientsByRecipeFromDB(recipe);
+        for (Ingredient ingredient : ingredientArrayList) {
+            System.out.println("recipe pop up controller ingredietnlist");
+            System.out.println(ingredient);
+        }
+        ObservableList<Ingredient> ingredientObservableList = FXCollections.observableArrayList(ingredientArrayList);
+        ingredientTable.setItems(ingredientObservableList);
     }
 }

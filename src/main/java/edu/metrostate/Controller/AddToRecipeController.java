@@ -1,9 +1,13 @@
 package edu.metrostate.Controller;
 
+import edu.metrostate.Main;
 import edu.metrostate.Model.*;
+import edu.metrostate.Util;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -44,6 +48,8 @@ public class AddToRecipeController {
 
     //Declare instance of the recipe list to manage the list.
     RecipeListModel recipeList;
+    IngredientList ingredientList;
+    Ingredient primaryIngredient;
     //Declare an instance of the recipe controller to add items to the list and update view
     private RecipeController recipeController;
     private Parent root;
@@ -104,7 +110,7 @@ public class AddToRecipeController {
 
             String recipeName = recipeNameField.getText();
             if (recipeName.isEmpty()) {
-                displayErrorMessage("Name", "Recipe name cannot be empty!");
+                Util.displayErrorMessage("Name", "Recipe name cannot be empty!");
                 return;
             } else {
                 recipe.setName(recipeName);
@@ -134,7 +140,7 @@ public class AddToRecipeController {
                 recipe.setServings(servings);
             }
 
-            Integer primaryIngredientID = Integer.valueOf(primaryIngredientField.getText());
+            int primaryIngredientID = primaryIngredient.getIngredientID();
 
 //            if (!primaryIngredientName.isEmpty()) {
 //                primaryIngredient = Ingredient.getIngredientByName((primaryIngredientName));
@@ -226,6 +232,10 @@ public class AddToRecipeController {
             }
             //Inserting recipe to DB
             recipe.insert(connection);
+            if (ingredientList.getIngredients().isEmpty()) {
+
+            }
+            IngredientRecipeController.addIngredientRecipeToDB(recipe, ingredientList.getIngredients());
 
         }catch (Exception e) {
             e.printStackTrace();
@@ -241,6 +251,40 @@ public class AddToRecipeController {
         alert.setHeaderText("Invalid Input in " + guiltyField);
         alert.setHeaderText(message);
         alert.showAndWait();
+    }
+
+    public void addIngredientsToRecipe(MouseEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/AddIngredientsToRecipe.fxml"));
+            Parent root = loader.load();
+
+            Stage newStage = new Stage();
+            newStage.setTitle("Add Ingredients to Recipe");
+            newStage.setScene(new Scene(root));
+            AddIngredientToRecipeController controller = loader.getController();
+            controller.setAddToRecipeController(this);
+            newStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setIngredientList (IngredientList ingredientList, Ingredient primaryIngredient) {
+        this.ingredientList = ingredientList;
+        this.primaryIngredient = primaryIngredient;
+    }
+
+    public void populateIngredients (IngredientList ingredientList, Ingredient primaryIngredient) {
+        StringBuilder sb = new StringBuilder();
+        for (Ingredient ingredient : ingredientList.getIngredients()) {
+            sb.append(ingredient.getName()).append(",").append("\n");
+        }
+        if (!sb.isEmpty()) {
+            ingredientsField.setText(sb.toString());
+        }
+if (primaryIngredient != null ) {
+    primaryIngredientField.setText(primaryIngredient.getName());
+}
     }
 
 }

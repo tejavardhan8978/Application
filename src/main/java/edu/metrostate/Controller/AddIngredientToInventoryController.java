@@ -190,7 +190,7 @@ public class AddIngredientToInventoryController {
                 System.out.println("Item added to the db: " + item);
 
                 //Add the new item to the singleton list to be viewed
-                ObservableList<Ingredient> updatedIngredients = inventoryController.loadIngredientsFromDB();
+                ObservableList<Ingredient> updatedIngredients = InventoryController.loadIngredientsFromDB();
                 inventoryController.updateTableView(updatedIngredients);
                 ReturnToInventoryHome(event);
                 Database.dbDisconnect(connection);

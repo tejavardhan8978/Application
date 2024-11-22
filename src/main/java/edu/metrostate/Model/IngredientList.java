@@ -32,15 +32,26 @@ public class IngredientList {
     }
 
     public void addIngredient(Ingredient ingredient) {
-        ingredient.setIngredientID(++lastId);
-        ingredients.add(ingredient);
+        if (!checkIngredientInList(ingredient)) {
+            //ingredient.setIngredientID(++lastId);
+            ingredients.add(ingredient);
+        }
+    }
+
+    public boolean checkIngredientInList(Ingredient ingredient) {
+        for (Ingredient ingredient1 : ingredients) {
+            if (ingredient1.getIngredientID() == ingredient.getIngredientID()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void updateIngredient(Ingredient ingredient, int newQuantity, Date newDate){
         ingredient.UpdateIngredient(ingredient.getIngredientID(), newQuantity, newDate);
     }
 
-    public ArrayList<Ingredient> getIngredients() throws SQLException {
+    public ArrayList<Ingredient> getIngredients() {
         return ingredients;
     }
 

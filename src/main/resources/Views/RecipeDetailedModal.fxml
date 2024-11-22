@@ -26,10 +26,10 @@
       </Rectangle>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b4ffa3" height="35.0" layoutX="150.0" layoutY="281.0" stroke="BLACK" strokeType="INSIDE" width="90.0" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="285.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b4ffa3" height="35.0" layoutX="45.0" layoutY="387.0" stroke="BLACK" strokeType="INSIDE" width="190.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="330.0" />
-      <TableView layoutX="50.0" layoutY="373.0" prefHeight="275.0" prefWidth="190.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="375.0">
+      <TableView fx:id="ingredientTable" layoutX="50.0" layoutY="373.0" prefHeight="275.0" prefWidth="190.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="375.0">
         <columns>
-          <TableColumn prefWidth="59.0" text="QUANTITY" />
-          <TableColumn prefWidth="130.0" text="INGREDIENTS" />
+          <TableColumn fx:id="ingredientQuantitycolumn" prefWidth="59.0" text="QUANTITY" />
+          <TableColumn fx:id="ingredientColumn" prefWidth="130.0" text="INGREDIENTS" />
         </columns>
       </TableView>
       <Text layoutX="58.0" layoutY="74.0" onMouseClicked="#handleBackButtonClick" strokeType="OUTSIDE" strokeWidth="0.0" text="BACK" textAlignment="CENTER" wrappingWidth="175.0">

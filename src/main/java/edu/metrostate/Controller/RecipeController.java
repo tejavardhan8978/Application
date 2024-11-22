@@ -2,6 +2,7 @@ package edu.metrostate.Controller;
 
 import edu.metrostate.Main;
 import edu.metrostate.Model.*;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -39,7 +40,7 @@ public class RecipeController implements Initializable {
     @FXML private TableColumn<Recipe, Cuisine> cuisineColumn;
     @FXML private TableColumn<Recipe, Integer> cookTimeColumn;
     @FXML private TableColumn<Recipe, Integer> servingsColumn;
-    @FXML private TableColumn<Recipe, Ingredient> primaryIngredientColumn;
+    @FXML private TableColumn<Recipe, String> primaryIngredientColumn;
     @FXML private TextField searchBar;
 
     //Switches back to the home screen
@@ -74,7 +75,10 @@ public class RecipeController implements Initializable {
         cuisineColumn.setCellValueFactory(new PropertyValueFactory<>("cuisine"));
         cookTimeColumn.setCellValueFactory(new PropertyValueFactory<>("cookTime"));
         servingsColumn.setCellValueFactory(new PropertyValueFactory<>("servings"));
-        primaryIngredientColumn.setCellValueFactory(new PropertyValueFactory<>("primaryIngredient"));
+        primaryIngredientColumn.setCellValueFactory(cellData -> {
+            Ingredient ingredient = cellData.getValue().getPrimaryIngredient(); // Adjust based on your model
+            return new SimpleStringProperty(ingredient != null ? ingredient.getName() : ""); // Use ingredient name or empty string
+        });
 
         try {
             updateTableView();
@@ -109,6 +113,7 @@ public class RecipeController implements Initializable {
 
         if (event.getClickCount() == 2) {
             Recipe tempRecipe = recipeTable.getSelectionModel().getSelectedItem();
+            System.out.println(tempRecipe);
             if (tempRecipe != null) {
                 System.out.println(tempRecipe);
 

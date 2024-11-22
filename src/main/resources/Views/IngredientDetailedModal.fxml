@@ -21,9 +21,9 @@
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b4ffa3" height="35.0" layoutX="50.0" layoutY="136.0" stroke="BLACK" strokeType="INSIDE" width="190.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="140.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b4ffa3" height="90.0" layoutX="50.0" layoutY="185.0" stroke="BLACK" strokeType="INSIDE" width="190.0" AnchorPane.bottomAnchor="425.0" AnchorPane.topAnchor="185.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b4ffa3" height="35.0" layoutX="50.0" layoutY="396.0" stroke="BLACK" strokeType="INSIDE" width="190.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="405.0" />
-      <TableView fx:id="ingredientRecipeTable" layoutX="50.0" layoutY="446.0" prefHeight="200.0" prefWidth="190.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="450.0">
+      <TableView fx:id="recipeTable" layoutX="50.0" layoutY="446.0" prefHeight="200.0" prefWidth="190.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="450.0">
         <columns>
-          <TableColumn prefWidth="189.6000106573105" />
+          <TableColumn fx:id="recipeColumn" prefWidth="189.6000106573105" />
         </columns>
       </TableView>
       <Text layoutX="60.0" layoutY="74.0" onMouseClicked="#handleBackButtonClick" strokeType="OUTSIDE" strokeWidth="0.0" text="BACK" textAlignment="CENTER" wrappingWidth="169.8222656249999">
