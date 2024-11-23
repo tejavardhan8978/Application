@@ -24,7 +24,7 @@ public class RecipeListModel {
     }
 
     public void addRecipe(Recipe recipe){
-        recipe.setRecipeID(++lastId);
+        //recipe.setRecipeID(++lastId);
         recipes.add(recipe);
     }
 
