@@ -138,25 +138,25 @@ public class AddToRecipeController {
                 recipe.setServings(servings);
             }
 
-            int primaryIngredientID = primaryIngredient.getIngredientID();
-
-//            if (!primaryIngredientName.isEmpty()) {
-//                primaryIngredient = Ingredient.getIngredientByName((primaryIngredientName));
-//                if (primaryIngredient != null) {
-//                    recipe.setPrimaryIngredientID(primaryIngredient.getIngredientID());
-//                    recipe.setPrimaryIngredient(primaryIngredient);
-//                } else {
-//                    recipe.setPrimaryIngredientID(0);
-//                    recipe.setPrimaryIngredient(null);
-//                }
-
-            if (primaryIngredientID == 0) {
-                recipe.setPrimaryIngredientID(0);
-                recipe.setPrimaryIngredient(getIngredientByID(0));
-            } else {
-                recipe.setPrimaryIngredientID(primaryIngredientID);
-                recipe.setPrimaryIngredient(getIngredientByID(primaryIngredientID));
-            }
+//            int primaryIngredientID = primaryIngredient.getIngredientID();
+//
+////            if (!primaryIngredientName.isEmpty()) {
+////                primaryIngredient = Ingredient.getIngredientByName((primaryIngredientName));
+////                if (primaryIngredient != null) {
+////                    recipe.setPrimaryIngredientID(primaryIngredient.getIngredientID());
+////                    recipe.setPrimaryIngredient(primaryIngredient);
+////                } else {
+////                    recipe.setPrimaryIngredientID(0);
+////                    recipe.setPrimaryIngredient(null);
+////                }
+//
+//            if (primaryIngredient.getIngredientID() == 0) {
+//                recipe.setPrimaryIngredientID(0);
+//                recipe.setPrimaryIngredient(getIngredientByID(0));
+//            } else {
+//                recipe.setPrimaryIngredientID(primaryIngredient.getIngredientID());
+//                recipe.setPrimaryIngredient(getIngredientByID(primaryIngredient.getIngredientID()));
+//            }
 
             String instructions = directionsArea.getText();
             if (instructions.isEmpty()) {
@@ -231,9 +231,10 @@ public class AddToRecipeController {
             //Inserting recipe to DB
             recipe.insert(connection);
             if (ingredientList.getIngredients().isEmpty()) {
-
+                displayErrorMessage("Ingredients", "Ingredients cannot be empty!");
+            } else {
+                IngredientRecipeController.addIngredientRecipeToDB(recipe, ingredientList.getIngredients());
             }
-            IngredientRecipeController.addIngredientRecipeToDB(recipe, ingredientList.getIngredients());
 
         }catch (Exception e) {
             e.printStackTrace();
