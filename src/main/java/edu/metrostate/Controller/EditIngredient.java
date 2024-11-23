@@ -4,7 +4,7 @@ import edu.metrostate.Main;
 import edu.metrostate.Model.Database;
 import edu.metrostate.Model.Ingredient;
 import edu.metrostate.Model.IngredientList;
-import edu.metrostate.Model.IngredientListSingleton;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -30,19 +30,18 @@ public class EditIngredient {
     private Stage stage;
     private Scene scene;
     private Parent root;
-
+    private InventoryController inventoryController;
     public void IngredientBackButton(MouseEvent event) throws IOException {
         root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("/Views/Inventory-Home.fxml")));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.close();
     }
-    public void saveButton(MouseEvent event) throws IOException {
-
+    public void saveButton(MouseEvent event) throws IOException, SQLException {
         Ingredient tempIngredient = InventoryController.tempIngredient;
         String quantityString = addQuantity.getText();
         int quantity = Integer.parseInt(quantityString);
-        int tempQuantity = tempIngredient.getQuantity() + quantity;
+
 
 
         String DateString = newExpiry.getText();
@@ -52,9 +51,13 @@ public class EditIngredient {
 
         //IngredientList ingredientList = IngredientListSingleton.getInstance();
         //ingredientList.updateIngredient(tempIngredient, tempQuantity, updateDate);
-        UpdateData(tempIngredient.getIngredientID(), tempQuantity, updateDate);
+        UpdateData(tempIngredient.getIngredientID(), quantity, updateDate);
+
+
         root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("/Views/Inventory-Home.fxml")));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        ObservableList<Ingredient> updatedIngredients = InventoryController.loadIngredientsFromDB();
+        inventoryController.updateTableView(updatedIngredients);
         scene = new Scene(root);
         stage.setScene(scene);
         stage.close();
@@ -68,14 +71,13 @@ public class EditIngredient {
             preparedStatement.setInt(3, updateID);
 
             int rowsAffected = preparedStatement.executeUpdate();
-            System.out.println("DID THE UPDATE");
         }catch (SQLException e){
             e.printStackTrace();
         }
-
-
-
-
-
     }
+    public void setInventoryController(InventoryController inventoryController){
+        this.inventoryController = inventoryController;
+    }
+
+
 }

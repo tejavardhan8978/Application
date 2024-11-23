@@ -40,7 +40,7 @@
          </font>
       </Text>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#8cc4f8" height="70.0" layoutX="50.0" layoutY="229.0" stroke="BLACK" strokeType="INSIDE" width="300.0" />
-      <Text layoutX="92.0" layoutY="272.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ADD">
+      <Text layoutX="67.0" layoutY="273.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New Amount">
          <font>
             <Font size="24.0" />
          </font>
