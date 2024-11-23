@@ -24,8 +24,8 @@ import java.util.Objects;
 
 
 public class EditIngredient {
-    @FXML
-    private TextField addQuantity;
+    @FXML private TextField addQuantity;
+    @FXML private TextField inStock;
     @FXML private TextField newExpiry;
     private Stage stage;
     private Scene scene;
@@ -78,6 +78,9 @@ public class EditIngredient {
     public void setInventoryController(InventoryController inventoryController){
         this.inventoryController = inventoryController;
     }
-
+    public void setDetails(Ingredient ingredient){
+        int quantity = ingredient.getQuantity();
+        this.inStock.setText(String.valueOf(quantity));
+    }
 
 }
