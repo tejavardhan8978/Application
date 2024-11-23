@@ -51,6 +51,6 @@
 and quantity allowing them to skip the nutritional chart values and automatically assigning them to null if they do.
 - [Quintin] Deleted the singleton pattern and created a list for the table view straight from the db for ingredients.
 - [Teja] Migrated the recipe, nutritionalChart, Cuisine functionality to SQLite database.
-
+- [Hunter] Implemented the edit ingredient function with the db. Which allows the user to change the quantity and expiration date of items. 
 # Milestone 6
 - [Quintin] Added the methods to both recipes and ingredients to be able to search the database.

@@ -91,9 +91,11 @@ public class InventoryController implements Initializable {
             FXMLLoader loader = new FXMLLoader(Main.class.getResource("/Views/ChangeQuantityInventoryModal.fxml"));
             Parent root = loader.load();
             // Get the controller
-            //EditIngredient controller = loader.getController();
+            EditIngredient controller = loader.getController();
+            controller.setInventoryController(this);
+            controller.setDetails(tempIngredient);
             // Switch to the new scene
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Stage stage = new Stage();
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
@@ -117,7 +119,7 @@ public class InventoryController implements Initializable {
 
             if(selectedIngredient != null){
                 System.out.println("Selected Ingredient: " + selectedIngredient.getName());
-
+                tempIngredient = inventoryTable.getSelectionModel().getSelectedItem();
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Views/IngredientDetailedModal.fxml"));
                 AnchorPane ingredientModal = fxmlLoader.load();
                 IngredientPopupController ingredientPopupController = fxmlLoader.getController();
