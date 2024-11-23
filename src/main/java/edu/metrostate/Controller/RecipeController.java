@@ -94,6 +94,28 @@ public class RecipeController implements Initializable {
         recipeList.addRecipe(recipe);
         System.out.println("You have added a recipe!");
     }
+    //Removes a recipe from the database and updates the view
+    public void setDeleteButton(MouseEvent event) throws SQLException {
+        Recipe selectedRecipe = recipeTable.getSelectionModel().getSelectedItem();
+        if (selectedRecipe != null) {
+            String deleteQuery = "DELETE FROM RecipeTable WHERE recipeID = ?";
+            try (Connection conn = Database.getConnection()) {
+                try (PreparedStatement stmt = conn.prepareStatement(deleteQuery)) {
+                    stmt.setInt(1, selectedRecipe.getRecipeID());
+                    int rowsAffected = stmt.executeUpdate();
+                    if (rowsAffected > 0){
+                        System.out.println("Recipe deleted successfully!");
+                        recipeTable.getItems().remove(selectedRecipe);
+                    } else {
+                        System.out.println("Couldn't delete Recipe :(");
+                    }
+                }
+            } catch (SQLException e) {
+                System.out.println("Couldn't get a connection to delete an item :(");
+                e.printStackTrace();
+            }
+        }
+    }
 
     //Prints the current recipes in the list
     public void updateTableView() throws SQLException {
