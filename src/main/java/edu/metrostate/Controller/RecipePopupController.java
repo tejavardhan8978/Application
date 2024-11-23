@@ -60,15 +60,6 @@ public class RecipePopupController implements Initializable {
         modalStage.close();
     }
 
-    @FXML
-    public void handleHomeButtonClick(MouseEvent event) throws IOException {
-        Stage modalStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        modalStage.close();
-        if (this.recipeController != null) {
-            recipeController.switchToHome(event);
-        }
-    }
-
     public void setRecipeController(RecipeController recipeController) {
         this.recipeController = recipeController;
     }

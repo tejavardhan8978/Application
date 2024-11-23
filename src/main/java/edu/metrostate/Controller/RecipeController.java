@@ -103,11 +103,6 @@ public class RecipeController implements Initializable {
         recipeTable.refresh();
     }
 
-    //Sets the recipe list model for the controller
-    public void setRecipeList(RecipeListModel recipeList, RecipeController recipeController){
-        this.recipeList = recipeList;
-    }
-
     @FXML
     public void openRecipeModal(MouseEvent event) throws IOException, SQLException {
 

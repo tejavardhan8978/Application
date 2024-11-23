@@ -102,9 +102,7 @@ public class AddToRecipeController {
 
     public void handleSaveButtonAction(MouseEvent event) throws SQLException, IOException {
 
-        try {
-            Connection connection = Database.getConnection();
-
+        try (Connection connection = Database.getConnection()){
             //get all info into local variables.
             Recipe recipe = new Recipe();
 
@@ -118,7 +116,7 @@ public class AddToRecipeController {
 
             String description = recipeDescriptionArea.getText();
             if (description.isEmpty()) {
-                displayErrorMessage("Description", "Description cannot be empty!");
+                Util.displayErrorMessage("Description", "Description cannot be empty!");
                 return;
             } else {
                 recipe.setDescription(description);
@@ -126,7 +124,7 @@ public class AddToRecipeController {
 
             Integer cookTime = Integer.parseInt(cookTimeField.getText());
             if (cookTimeField.getText().isEmpty()) {
-                displayErrorMessage("CookTime", "CookTime cannot be empty!");
+                Util.displayErrorMessage("CookTime", "CookTime cannot be empty!");
                 return;
             } else {
                 recipe.setCookTime(cookTime);
@@ -282,9 +280,8 @@ public class AddToRecipeController {
         if (!sb.isEmpty()) {
             ingredientsField.setText(sb.toString());
         }
-if (primaryIngredient != null ) {
-    primaryIngredientField.setText(primaryIngredient.getName());
-}
+        if (primaryIngredient != null ) {
+            primaryIngredientField.setText(primaryIngredient.getName());
+        }
     }
-
 }

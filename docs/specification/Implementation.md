@@ -33,6 +33,28 @@ item is created and then passed to the RecipeController to be added to the list
 ## Delete From Recipes
 
 ## Edit/Delete from Ingredients
+Within the Inventory menu, you will notice a Delete button. To delete an item, select it by clicking on it once in the table, 
+then click the Delete button to remove it. To make this functional, we collect the selected ingredient's ID. We then create 
+a SQL statement “DELETE FROM IngredientTable WHERE ingredientID = ?“. After establishing the database connection, we update 
+the ? placeholder with the selected ingredient’s ID, execute the statement, and finally, ensure that the table view is updated 
+to reflect the change. Since we configured the ingredient and nutritional items to delete on cascade both will be deleted.
+
+Editing an ingredient's inventory follows a very similar process. First, select the item you want to edit by clicking on it 
+once in the table. Then, click the Edit button to open a new view. Enter the new quantity and click Save. Again, we collect the 
+ingredient using the selected ID, then construct an SQL statement “UPDATE IngredientTable SET quantity = ? WHERE ingredientID = ?”. 
+We get the connection, and update the ? placeholders with the new quantity and ingredient ID, execute the statement and refresh 
+the table to show the updated inventory.
+
+### Process Remove
+1) Navigate to the inventory table
+2) Select an item by selecting an ingredient by hitting it once
+3) then press the delete button
+
+### Process Edit
+1) Navigate to the inventory table
+2) Select an item by selecting an ingredient by hitting it once
+3) Then press the edit button
+4) Enter your new desired quantity and then hit save
 
 # Phase 3
 

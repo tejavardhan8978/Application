@@ -28,8 +28,6 @@ public class InventoryController implements Initializable {
     Stage stage;
     Scene scene;
     Parent root;
-    private boolean initialInventoryFlag = false;
-    IngredientList ingredientList;
     public static Ingredient tempIngredient;
 
     @FXML private TableView<Ingredient> inventoryTable;
@@ -242,6 +240,7 @@ public class InventoryController implements Initializable {
                     String name = rs.getString("name");
                     Date expiryDate = rs.getDate("expiryDate");
                     int quantity = rs.getInt("quantity");
+                    int nutritionID = rs.getInt("nutritionID");
 
                     //Ensure that we do not try to get an enum for a null value
                     try {
@@ -266,6 +265,7 @@ public class InventoryController implements Initializable {
 
                         Ingredient ingredient = new Ingredient.Builder()
                                 .ingredientID(ingredientID)
+                                .nutritionID(nutritionID)
                                 .name(name)
                                 .expiryDate(expiryDate)
                                 .quantity(quantity)
