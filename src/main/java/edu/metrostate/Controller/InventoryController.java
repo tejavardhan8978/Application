@@ -58,7 +58,6 @@ public class InventoryController implements Initializable {
         }
         inventoryTable.refresh();
         searchBar.textProperty().addListener((observable, oldValue, newValue) -> onSearch());
-        System.out.println("Initialize end - Inventory controller");
     }
 
     public void switchToHome(MouseEvent event) throws IOException {
@@ -243,6 +242,7 @@ public class InventoryController implements Initializable {
                     Date expiryDate = rs.getDate("expiryDate");
                     int quantity = rs.getInt("quantity");
                     int nutritionID = rs.getInt("nutritionID");
+                    String description = rs.getString("description");
 
                     //Ensure that we do not try to get an enum for a null value
                     try {
@@ -274,6 +274,7 @@ public class InventoryController implements Initializable {
                                 .primaryMacroNutrient(primaryMacroNutrient)
                                 .storage(storage)
                                 .category(category)
+                                .description(description)
                                 .build();
 
                         searchResults.add(ingredient);
