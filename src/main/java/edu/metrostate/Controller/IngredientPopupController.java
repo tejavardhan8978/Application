@@ -1,5 +1,6 @@
 package edu.metrostate.Controller;
 
+import edu.metrostate.Main;
 import edu.metrostate.Model.Ingredient;
 import edu.metrostate.Model.NutritionalChart;
 import edu.metrostate.Model.Recipe;
@@ -9,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -63,6 +65,8 @@ public class IngredientPopupController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("Initializing Ingredient pop up screen");
         recipeColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+
+        SetStockDetails();
     }
 
     @FXML
@@ -147,22 +151,18 @@ public class IngredientPopupController implements Initializable {
     public void handleAddButtonClick(MouseEvent event) throws IOException {
         System.out.println("Opening add quantity modal");
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Views/ChangeQuantityModal.fxml"));
-        Pane addModal = fxmlLoader.load();
-
-        Stage modalStage = new Stage();
-        Scene modalScene = new Scene(addModal);
-
-        modalStage.setScene(modalScene);
-        modalStage.setTitle("Add to Ingredient Popup");
-        modalStage.initModality(Modality.APPLICATION_MODAL);
-
-        modalStage.show();
-
-        ChangeQuantityModalController changeQuantityModalController = fxmlLoader.getController();
-        changeQuantityModalController.setChangeQuantityModalStage(modalStage);
-        changeQuantityModalController.setIngredient(ingredient);
-        changeQuantityModalController.setIngredientPopupController(this);
+        Ingredient tempIngredient = InventoryController.tempIngredient;
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("/Views/ChangeQuantityInventoryModal.fxml"));
+        Parent root = loader.load();
+        // Get the controller
+        EditIngredient controller = loader.getController();
+        controller.setInventoryController(inventoryController);
+        controller.setDetails(tempIngredient);
+        // Switch to the new scene
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
     public void setIngredientPopupStage(Stage stage) {
@@ -196,5 +196,14 @@ public class IngredientPopupController implements Initializable {
 
     public void refreshIngredientStock() {
         this.ingredientStock.setText(String.valueOf(ingredient.getQuantity()));
+    }
+
+    public void SetStockDetails(){
+
+        //Sets the Stock for the Add area
+        Ingredient ingredient = InventoryController.tempIngredient;
+        int quantity = ingredient.getQuantity();
+        this.ingredientStock.setText(String.valueOf(quantity));
+
     }
 }

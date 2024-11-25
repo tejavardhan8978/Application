@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Objects;
 
+import static edu.metrostate.Controller.InventoryController.tempIngredient;
 
 
 public class EditIngredient {
@@ -48,9 +49,6 @@ public class EditIngredient {
         LocalDate TempDate = LocalDate.parse(DateString);
         Date updateDate = java.sql.Date.valueOf(TempDate);
 
-
-        //IngredientList ingredientList = IngredientListSingleton.getInstance();
-        //ingredientList.updateIngredient(tempIngredient, tempQuantity, updateDate);
         UpdateData(tempIngredient.getIngredientID(), quantity, updateDate);
 
 
@@ -79,7 +77,7 @@ public class EditIngredient {
         this.inventoryController = inventoryController;
     }
     public void setDetails(Ingredient ingredient){
-        int quantity = ingredient.getQuantity();
+        int quantity = tempIngredient.getQuantity();
         this.inStock.setText(String.valueOf(quantity));
     }
 

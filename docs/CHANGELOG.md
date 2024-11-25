@@ -54,3 +54,4 @@ and quantity allowing them to skip the nutritional chart values and automaticall
 - [Hunter] Implemented the edit ingredient function with the db. Which allows the user to change the quantity and expiration date of items. 
 # Milestone 6
 - [Quintin] Added the methods to both recipes and ingredients to be able to search the database.
+- [Hunter] Added the ability to view and change stock from detailed inventory view.

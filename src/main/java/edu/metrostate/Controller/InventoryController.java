@@ -116,7 +116,7 @@ public class InventoryController implements Initializable {
     public void openIngredientModal(MouseEvent event) throws IOException, SQLException {
         if (event.getClickCount() == 2) {
             Ingredient selectedIngredient = inventoryTable.getSelectionModel().getSelectedItem();
-
+            tempIngredient = inventoryTable.getSelectionModel().getSelectedItem();
             if(selectedIngredient != null){
                 System.out.println("Selected Ingredient: " + selectedIngredient.getName());
                 tempIngredient = inventoryTable.getSelectionModel().getSelectedItem();
