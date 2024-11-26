@@ -6,8 +6,11 @@ import edu.metrostate.Model.Recipe;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
@@ -46,6 +49,8 @@ public class RecipePopupController implements Initializable {
     @FXML private TableView<Ingredient> ingredientTable;
     @FXML private TableColumn<Ingredient, Integer> ingredientQuantitycolumn;
     @FXML private TableColumn<Ingredient, String> ingredientColumn;
+
+    ArrayList<Ingredient> ingredientArrayList;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -96,13 +101,28 @@ public class RecipePopupController implements Initializable {
             this.dietaryFiberColumn.setText(String.valueOf(tempNutritionalChart.getDietaryFiber()));
             this.cholesterolColumn.setText(String.valueOf(tempNutritionalChart.getCholesterol()));
         }
-        System.out.println("hereeeeeeee");
-        ArrayList<Ingredient> ingredientArrayList = IngredientRecipeController.retrieveIngredientsByRecipeFromDB(recipe);
-        for (Ingredient ingredient : ingredientArrayList) {
-            System.out.println("recipe pop up controller ingredietnlist");
-            System.out.println(ingredient);
-        }
+
+        ingredientArrayList = IngredientRecipeController.retrieveIngredientsByRecipeFromDB(recipe);
         ObservableList<Ingredient> ingredientObservableList = FXCollections.observableArrayList(ingredientArrayList);
         ingredientTable.setItems(ingredientObservableList);
+    }
+
+    public void displayIngredientStock(MouseEvent event) {
+        try {
+            URL fxmlLocation = getClass().getResource("/Views/IngredientStockModal.fxml");
+            System.out.println(fxmlLocation); // Should not be null
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/IngredientStockModal.fxml"));
+            Parent root = loader.load();
+
+            Stage newStage = new Stage();
+            newStage.setTitle("Ingredients in Stock");
+            newStage.setScene(new Scene(root));
+            IngredientStockController controller = loader.getController();
+            controller.setIngredientRecipeArrayList(ingredientArrayList);
+            controller.runProcess();
+            newStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

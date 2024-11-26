@@ -53,5 +53,11 @@ and quantity allowing them to skip the nutritional chart values and automaticall
 - [Teja] Migrated the recipe, nutritionalChart, Cuisine functionality to SQLite database.
 - [Hunter] Implemented the edit ingredient function with the db. Which allows the user to change the quantity and expiration date of items.
 - [Hieu] Implemented recipe delete feature.
+- [Teja] Fixed data discrepancy with Nutritional chart and Cuisine tables.
 # Milestone 6
 - [Quintin] Added the methods to both recipes and ingredients to be able to search the database.
+- [Teja] Linked Ingredients and Recipes. Implemented search and add Ingredients to recipe.
+- [Teja] Added Check Ingredients from Recipe pop up. Added functionality for primary ingredient.
+- [Teja] Populated Recipes table for each Ingredient pop up and Ingredients table in Recipe pop up.
+- [Teja] Fixed bugs. Refactored some methods to extract functionality into separate methods. Created frequently used methods in utility class.
+- [Teja] Added type checking to 'add a new recipe screen'.

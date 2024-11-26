@@ -33,7 +33,6 @@ public class IngredientList {
 
     public void addIngredient(Ingredient ingredient) {
         if (!checkIngredientInList(ingredient)) {
-            //ingredient.setIngredientID(++lastId);
             ingredients.add(ingredient);
         }
     }

@@ -41,31 +41,24 @@ public class IngredientRecipeController {
                 "FROM IngredientTable i " +
                 "JOIN IngredientRecipe ir ON i.ingredientID = ir.ingredientID " +
                 "WHERE ir.recipeID = ?";
-            System.out.println("here1");
+
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setInt(1, recipeID);  // Set the recipe_id parameter
-            System.out.println("here123");
             try (ResultSet rs = pstmt.executeQuery()) {
-                System.out.println("here987");
-                System.out.println(rs.next());
                 while (rs.next()) {
                     //Retrieve the ingredient details from the result set
                     int ingredientId = rs.getInt("ingredientID");
                     String name = rs.getString("name");
                     int quantity = rs.getInt("quantity");  // Retrieve the quantity from IngredientRecipe table
-                    System.out.println("here2");
                     //Create the Ingredient object and set its properties
                     Ingredient ingredient = new Ingredient.Builder()
                             .ingredientID(ingredientId)
                             .name(name)
                             .quantity(quantity).build();
-//                    ingredient.setIngredientId(ingredientId);
-//                    ingredient.setName(name);
-//                    ingredient.setQuantity(quantity);
 
                     //Add the ingredient to the list
                     ingredients.add(ingredient);
-                    System.out.println("here3");
+
                 }
             }
         } catch (SQLException e) {
@@ -73,10 +66,7 @@ public class IngredientRecipeController {
             throw new SQLException("Error retrieving ingredients for recipe", e);
         }
     }
-
         return ingredients;
-
-
     }
 
     public static ArrayList<Recipe> retrieveRecipeByIngredientFromDB(Ingredient ingredient) throws SQLException {

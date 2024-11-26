@@ -115,7 +115,6 @@ public class AddIngredientToRecipeController implements Initializable {
         } else {
             selectedIngredient.setQuantity(0);
         }
-
             ingredientList.addIngredient(selectedIngredient);
             populateSelectedTable();
             return selectedIngredient;
