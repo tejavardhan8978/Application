@@ -95,3 +95,9 @@ After retrieving both the required and available quantities, the checkStock meth
 ingredient. If any ingredient’s stock is insufficient to meet the recipe’s requirements, it updates the user interface to 
 indicate whether the ingredients are in stock or not. 
 
+### Process
+1) Go to the recipe table view
+2) Select a recipe by double clicking it
+3) Press the check ingredients on the middle left
+4) view how much are currently in the inventory and how much are needed. 
+
