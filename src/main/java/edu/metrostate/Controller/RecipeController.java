@@ -164,6 +164,12 @@ public class RecipeController implements Initializable {
                     int cookTime = rs.getInt("cookTime");
                     int servings = rs.getInt("servings");
                     int primaryIngredientID = rs.getInt("primaryIngredientID");
+                    String description = rs.getString("description");
+                    int nutritionID = rs.getInt("nutritionID");
+                    String instructions = rs.getString("instructions");
+
+                    NutritionalChart nutritionalChart = NutritionalChart.getNutritionalChartByID(nutritionID);
+
                     String ingredientQuery = "SELECT name FROM IngredientTable where ingredientID = ?";
                     try (PreparedStatement ingredientStmt = connection.prepareStatement(ingredientQuery)){
                         ingredientStmt.setInt(1, primaryIngredientID);
@@ -191,6 +197,10 @@ public class RecipeController implements Initializable {
                                 .setCuisine(cuisine)
                                 .setCookTime(cookTime)
                                 .setServings(servings)
+                                .setDescription(description)
+                                .setNutritionID(nutritionID)
+                                .setNutrition(nutritionalChart)
+                                .setInstruction(instructions)
                                 .build();
                         searchResults.add(recipe);
                     }

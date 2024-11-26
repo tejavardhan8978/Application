@@ -122,41 +122,13 @@ public class AddToRecipeController {
                 recipe.setDescription(description);
             }
 
-            Integer cookTime = Integer.parseInt(cookTimeField.getText());
-            if (cookTimeField.getText().isEmpty()) {
-                Util.displayErrorMessage("CookTime", "CookTime cannot be empty!");
-                return;
-            } else {
-                recipe.setCookTime(cookTime);
-            }
+            Integer cookTime = validateAndParseField(cookTimeField, "Cook Time Field");
+            if (cookTime == null) return;
+            recipe.setCookTime(Integer.parseInt(cookTimeField.getText()));
 
-            Integer servings = Integer.parseInt(servingsField.getText());
-            if (servingsField.getText().isEmpty()) {
-                displayErrorMessage("Servings", "Servings cannot be empty!");
-                return;
-            } else {
-                recipe.setServings(servings);
-            }
-
-//            int primaryIngredientID = primaryIngredient.getIngredientID();
-//
-////            if (!primaryIngredientName.isEmpty()) {
-////                primaryIngredient = Ingredient.getIngredientByName((primaryIngredientName));
-////                if (primaryIngredient != null) {
-////                    recipe.setPrimaryIngredientID(primaryIngredient.getIngredientID());
-////                    recipe.setPrimaryIngredient(primaryIngredient);
-////                } else {
-////                    recipe.setPrimaryIngredientID(0);
-////                    recipe.setPrimaryIngredient(null);
-////                }
-//
-//            if (primaryIngredient.getIngredientID() == 0) {
-//                recipe.setPrimaryIngredientID(0);
-//                recipe.setPrimaryIngredient(getIngredientByID(0));
-//            } else {
-//                recipe.setPrimaryIngredientID(primaryIngredient.getIngredientID());
-//                recipe.setPrimaryIngredient(getIngredientByID(primaryIngredient.getIngredientID()));
-//            }
+            Integer servings = validateAndParseField(servingsField, "Servings Field");
+            if (servings == null) return;
+            recipe.setServings(Integer.parseInt(servingsField.getText()));
 
             String instructions = directionsArea.getText();
             if (instructions.isEmpty()) {
@@ -173,18 +145,29 @@ public class AddToRecipeController {
             } else {
                 recipe.setIngredients(ingredients);
             }
-            try {
-            // Getting values for Nutritional chart to insert into recipe.
-            Integer servingSize = Integer.parseInt(servingSizeField.getText());
-            Integer calories = Integer.parseInt(caloriesField.getText());
-            Integer totalCarbohydrates = Integer.parseInt(carbsField.getText());
-            Integer totalFat = Integer.parseInt(fatField.getText());
-            Integer totalProtein = Integer.parseInt(proteinField.getText());
-            Integer totalSodium = Integer.parseInt(sodiumField.getText());
-            Integer totalSugars = Integer.parseInt(sugarField.getText());
-            Integer dietaryFiber = Integer.parseInt(fiberField.getText());
-            Integer cholesterol = Integer.parseInt(cholesterolField.getText());
 
+            recipe.setPrimaryIngredientID(primaryIngredient.getIngredientID());
+
+            try {
+            //Getting values for Nutritional chart to insert into recipe.
+                Integer servingSize = validateAndParseField(servingSizeField, "Serving size");
+                if (servingSize == null) return;
+                Integer calories = validateAndParseField(caloriesField, "Calories");
+                if (calories == null) return;
+                Integer totalCarbohydrates = validateAndParseField(carbsField, "Total carbohydrates");
+                if (totalCarbohydrates == null) return;
+                Integer totalFat = validateAndParseField(fatField, "Total fat");
+                if (totalFat == null) return;
+                Integer totalProtein = validateAndParseField(proteinField, "Total protein");
+                if (totalProtein == null) return;
+                Integer totalSodium = validateAndParseField(sodiumField, "Total sodium");
+                if (totalSodium == null) return;
+                Integer totalSugars = validateAndParseField(sugarField, "Total sugars");
+                if (totalSugars == null) return;
+                Integer dietaryFiber = validateAndParseField(fiberField, "Dietary fiber");
+                if (dietaryFiber == null) return;
+                Integer cholesterol = validateAndParseField(cholesterolField, "Cholesterol");
+                if (cholesterol == null) return;
 
                 NutritionalChart nutritionalChart = new NutritionalChart.Builder()
                         .servingSize(servingSize)
@@ -212,8 +195,20 @@ public class AddToRecipeController {
             }
 
             try {
-                String cuisineName = cuisineNameField.getText();
-                String cuisineCountry = cuisineOriginField.getText();
+                String cuisineName;
+                if (cuisineNameField.getText().isEmpty()) {
+                    displayErrorMessage("Cuisine Name", "Cuisine name cannot be empty!");
+                    return;
+                } else {
+                    cuisineName = cuisineNameField.getText();
+                }
+                String cuisineCountry;
+                if (cuisineOriginField.getText().isEmpty()) {
+                    displayErrorMessage("Cuisine Origin Field", "Cuisine Origin Field cannot be empty!");
+                    return;
+                } else {
+                    cuisineCountry = cuisineOriginField.getText();
+                }
                 Cuisine cuisine = new Cuisine(cuisineName, cuisineCountry);
 
                 Integer cuisineID;
@@ -283,6 +278,34 @@ public class AddToRecipeController {
         }
         if (primaryIngredient != null ) {
             primaryIngredientField.setText(primaryIngredient.getName());
+        }
+    }
+
+    private Integer validateAndParseField(TextField field, String fieldName) {
+        String input = field.getText();
+
+        //Check if the field is empty
+        if (input.isEmpty()) {
+            displayErrorMessage(fieldName, fieldName + " cannot be empty!");
+            System.err.println(fieldName + " is empty.");
+            return null;
+        }
+
+        //Check if the input contains only numeric characters
+        if (!input.matches("\\d+")) {
+            displayErrorMessage(fieldName, fieldName + " must contain only numeric characters!");
+            System.err.println(fieldName + " contains non-numeric characters.");
+            return null;
+        }
+
+        //Attempt to parse the input as an integer
+        try {
+            return Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            displayErrorMessage(fieldName, fieldName + " must be a valid number!");
+            System.err.println("Error parsing " + fieldName + ": " + e.getMessage());
+            e.printStackTrace();
+            return null;
         }
     }
 }
