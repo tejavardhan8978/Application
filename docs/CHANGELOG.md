@@ -54,6 +54,8 @@ and quantity allowing them to skip the nutritional chart values and automaticall
 - [Hunter] Implemented the edit ingredient function with the db. Which allows the user to change the quantity and expiration date of items.
 - [Hieu] Implemented recipe delete feature.
 - [Teja] Fixed data discrepancy with Nutritional chart and Cuisine tables.
+- [Quintin] Added the ability to delete from the inventory table.
+
 # Milestone 6
 - [Quintin] Added the methods to both recipes and ingredients to be able to search the database.
 - [Teja] Linked Ingredients and Recipes. Implemented search and add Ingredients to recipe.
