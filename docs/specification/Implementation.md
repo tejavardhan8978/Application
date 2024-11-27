@@ -23,7 +23,7 @@ information correctly. Then hit save once more information entered is passed to 
 item is created and then passed to the RecipeController to be added to the list
 
 ### Process:
-1) Navigate to the Recipe page.
+1) Navigate to the recipe page.
 2) Select the option to add a new recipe, leading to a new view.
 3) Enter the required information and press Save (You can also hit cancel to abort.)
 4) Your recipe should be in your recipe table now.
@@ -31,6 +31,16 @@ item is created and then passed to the RecipeController to be added to the list
 # Phase 2
 
 ## Delete From Recipes
+This process is very similar to removing an item from the inventory. First, select the recipe by clicking on it once in 
+the table, then press the Delete button. Next, we create an SQL statement “DELETE FROM RecipeTable WHERE recipeID = ?”. 
+After establishing the connection, we update the placeholder ? with the selected recipe’s ID, execute the statement, and 
+refresh the table to reflect the change.
+
+### Process: 
+1) Navigate to the recipe page.
+2) Select a recipe to delete by pressing it once and highlighting it.
+3) Press the delete button and the recipe should be gone. 
+
 
 ## Edit/Delete from Ingredients
 Within the Inventory menu, you will notice a Delete button. To delete an item, select it by clicking on it once in the table, 
@@ -70,3 +80,24 @@ them from the database.
 3) As you keep entering characters your search will become more accurate
 
 ## Check Inventory for Recipe Ingredients
+The IngredientStockController class is responsible for checking whether the ingredients required for a recipe are available 
+in sufficient quantities. The process begins with the retrieveIngredientsByRecipeFromDB method, which retrieves the list of 
+ingredients associated with a recipe. This is done by performing an SQL join between the IngredientTable and the IngredientRecipe
+table. The SQL query used for this join is “SELECT i.ingredientID, i.name, ir.quantity FROM IngredientTable i JOIN IngredientRecipe 
+ir ON i.ingredientID = ir.ingredientID WHERE ir.recipeID = ?”
+
+This query returns the ingredient IDs, names, and required quantities for a specific recipe. Once the ingredients are retrieved, 
+they are stored in a list. The getIngredientInStockArrayList method is then called to fetch the current stock quantities 
+for each ingredient by querying the IngredientTable again with “SELECT ingredientID, name, quantity FROM IngredientTable 
+WHERE ingredientID = ?”
+
+After retrieving both the required and available quantities, the checkStock method compares the quantities for each 
+ingredient. If any ingredient’s stock is insufficient to meet the recipe’s requirements, it updates the user interface to 
+indicate whether the ingredients are in stock or not. 
+
+### Process
+1) Go to the recipe table view
+2) Select a recipe by double clicking it
+3) Press the check ingredients on the middle left
+4) view how much are currently in the inventory and how much are needed. 
+
