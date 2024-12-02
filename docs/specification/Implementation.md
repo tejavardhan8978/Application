@@ -12,11 +12,12 @@ added to a singleton list.
 ### Process:
 1) Navigate to the Inventory page.
 2) Select the option to add a new item, leading to a new view.
-3) Enter the required information and press Save (You can also hit cancel to abort.)
-4) Your item should be in your inventory now.
+3) Enter the required information. Please keep in mind that the Date should be in the format of YYYY-MM-DD (Example: '2024-12-24'). The application will not accept any other format of the date. 
+4) Clicking Save will now save the item you have added to the  database. (You can also hit cancel to abort.)
+5) Your item should be in your inventory now.
 
 ## Add to the Recipe
-We were able to implement a similar process for adding an recipe. Again using 2 views, 2 controllers, and 3 models.
+We were able to implement a similar process for adding a recipe. Again using 2 views, 2 controllers, and 3 models.
 From the launch hit Recipes to see one of the views which displays information about the recipes called Recipe-Home.
 From here you can select add new recipe which takes you to our second view AddToRecipe. Once again please enter all 
 information correctly. Then hit save once more information entered is passed to the AddToRecipeController where a recipe
@@ -25,20 +26,23 @@ item is created and then passed to the RecipeController to be added to the list
 ### Process:
 1) Navigate to the recipe page.
 2) Select the option to add a new recipe, leading to a new view.
-3) Enter the required information and press Save (You can also hit cancel to abort.)
-4) Your recipe should be in your recipe table now.
+3) Enter the required information. Please keep in mind that the Date should be in the format of YYYY-MM-DD (Example: '2024-12-24'). The application will not accept any other format of the date.
+4) You must add ingredients to a recipe from the recipe using the 'ADD INGREDIENTS' button in the top left corner.
+5) An ingredient can be added by selecting it from the upper screen, entering a quantity and clicking add button. A primary ingredient has to be selected as well. After all ingredients have been added, click save to close the screen.
+6) Clicking Save will now save the item you have added to the  database. (You can also hit cancel to abort.) 
+7) Your recipe should be in your recipe table now.
 
 # Phase 2
 
 ## Delete From Recipes
-This process is very similar to removing an item from the inventory. First, select the recipe by clicking on it once in 
+We only offer to delete a recipe item. First, select the recipe by clicking on it once in 
 the table, then press the Delete button. Next, we create an SQL statement “DELETE FROM RecipeTable WHERE recipeID = ?”. 
 After establishing the connection, we update the placeholder ? with the selected recipe’s ID, execute the statement, and 
 refresh the table to reflect the change.
 
 ### Process: 
 1) Navigate to the recipe page.
-2) Select a recipe to delete by pressing it once and highlighting it.
+2) Select a recipe to delete by clicking it once and highlighting it.
 3) Press the delete button and the recipe should be gone. 
 
 
@@ -55,16 +59,18 @@ ingredient using the selected ID, then construct an SQL statement “UPDATE Ingr
 We get the connection, and update the ? placeholders with the new quantity and ingredient ID, execute the statement and refresh 
 the table to show the updated inventory.
 
-### Process Remove
+### Process to Remove
 1) Navigate to the inventory table
-2) Select an item by selecting an ingredient by hitting it once
-3) then press the delete button
+2) Select an ingredient by clicking it once and highlighting it.
+3) Then click the delete button.
+4) The Ingredient you have deleted is no longer in the database and will not be displayed.
 
 ### Process Edit
 1) Navigate to the inventory table
 2) Select an item by selecting an ingredient by hitting it once
 3) Then press the edit button
-4) Enter your new desired quantity and then hit save
+4) Enter your new desired quantity or expiration date or both and then hit save.
+5) The Ingredient's values are now updated. This can be verified on the main table display.
 
 # Phase 3
 
@@ -99,5 +105,13 @@ indicate whether the ingredients are in stock or not.
 1) Go to the recipe table view
 2) Select a recipe by double clicking it
 3) Press the check ingredients on the middle left
-4) view how much are currently in the inventory and how much are needed. 
+4) view how much are currently in the inventory and if all ingredients are in stock at the moment. 
+
+## View Ingredient details screen
+### Process
+1) To view the full details of an ingredient, double click on an ingredient from the ingredient table.
+
+## View Recipe details screen
+### Process
+1) To view the full details of a recipe, double click on a recipe from the ingredient table.
 
